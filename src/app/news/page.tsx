@@ -9,6 +9,9 @@ export default async function News() {
   // parse html
 
   const response = await fetch("https://weeklyosm.eu/", {
+    next: {
+      revalidate: 60 * 60 * 2, // 2 hours
+    },
     method: "GET",
     headers: {
       Accept: "text/html",

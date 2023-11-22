@@ -2,14 +2,15 @@ import { TopicList } from "@/components/example/topic-list";
 import { UserList } from "@/components/example/user-list";
 import { ExternalButton } from "@/components/external-button";
 import { TitledPage } from "@/components/layouts/titled-page";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { SeparatorTypes } from "@/enums/separator-types";
 import { DiscourseTopicList, DiscourseUser } from "@/types/discourse";
-import { ExternalLink } from "lucide-react";
-import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export default async function CommunityPage() {
+  let users: DiscourseUser[] = [];
+  let topicList: DiscourseTopicList;
+
   const response = await fetch(
     "https://community.openstreetmap.org/latest.json?category=43",
     {
@@ -22,16 +23,52 @@ export default async function CommunityPage() {
         "Content-Type": "application/json;charset=UTF-8",
       },
     }
-  );
-  const data = await response.json();
-  if (!data) {
-    return {
-      notFound: true,
-    };
-  }
+  )
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
 
-  const users: DiscourseUser[] = data.users;
-  const topicList: DiscourseTopicList = data.topic_list;
+      return response.json();
+    })
+    .then((data) => {
+      users = data.users;
+
+      users = users.filter(
+        (user) => user.trust_level === 2 || user.trust_level === 3
+      );
+
+      // sort randomly but use today as seed
+      // this prevents the list from changing on every request
+      users.sort((a, b) => {
+        const today = new Date();
+        const seed = new Date(
+          today.getFullYear(),
+          today.getMonth(),
+          today.getDate()
+        );
+        const randomA = Math.sin(seed.getTime() + a.id) * 10000;
+        const randomB = Math.sin(seed.getTime() + b.id) * 10000;
+
+        return randomA - randomB;
+      });
+
+      topicList = data.topic_list;
+
+      return data;
+    })
+    .catch((error) => {
+      console.error(
+        "There has been a problem with your fetch operation:",
+        error
+      );
+
+      return null;
+    });
+
+  if (!response) {
+    return notFound();
+  }
 
   return (
     <TitledPage

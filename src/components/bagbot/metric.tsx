@@ -109,13 +109,12 @@ export function CardsMetric() {
                 strokeWidth={2}
                 dataKey="average"
                 activeDot={{
-                  r: 6,
-                  style: { fill: "#000", opacity: 0.25 },
+                  r: 8,
+                  style: { fill: "#000" },
                 }}
                 style={
                   {
-                    stroke: "#000",
-                    opacity: 0.25,
+                    stroke: "#65a30d",
                   } as React.CSSProperties
                 }
               />
@@ -129,7 +128,7 @@ export function CardsMetric() {
                 }}
                 style={
                   {
-                    stroke: "#000",
+                    stroke: "#dc2626",
                   } as React.CSSProperties
                 }
               />

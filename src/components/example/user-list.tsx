@@ -16,11 +16,6 @@ type Props = {
 };
 
 export function UserList({ users }: Props) {
-  users = users.filter(
-    (user) => user.trust_level === 2 || user.trust_level === 3
-  );
-  users.sort(() => Math.random() - 0.5);
-
   return (
     <div className="space-y-4">
       {users.map((user) => (

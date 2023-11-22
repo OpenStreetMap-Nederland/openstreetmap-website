@@ -10,9 +10,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CalendarDateRangePicker } from "@/components/example/date-range-picker";
-import { Overview } from "@/components/example/overview";
-import { Map } from "@/components/map/map";
 import { ExternalLink, Info } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { TitledPage } from "@/components/layouts/titled-page";
