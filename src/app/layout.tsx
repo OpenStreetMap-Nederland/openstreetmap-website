@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/providers";
 import { Toaster } from "@/components/toaster";
 import { Header } from "@/components/header/header";
 import { NextAuthProvider } from "@/lib/next-auth-provider";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -60,6 +61,7 @@ export default function RootLayout({ children, pageProps }: RootLayoutProps) {
             {/* <ThemeSwitcher /> */}
             <Toaster />
           </NextAuthProvider>
+          <Analytics />
         </body>
       </html>
     </>
