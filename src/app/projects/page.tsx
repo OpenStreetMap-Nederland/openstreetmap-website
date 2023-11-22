@@ -37,13 +37,20 @@ export default function ProjectsPage() {
                     </div>
 
                     {project.image && (
-                      <Image
-                        className="overflow-hidden rounded-md"
-                        alt={project.name}
-                        width="400"
-                        height="400"
-                        src={project.image}
-                      ></Image>
+                      <div
+                        className="flex justify-center items-center relative"
+                        style={{ height: "300px", width: "400px" }}
+                      >
+                        <Image
+                          className="overflow-hidden rounded-md"
+                          alt={project.name}
+                          objectFit="cover"
+                          src={project.image}
+                          fill
+                          placeholder="blur"
+                          blurDataURL={`/_next/image?url=${project.image}&w=16&h=16&q=1`}
+                        />
+                      </div>
                     )}
                   </Card>
                 </Link>

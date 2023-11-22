@@ -4,7 +4,7 @@ export function GithubLink() {
   return (
     <Link
       className="w-8 h-8 flex items-center justify-center"
-      href="https://github.com/openstreetmap-netherlands"
+      href="https://github.com/openstreetmap-netherlands/openstreetmap-website"
       target="_blank"
     >
       <svg

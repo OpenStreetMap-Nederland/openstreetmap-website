@@ -25,13 +25,20 @@ export function TopicList({ topicList }: Props) {
               <div className="flex flex-col">
                 <div className="flex gap-4">
                   {topic.image_url && (
-                    <Image
-                      className="overflow-hidden rounded-md"
-                      alt="OpenStreetMap logo"
-                      width="300"
-                      height="300"
-                      src={topic.image_url}
-                    ></Image>
+                    <div
+                      className="flex justify-center items-center relative"
+                      style={{ height: "300px", width: "400px" }}
+                    >
+                      <Image
+                        className="overflow-hidden rounded-md"
+                        alt={topic.title}
+                        objectFit="cover"
+                        src={topic.image_url}
+                        fill
+                        placeholder="blur"
+                        blurDataURL={`/_next/image?url=${topic.image_url}&w=16&h=16&q=1`}
+                      />
+                    </div>
                   )}
 
                   <div className="space-y-1">
