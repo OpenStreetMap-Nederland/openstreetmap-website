@@ -27,7 +27,7 @@ const JOSM: Project = {
     "A desktop editor for OpenStreetMap. Reccomended for more advanced mappers.",
   link: "https://josm.openstreetmap.de/",
 };
-di
+
 const Achavi: Project = {
   name: "Achavi",
   description:

@@ -80,7 +80,7 @@ export function SplitContainer({
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [dragging]);
+  }, [dragging, offsetWidth, offsetHeight, offsetLeft, offsetTop, type]);
 
   useEffect(() => {
     if (dragging) {

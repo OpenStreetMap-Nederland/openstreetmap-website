@@ -119,8 +119,6 @@ export function EditButton() {
             key={editor.value}
             onClick={() => {
               editor.onclick?.();
-              setValue(editor.value);
-              setOpen(false);
             }}
             className="flex items-center justify-between"
           >

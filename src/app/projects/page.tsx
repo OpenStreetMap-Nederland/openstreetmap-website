@@ -22,6 +22,7 @@ export default function ProjectsPage() {
             {projectsList.projects.map((project) => {
               return (
                 <Link
+                  key={project.name}
                   href={`/projects/${project.name
                     .toLowerCase()
                     .replaceAll(" ", "-")}`}
