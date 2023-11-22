@@ -19,15 +19,10 @@ export default async function AboutPage({
   params: { id: string };
 }) {
   const id = params.id;
-
-  if (!id) {
-    return {
-      notFound: true,
-    };
-  }
+  if (!id) return notFound();
 
   const response = await fetch(
-    "https://www.openstreetmap.org/api/0.6/user/" + id,
+    `https://www.openstreetmap.org/api/0.6/user/${id}`,
     {
       method: "GET",
       headers: {
@@ -36,24 +31,14 @@ export default async function AboutPage({
       },
     }
   );
-
-  if (response.status !== 200) {
-    return notFound();
-  }
+  if (response.status !== 200) return notFound();
 
   const userData: UserData = await response.json();
-
-  if (!userData) {
-    return {
-      notFound: true,
-    };
-  }
+  if (!userData) return notFound();
 
   const user: User = userData.user;
 
   metadata.title = user.display_name;
-  metadata.description =
-    user.description ?? `Zie hier de details van ${user.display_name}.`;
 
   return (
     <TitledPage
