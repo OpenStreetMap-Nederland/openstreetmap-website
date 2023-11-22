@@ -6,6 +6,12 @@ import { ExternalLink } from "lucide-react";
 import { ExternalButton } from "@/components/external-button";
 import { Card } from "@/components/ui/card";
 import { EventClass, Event } from "@/types/event";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "OpenStreetMap Events",
+  description: "Zie hier de evenementen van OpenStreetMap Nederland.",
+};
 
 const locations: any[] = [];
 

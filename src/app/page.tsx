@@ -2,16 +2,16 @@ import { Metadata } from "next";
 import { Map } from "@/components/map/map";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapContainer } from "@/components/map/map-container";
+import { MapContainer } from "@/components/map/containers/map-container";
 import { SplitContainer } from "@/components/dynamic-layout/split-container";
 
 export const metadata: Metadata = {
-  title: "OpenStreetMap",
+  title: "OpenStreetMap Nederland",
   description:
-    "OpenStreetMap is een kaart van de wereld, gemaakt door mensen zoals jij en gratis te gebruiken onder een open licentie.",
+    "OpenStreetMap is een kaart van de wereld, gemaakt door mensen zoals jij en ik, gratis te gebruiken onder een open licentie.",
 };
 
-export default function DashboardPage() {
+export default function HomePage() {
   return (
     <>
       <div className="h-0 z-10 relative">

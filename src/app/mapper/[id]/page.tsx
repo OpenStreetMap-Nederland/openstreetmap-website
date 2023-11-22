@@ -6,6 +6,12 @@ import Markdown from "react-markdown";
 import { Separator } from "@/components/ui/separator";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Mapper details",
+  description: "De details van een mapper.",
+};
 
 export default async function AboutPage({
   params,
@@ -44,6 +50,10 @@ export default async function AboutPage({
   }
 
   const user: User = userData.user;
+
+  metadata.title = user.display_name;
+  metadata.description =
+    user.description ?? `Zie hier de details van ${user.display_name}.`;
 
   return (
     <TitledPage

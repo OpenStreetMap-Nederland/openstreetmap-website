@@ -1,14 +1,13 @@
 "use client";
 import { useState } from "react";
-import { MapContainer } from "@/components/map/map-container";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Polygon } from "react-leaflet";
 import { Changeset } from "@/types/changset";
 import Link from "next/link";
-import { useMap, useMapEvents } from "react-leaflet/hooks";
+import { useMap } from "react-leaflet/hooks";
 import { Title } from "@/components/layouts/title";
-import { Separator } from "@/components/ui/separator";
+import dynamic from "next/dynamic";
 
 type Props = {
   changeset: Changeset;
@@ -27,6 +26,13 @@ function MoveToCenterOfChangeset({ changeset }: Props) {
 
 export default function ChangesetViewer({ changeset }: Props) {
   const [achavi, setAchavi] = useState(false);
+
+  const Map = dynamic(
+    () => import("./../../../components/map/map").then((m) => m.Map),
+    {
+      ssr: false,
+    }
+  );
 
   return (
     <div className="h-full w-full grid grid-cols-4">
@@ -65,8 +71,7 @@ export default function ChangesetViewer({ changeset }: Props) {
             src={`https://overpass-api.de/achavi/?changeset=${changeset.id}`}
           ></iframe>
         ) : (
-          <MapContainer>
-            <MoveToCenterOfChangeset changeset={changeset} />
+          <Map>
             <Polygon
               positions={[
                 [changeset.minlat, changeset.minlon],
@@ -75,7 +80,8 @@ export default function ChangesetViewer({ changeset }: Props) {
                 [changeset.minlat, changeset.maxlon],
               ]}
             />
-          </MapContainer>
+            <MoveToCenterOfChangeset changeset={changeset} />
+          </Map>
         )}
       </div>
     </div>

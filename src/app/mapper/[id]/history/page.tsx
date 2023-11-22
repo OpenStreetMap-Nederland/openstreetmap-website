@@ -3,10 +3,16 @@ import { TitledPage } from "@/components/layouts/titled-page";
 import { User, UserData } from "@/types/user";
 import { Separator } from "@/components/ui/separator";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
 export function generateStaticParams() {
   return [{ name: "Tjuro" }];
 }
+
+export const metadata: Metadata = {
+  title: "Mapper details",
+  description: "De details van een mapper.",
+};
 
 export default async function AboutPage() {
   const response = await fetch(

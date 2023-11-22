@@ -15,8 +15,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { TitledPage } from "@/components/layouts/titled-page";
 import { SeparatorTypes } from "@/enums/separator-types";
 import { CardsMetric } from "@/components/bagbot/metric";
-import { MapContainer } from "@/components/map/map-container";
-import SelectBuilding from "@/components/bagbot/select-building";
+import { MapContainer } from "@/components/map/containers/map-container";
 
 export default function Dashboard() {
   const [selectedBuilding, setSelectedBuilding] = useState<Building>();

@@ -1,5 +1,12 @@
 import React from "react";
 import { TitledPage } from "@/components/layouts/titled-page";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "OpenStreetMap About",
+  description:
+    "Hoe werkt OpenStreetMap? Wat kan je met OpenStreetMap? En hoe kan je zelf meehelpen?",
+};
 
 export default function AboutPage() {
   return (

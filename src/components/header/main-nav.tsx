@@ -14,20 +14,26 @@ export function MainNav({
     { href: "/projects", label: "Projects" },
 
     { href: "/events", label: "Events" },
-    { href: "/news", label: "News" },
+    // { href: "/news", label: "News" },
 
     { href: "/community", label: "Community" },
-    { href: "/bagbot", label: "BagBot", badge: "New!" },
+    // { href: "/bagbot", label: "BagBot", badge: "New!" },
     // { href: "/copyright", label: "Copyright" },
     // { href: "/help", label: "Help" },
   ];
+
+  type LinkProps = {
+    href: string;
+    label: string;
+    badge?: string;
+  };
 
   return (
     <nav
       className={cn("flex items-center space-x-2 lg:space-x-4", className)}
       {...props}
     >
-      {links.map(({ href, label, badge }) => (
+      {links.map(({ href, label, badge }: LinkProps) => (
         <Link
           href={href}
           key={href}

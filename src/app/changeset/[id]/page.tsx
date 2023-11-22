@@ -1,6 +1,12 @@
 import { Changeset, ChangesetData } from "@/types/changset";
+import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "OpenStreetMap changeset viewer",
+  description: "Bekijk de inhoud van een OpenStreetMap changeset.",
+};
 
 export default async function ChangesetPage({
   params,

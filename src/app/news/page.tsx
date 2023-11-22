@@ -3,6 +3,12 @@ import { TitledPage } from "@/components/layouts/titled-page";
 import { notFound } from "next/navigation";
 import jsdom from "jsdom";
 import { ExternalButton } from "@/components/external-button";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "OpenStreetMap News",
+  description: "De laatste nieuwsberichten over OpenStreetMap.",
+};
 
 export default async function News() {
   // fetch html from https://weeklyosm.eu/

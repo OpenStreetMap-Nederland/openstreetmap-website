@@ -5,7 +5,13 @@ import { TitledPage } from "@/components/layouts/titled-page";
 import { Card } from "@/components/ui/card";
 import { SeparatorTypes } from "@/enums/separator-types";
 import { DiscourseTopicList, DiscourseUser } from "@/types/discourse";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "OpenStreetMap Community",
+  description: "De OpenStreetMap community is een wereldwijde gemeenschap.",
+};
 
 export default async function CommunityPage() {
   const response = await fetch(

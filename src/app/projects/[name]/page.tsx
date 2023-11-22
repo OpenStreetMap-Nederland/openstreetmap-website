@@ -7,7 +7,7 @@ import Link from "next/link";
 import { ExternalButton } from "@/components/external-button";
 
 export const metadata: Metadata = {
-  title: "OpenStreetMap Projects",
+  title: "OpenStreetMap Project",
   description: "",
 };
 

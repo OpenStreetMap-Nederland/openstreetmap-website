@@ -6,6 +6,12 @@ import Link from "next/link";
 import { projectLists } from "./data";
 import { Title } from "@/components/layouts/title";
 import { Card } from "@/components/ui/card";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "OpenStreetMap Projects",
+  description: "Zie hier de projecten van OpenStreetMap Nederland.",
+};
 
 export default function ProjectsPage() {
   return (

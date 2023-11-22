@@ -40,9 +40,6 @@ export function Map({ children }: Props) {
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
       </MapMenu>
-      <MapNotes />
-      <MapUrl />
-
       {children}
     </MapContainer>
   );
