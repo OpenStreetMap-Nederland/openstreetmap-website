@@ -40,14 +40,14 @@ export function SplitContainer({
     setOffsetLeft(ref.current ? ref.current.offsetLeft : 0);
   };
 
-  useEffect(() => {
-    setConsts();
-    window.addEventListener("resize", setConsts);
+  // useEffect(() => {
+  //   setConsts();
+  //   window.addEventListener("resize", setConsts);
 
-    return () => {
-      window.removeEventListener("resize", setConsts);
-    };
-  }, [ref.current]);
+  //   return () => {
+  //     window.removeEventListener("resize", setConsts);
+  //   };
+  // }, [ref.current]);
 
   useEffect(() => {
     const handleMouseMove = (event: { clientX: any; clientY: any }) => {
