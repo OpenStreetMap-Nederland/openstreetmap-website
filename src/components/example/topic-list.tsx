@@ -32,11 +32,8 @@ export function TopicList({ topicList }: Props) {
                       <Image
                         className="overflow-hidden rounded-md"
                         alt={topic.title}
-                        objectFit="cover"
                         src={topic.image_url}
                         fill
-                        placeholder="blur"
-                        blurDataURL={`/_next/image?url=${topic.image_url}&w=16&h=16&q=1`}
                       />
                     </div>
                   )}

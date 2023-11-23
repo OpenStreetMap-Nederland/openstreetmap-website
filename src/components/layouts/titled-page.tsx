@@ -26,7 +26,7 @@ export function TitledPage({
   children,
 }: TitledPageProps) {
   return (
-    <div className="flex-1 space-y-6 p-4 md:p-10 pb-16 container mx-auto">
+    <div className="flex-1 space-y-6 p-4 lg:p-10 pb-16 container mx-auto">
       {backLink && (
         <Link
           href={backLink}
