@@ -13,7 +13,10 @@ export async function Header() {
   return (
     <div className="border-b">
       <div className="flex h-15 items-center justify-between container">
-        <div className="flex items-center space-x-4">
+        <div className="flex lg:hidden">
+          <Logo />
+        </div>
+        <div className="items-center space-x-4 hidden lg:flex">
           <Logo />
           {/* <Search /> */}
           <EditButton />

@@ -41,7 +41,7 @@ export function Title({
           </p>
         )}
       </div>
-      {actions && actions}
+      <div className="hidden md:block">{actions && actions}</div>
     </div>
   );
 }

@@ -28,7 +28,7 @@ export async function UpcomingEvents() {
   const event: Event = events[0];
 
   return event ? (
-    <Link href="/events">
+    <Link href="/events" className="hidden xl:block">
       <Badge className="bg-green-600 dark:bg-green-400  pr-1">
         <div className="m-0.5 mr-2 text-white dark:text-black">
           {event.name}

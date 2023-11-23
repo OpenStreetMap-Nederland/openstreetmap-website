@@ -26,7 +26,7 @@ export function TopicList({ topicList }: Props) {
                 <div className="flex gap-4">
                   {topic.image_url && (
                     <div
-                      className="flex justify-center items-center relative"
+                      className="hidden lg:flex justify-center items-center relative"
                       style={{ height: "300px", width: "400px" }}
                     >
                       <Image

@@ -44,7 +44,7 @@ export default function ProjectsPage() {
 
                     {project.image && (
                       <div
-                        className="flex justify-center items-center relative"
+                        className="hidden md:flex justify-center items-center relative"
                         style={{ height: "300px", width: "400px" }}
                       >
                         <Image

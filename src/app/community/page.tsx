@@ -69,10 +69,10 @@ export default async function CommunityPage() {
       }
     >
       <div className="grid grid-cols-4 gap-4">
-        <div className="col-span-3">
+        <div className="col-span-4 lg:col-span-3">
           <TopicList topicList={topicList}></TopicList>
         </div>
-        <Card className="p-4 col-span-1">
+        <Card className="p-4 col-span-4 lg:col-span-1">
           <h2 className="text-xl font-bold tracking-tight mb-4 m-2">Members</h2>
           <UserList users={users}></UserList>
         </Card>
