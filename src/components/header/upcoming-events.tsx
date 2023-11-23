@@ -4,6 +4,9 @@ import Link from "next/link";
 
 const getFutureEvents = async () => {
   const response = await fetch("https://osmcal.org/api/v2/events?in=nl", {
+    next: {
+      revalidate: 60 * 60 * 24, // 24 hours
+    },
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -26,10 +29,14 @@ export async function UpcomingEvents() {
 
   return event ? (
     <Link href="/events">
-      <Badge className="bg-green-500 text-white pr-1">
-        <div className="m-1 mr-2.5">{event.name}</div>
+      <Badge className="bg-green-600 dark:bg-green-400  pr-1">
+        <div className="m-0.5 mr-2 text-white dark:text-black">
+          {event.name}
+        </div>
         {events.length > 1 && (
-          <Badge className="px-1">+{events.length - 1}</Badge>
+          <Badge className="px-1 h-[16px] text-[10px]">
+            +{events.length - 1}
+          </Badge>
         )}
       </Badge>
     </Link>

@@ -72,6 +72,10 @@ export function UserNav() {
     return <SignInButton />;
   }
 
+  if (!user) {
+    return <Skeleton className="h-8 w-8 rounded-full" />;
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
