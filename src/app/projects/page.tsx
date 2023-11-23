@@ -7,6 +7,7 @@ import { projectLists } from "./data";
 import { Title } from "@/components/layouts/title";
 import { Card } from "@/components/ui/card";
 import { Metadata } from "next";
+import { ExternalButton } from "@/components/external-button";
 
 export const metadata: Metadata = {
   title: "OpenStreetMap Projects",
@@ -19,6 +20,11 @@ export default function ProjectsPage() {
       title="Projects"
       subTitle="A collection of projects and tools that are used by OpenStreetMap Netherlands."
       separator={SeparatorTypes.none}
+      actions={
+        <ExternalButton href="https://github.com/openstreetmap-netherlands/openstreetmap-website/blob/main/src/app/projects/data.ts">
+          Add a project
+        </ExternalButton>
+      }
     >
       {projectLists.map((projectsList) => {
         return (

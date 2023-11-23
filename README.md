@@ -2,6 +2,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+pre-requisites:
+nodejs >= 18.0.0
+
 **If you want to use oauth you need the app to be runnig on https (optional)**
 
 ```bash
