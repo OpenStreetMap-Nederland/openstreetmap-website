@@ -32,8 +32,6 @@ export default async function AboutPage() {
     return notFound();
   }
 
-  console.log(userData);
-
   const user: User = userData.user;
 
   return <div>{user.changesets.count}</div>;

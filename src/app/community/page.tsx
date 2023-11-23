@@ -64,7 +64,7 @@ export default async function CommunityPage() {
       separator={SeparatorTypes.none}
       actions={
         <ExternalButton href="https://community.openstreetmap.org/">
-          community
+          Community
         </ExternalButton>
       }
     >

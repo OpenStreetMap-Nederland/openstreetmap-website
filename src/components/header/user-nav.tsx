@@ -135,12 +135,12 @@ export function UserNav() {
               <DropdownMenuShortcut>⇧P</DropdownMenuShortcut>
             </DropdownMenuItem>
           </Link>
-          <Link href="/settings">
+          {/* <Link href="/settings">
             <DropdownMenuItem>
               Settings
               <DropdownMenuShortcut>⇧S</DropdownMenuShortcut>
             </DropdownMenuItem>
-          </Link>
+          </Link> */}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <SignOutButton />

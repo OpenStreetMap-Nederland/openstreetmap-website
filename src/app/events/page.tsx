@@ -27,7 +27,7 @@ const addLocations = (events: Event[]) => {
   });
 };
 
-const getFutureEvents = async () => {
+export const getFutureEvents = async () => {
   const response = await fetch("https://osmcal.org/api/v2/events?in=nl", {
     method: "GET",
     headers: {
@@ -41,7 +41,7 @@ const getFutureEvents = async () => {
   return data;
 };
 
-const getPastEvents = async () => {
+export const getPastEvents = async () => {
   const response = await fetch("https://osmcal.org/api/v2/events/past?in=nl", {
     method: "GET",
     headers: {
