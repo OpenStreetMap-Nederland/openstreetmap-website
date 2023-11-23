@@ -5,6 +5,8 @@ import { Project, projects } from "../data";
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalButton } from "@/components/external-button";
+import Markdown from "react-markdown";
+import { SeparatorTypes } from "@/enums/separator-types";
 
 export const metadata: Metadata = {
   title: "OpenStreetMap Project",
@@ -30,22 +32,32 @@ export default function ProjectDetailPage({
   return (
     <TitledPage
       title={project.name}
-      titlePostfix="project"
+      titlePostfix={project.altName ? `(${project.altName})` : "project"}
       subTitle={project.description}
       backLink={"/projects"}
-      actions={
-        <ExternalButton href={project.link}>{project.name}</ExternalButton>
-      }
+      separator={SeparatorTypes.none}
     >
+      <div className="flex gap-4">
+        {project.links.map((link) => {
+          return (
+            <ExternalButton key={link.url} href={link.url}>
+              {link.name}
+            </ExternalButton>
+          );
+        })}
+      </div>
+
       {project.image && (
         <Image
           className="overflow-hidden rounded-md"
           alt={project.name}
-          width="400"
-          height="400"
+          width="800"
+          height="600"
           src={project.image}
         ></Image>
       )}
+
+      <Markdown>{project.longdescription}</Markdown>
     </TitledPage>
   );
 }

@@ -45,10 +45,11 @@ export default function ProjectsPage() {
                     {project.image && (
                       <div
                         className="hidden md:flex justify-center items-center relative"
-                        style={{ height: "300px", width: "400px" }}
+                        style={{ height: "300px", width: "580px" }}
                       >
                         <Image
                           className="overflow-hidden rounded-md"
+                          objectFit="cover"
                           alt={project.name}
                           src={project.image}
                           fill

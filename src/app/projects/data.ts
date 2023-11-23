@@ -1,60 +1,84 @@
 export type Project = {
   name: string;
+  altName?: string;
   description: string;
-  link: string;
+  longdescription: string;
+  links: {
+    name?: string;
+    url: string;
+  }[];
   image?: string;
+  startDate?: string;
 };
 
 const OpenStreetMapCarto: Project = {
-  name: "OpenStreetMap Carto",
+  name: "OSM Carto",
+  altName: "OpenStreetMap Carto",
   description:
     "The default OpenStreetMap style for the map on openstreetmap.org.",
-  link: "https://github.com/gravitystorm/openstreetmap-carto",
+  longdescription:
+    "The default OpenStreetMap style for the map on openstreetmap.org. It is written in CartoCSS and published as the openstreetmap-carto style on GitHub.",
+  links: [
+    {
+      name: "Code",
+      url: "https://github.com/gravitystorm/openstreetmap-carto",
+    },
+    {
+      name: "Wiki",
+      url: "https://wiki.openstreetmap.org/wiki/Standard_tile_layer",
+    },
+  ],
   image: "/osmCartoPreview.png",
+  startDate: "2012",
 };
 
 // editors
 const iD: Project = {
   name: "iD",
+  altName: "iD editor",
   description:
     "A web editor for OpenStreetMap, that is easy to use. Reccomended for beginning mappers.",
-  link: "https://github.com/openstreetmap/iD",
+  longdescription:
+    "iD is a web editor for OpenStreetMap, that is easy to use. It is intentionally simple, but powerful. iD is written in JavaScript and uses [d3](https://d3js.org/)",
+  links: [
+    {
+      name: "Code",
+      url: "https://github.com/openstreetmap/iD",
+    },
+    {
+      name: "Website",
+      url: "https://ideditor.com/",
+    },
+    {
+      name: "Wiki",
+      url: "https://wiki.openstreetmap.org/wiki/ID",
+    },
+  ],
+  image: "/idPreview.png",
+  startDate: "2012",
 };
 
 const JOSM: Project = {
   name: "JOSM",
+  altName: "Java OpenStreetMap Editor",
   description:
     "A desktop editor for OpenStreetMap. Reccomended for more advanced mappers.",
-  link: "https://josm.openstreetmap.de/",
+  longdescription:
+    "JOSM is a desktop editor for OpenStreetMap. It supports a large number of plugins. JOSM is written in Java.",
+  links: [
+    {
+      name: "Website",
+      url: "https://josm.openstreetmap.de/",
+    },
+    {
+      name: "Wiki",
+      url: "https://wiki.openstreetmap.org/wiki/JOSM",
+    },
+  ],
+  image: "/josmPreview.png",
 };
 
-const Achavi: Project = {
-  name: "Achavi",
-  description:
-    "Achavi (Augmented OSM Change Viewer) displays OpenStreetMap changes based on the Augmented Diff.",
-  link: "https://wiki.openstreetmap.org/wiki/Achavi",
-};
-
-const OSMCha: Project = {
-  name: "OSMCha",
-  description: "A web application for quality control in OpenStreetMap.",
-  link: "https://osmcha.org/",
-};
-
-const ohsome: Project = {
-  name: "ohsome",
-  description: "Easy access to OSM History and Quality Analyses",
-  link: "https://dashboard.ohsome.org/",
-};
-
-export const projects = [
-  OpenStreetMapCarto,
-  iD,
-  JOSM,
-  Achavi,
-  OSMCha,
-  ohsome,
-] as Project[];
+export const projects = [OpenStreetMapCarto, iD, JOSM] as Project[];
 
 export const projectLists = [
   {
@@ -70,61 +94,18 @@ export const projectLists = [
   {
     name: "Editors",
     description: "Editors voor OpenStreetMap.",
-    projects: [
-      iD,
-      JOSM,
-      {
-        name: "Vespucci",
-        description: "An Android editor for OpenStreetMap.",
-        link: "https://vespucci.io/",
-      },
-      {
-        name: "Go Map!!",
-        description: "An iOS editor for OpenStreetMap.",
-        link: "https://wiki.openstreetmap.org/wiki/Go_Map!!",
-      },
-      {
-        name: "StreetComplete",
-        description: "An Android app for completing OpenStreetMap data.",
-        link: "https://wiki.openstreetmap.org/wiki/StreetComplete",
-      },
-      {
-        name: "Every Door",
-        description:
-          "An Android and IOS app and is specifically designed to help users keep amenities and shops up-to-date.",
-        link: "https://wiki.openstreetmap.org/wiki/Every_Door",
-      },
-    ] as Project[],
+    projects: [iD, JOSM] as Project[],
   },
   {
     name: "Information",
-    projects: [
-      {
-        name: "OSM wiki",
-        description: "The wiki for OpenStreetMap.",
-        link: "https://wiki.openstreetmap.org/",
-      },
-      {
-        name: "Taginfo",
-        description:
-          "A web service for viewing information about OpenStreetMap tags.",
-        link: "https://taginfo.openstreetmap.org/",
-      },
-    ] as Project[],
+    projects: [] as Project[],
   },
   {
     name: "Data",
-    projects: [
-      {
-        name: "Overpass Turbo",
-        description:
-          "A web based data mining tool for OpenStreetMap using Overpass API.",
-        link: "https://overpass-turbo.eu/",
-      },
-    ] as Project[],
+    projects: [] as Project[],
   },
   {
     name: "Quality control",
-    projects: [Achavi, OSMCha, ohsome] as Project[],
+    projects: [] as Project[],
   },
 ];
