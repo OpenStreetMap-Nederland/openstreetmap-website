@@ -53,15 +53,14 @@ export async function Header() {
         </div>
       </div>
 
-      <div className="lg:hidden flex w-full">
+      <div className="lg:hidden flex items-center justify-between px-2 w-full">
+        <Logo />
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <div className="flex items-center justify-between px-2 w-full">
-              <Logo />
-              <Button variant="ghost" className="flex h-10 w-10 mx-2">
-                <HamburgerMenuIcon className="absolute h-6 w-6" />
-              </Button>
-            </div>
+            <Button variant="ghost" className="flex h-10 w-10 mx-2">
+              <HamburgerMenuIcon className="absolute h-6 w-6" />
+            </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
             className="w-screen border-0 bg-black shadow-none rounded-none bg-transparent p-4 m-0"
