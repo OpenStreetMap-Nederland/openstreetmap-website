@@ -31,6 +31,7 @@ export function TopicList({ topicList }: Props) {
                     >
                       <Image
                         className="overflow-hidden rounded-md"
+                        objectFit="cover"
                         alt={topic.title}
                         src={topic.image_url}
                         fill
