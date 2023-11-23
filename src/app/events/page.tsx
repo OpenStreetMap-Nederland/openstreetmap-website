@@ -70,46 +70,52 @@ export default async function Blog() {
         </ExternalButton>
       }
     >
-      <h3 className="text-2xl font-bold tracking-tight mb-4">
-        Upcoming events
-      </h3>
-      {futureEvents.length === 0 ? (
-        <p>No upcoming events</p>
-      ) : (
-        futureEvents.map((event) => {
-          const eventClass: EventClass = new EventClass(event);
+      <div>
+        <h3 className="text-2xl font-bold tracking-tight mb-4">
+          Upcoming events
+        </h3>
+        <div className="flex flex-col gap-4">
+          {futureEvents.length === 0 ? (
+            <p>No upcoming events</p>
+          ) : (
+            futureEvents.map((event) => {
+              const eventClass: EventClass = new EventClass(event);
 
-          return (
-            <Link href={`/events/${eventClass.toHash()}`} key={event.name}>
-              <Card className="flex flex-col p-4">
-                <h1>{event.name}</h1>
-                <p>{event.date.human}</p>
-                <p>{event?.location?.venue}</p>
-              </Card>
-            </Link>
-          );
-        })
-      )}
+              return (
+                <Link href={`/events/${eventClass.toHash()}`} key={event.name}>
+                  <Card className="flex flex-col p-4">
+                    <h1>{event.name}</h1>
+                    <p>{event.date.human}</p>
+                    <p>{event?.location?.venue}</p>
+                  </Card>
+                </Link>
+              );
+            })
+          )}
+        </div>
+      </div>
 
-      <h3 className="text-2xl font-bold tracking-tight mb-4">Past events</h3>
-      <div className="flex flex-col gap-4">
-        {pastEvents.length === 0 ? (
-          <p>No past events</p>
-        ) : (
-          pastEvents.map((event) => {
-            const eventClass: EventClass = new EventClass(event);
+      <div>
+        <h3 className="text-2xl font-bold tracking-tight mb-4">Past events</h3>
+        <div className="flex flex-col gap-4">
+          {pastEvents.length === 0 ? (
+            <p>No past events</p>
+          ) : (
+            pastEvents.map((event) => {
+              const eventClass: EventClass = new EventClass(event);
 
-            return (
-              <Link href={`/events/${eventClass.toHash()}`} key={event.name}>
-                <Card className="flex flex-col p-4">
-                  <h1>{event.name}</h1>
-                  <p>{event.date.human}</p>
-                  <p>{event?.location?.venue}</p>
-                </Card>
-              </Link>
-            );
-          })
-        )}
+              return (
+                <Link href={`/events/${eventClass.toHash()}`} key={event.name}>
+                  <Card className="flex flex-col p-4">
+                    <h1>{event.name}</h1>
+                    <p>{event.date.human}</p>
+                    <p>{event?.location?.venue}</p>
+                  </Card>
+                </Link>
+              );
+            })
+          )}
+        </div>
       </div>
     </TitledPage>
   );

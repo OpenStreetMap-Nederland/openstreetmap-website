@@ -7,6 +7,7 @@ import { UpcomingEvents } from "./upcoming-events";
 import { EditButton } from "./edit-button";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { ModeToggle } from "./mode-toggle";
 
 export async function Header() {
   return (
@@ -26,10 +27,13 @@ export async function Header() {
           <UpcomingEvents />
         </div>
 
-        <div className="flex items-center space-x-4 mx-4">
+        <div className="flex items-center space-x-6 mx-4">
           <MainNav />
-          <GithubLink />
-          <UserNav />
+          <div className="flex items-center space-x-2">
+            <GithubLink />
+            <ModeToggle />
+            <UserNav />
+          </div>
         </div>
       </div>
     </div>

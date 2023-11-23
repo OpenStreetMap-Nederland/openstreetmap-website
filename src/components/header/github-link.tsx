@@ -3,7 +3,7 @@ import Link from "next/link";
 export function GithubLink() {
   return (
     <Link
-      className="w-8 h-8 flex items-center justify-center"
+      className="w-6 h-8 flex items-center justify-center"
       href="https://github.com/openstreetmap-netherlands/openstreetmap-website"
       target="_blank"
     >
