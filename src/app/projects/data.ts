@@ -28,7 +28,7 @@ const OpenStreetMapCarto: Project = {
       url: "https://wiki.openstreetmap.org/wiki/Standard_tile_layer",
     },
   ],
-  image: "/osmCartoPreview.png",
+  image: "/osmCartoPreviewNL.png",
   startDate: "2012",
 };
 
