@@ -68,6 +68,11 @@
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
   }
+
+  li {
+    list-style-type: disc;
+    margin: 0 0 0.25rem 1.75rem;
+  }
 }
 
 @layer base {

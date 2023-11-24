@@ -33,6 +33,7 @@
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
     "date-fns": "^2.30.0",
+    "html-react-parser": "^5.0.6",
     "jsdom": "^22.1.0",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.292.0",
