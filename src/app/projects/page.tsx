@@ -38,8 +38,12 @@ export default function ProjectsPage() {
                     className="gap-4 p-4 justify-between grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2"
                   >
                     <div className="flex flex-col gap-2 col-span-1 lg:col-span-1">
-                      <Title size="h3" title={project.name} />
-                      <p>{project.longdescription}</p>
+                      <Title
+                        size="h3"
+                        title={project.name}
+                        titlePostfix={`(${project.altName})`}
+                      />
+                      <p>{project.description}</p>
                     </div>
 
                     {project.image && (

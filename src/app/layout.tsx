@@ -11,6 +11,17 @@ import { Analytics } from "@vercel/analytics/react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  applicationName: "OpenStreetMap",
+  referrer: "origin-when-cross-origin",
+  keywords: [
+    "OpenStreetMap",
+    "OSM",
+    "OpenStreetMap Nederland",
+    "Gratis kaart",
+    "Kaarten",
+  ],
+  creator: "OpenStreetMap Nederland",
+  publisher: "OpenStreetMap Nederland",
   title: "OpenStreetMap",
   description:
     "Open street map is a map of the world, made by people like you and free to use under an open license.",

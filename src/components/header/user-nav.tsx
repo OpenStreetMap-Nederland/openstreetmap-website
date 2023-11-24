@@ -1,5 +1,5 @@
 "use client";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -11,15 +11,12 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ModeToggle } from "./mode-toggle";
 import { cn, getColor } from "@/lib/utils";
 import Link from "next/link";
-import { useSession, signIn, signOut } from "next-auth/react";
-import { use, useEffect, useState } from "react";
+import { signOut, useSession } from "next-auth/react";
+import { useCallback, useEffect, useState } from "react";
 import { User } from "@/types/user";
 import { Skeleton } from "@/components/ui/skeleton";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/lib/auth";
 import { SignOutButton } from "./sign-out-button";
 import { SignInButton } from "./sign-in-button";
 import Image from "next/image";
@@ -28,6 +25,34 @@ export function UserNav() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
   const session = useSession();
+
+  const handleKeyPress = useCallback(
+    (event: { key: any }) => {
+      if (user?.display_name) {
+        if (event.key === "P") {
+          window.location.href = `/mapper/${user?.display_name}`;
+          console.log(event.key);
+        }
+
+        if (event.key === "S") {
+          window.location.href = `/settings`;
+        }
+      }
+
+      if (event.key === "Q") {
+        signOut();
+      }
+    },
+    [user]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [handleKeyPress, user]);
 
   useEffect(() => {
     const sesionUser = session?.data?.user;
