@@ -6,6 +6,7 @@ import { ExternalButton } from "@/components/external-button";
 import { Metadata } from "next";
 import parse from "html-react-parser";
 import { SeparatorTypes } from "@/enums/separator-types";
+import { sanitize } from "isomorphic-dompurify";
 
 export const metadata: Metadata = {
   title: "OpenStreetMap News",
@@ -37,24 +38,28 @@ export default async function News() {
   const content = dom.window.document.getElementById("content");
   const article = content?.querySelector("article");
 
+  if (!article) {
+    return notFound();
+  }
+
   // step 1: remove all syling
-  const styles = article?.querySelectorAll("[style]");
+  const styles = article.querySelectorAll("[style]");
   styles?.forEach((style) => {
     style.removeAttribute("style");
   });
 
   // step 2: remove header and footer
-  article?.querySelector("header")?.remove();
-  article?.querySelector("footer")?.remove();
+  article.querySelector("header")?.remove();
+  article.querySelector("footer")?.remove();
 
   // step 3: style the headings
-  const headings = article?.querySelectorAll("h2");
-  headings?.forEach((heading) => {
+  const headings = article.querySelectorAll("h2");
+  headings.forEach((heading) => {
     heading.classList.add("text-2xl", "font-bold", "mt-4", "mb-2");
   });
 
   // step 4: remove the Upcoming Events
-  headings?.forEach((heading) => {
+  headings.forEach((heading) => {
     if (heading.textContent?.includes("Upcoming Events")) {
       heading.nextElementSibling?.remove();
       heading.remove();
@@ -62,9 +67,9 @@ export default async function News() {
   });
 
   // step 5: add styling to images and remove all images except the first one
-  const images = article?.querySelectorAll("img");
+  const images = article.querySelectorAll("img");
   if (images) {
-    for (let i = 0; i < images?.length; i++) {
+    for (let i = 0; i < images.length; i++) {
       const image = images[i];
       if (i !== 0) {
         image.remove();
@@ -76,13 +81,13 @@ export default async function News() {
   }
 
   // step 6: remove all "►"
-  const lis = article?.querySelectorAll("li");
-  lis?.forEach((li) => {
+  const lis = article.querySelectorAll("li");
+  lis.forEach((li) => {
     li.innerHTML = li.innerHTML.replaceAll("►", "");
   });
 
   // step 7: change user links to internal links
-  // const as = article?.querySelectorAll("a");
+  // const as = article.querySelectorAll("a");
   // as?.forEach((a) => {
   //   if (a.href.includes("https://www.openstreetmap.org/user")) {
   //     a.href = a.href.replace("https://www.openstreetmap.org/user", "/mapper");
@@ -90,11 +95,11 @@ export default async function News() {
   // });
 
   // step 8: remove .sharedaddy
-  article?.querySelector(".sharedaddy")?.remove();
+  article.querySelector(".sharedaddy")?.remove();
 
   // get last p element
-  const p = article?.querySelectorAll("p");
-  const lastP = p?.[p.length - 1];
+  const p = article.querySelectorAll("p");
+  const lastP = p[p.length - 1];
 
   if (lastP) {
     lastP.classList.add("text-center", "mt-12");
@@ -124,7 +129,7 @@ export default async function News() {
     >
       {article && (
         <div className="flex flex-col gap-4">
-          {parse(article.innerHTML, options)}
+          {parse(sanitize(article.innerHTML), options)}
         </div>
       )}
     </TitledPage>
