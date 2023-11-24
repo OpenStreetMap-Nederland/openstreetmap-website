@@ -8,6 +8,10 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Metadata } from "next";
 
+const generateImageLink = (href: string) => {
+  return `/_next/image?url=${encodeURIComponent(href)}&w=128&q=75`;
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -16,6 +20,16 @@ export async function generateMetadata({
   const user = await getUser(params.id);
   if (!user) return notFound();
 
+  if (!user.img) {
+    return {
+      title: user.display_name,
+      description: user.description,
+      openGraph: {
+        type: "profile",
+      },
+    };
+  }
+
   return {
     title: user.display_name,
     description: user.description,
@@ -23,7 +37,7 @@ export async function generateMetadata({
       type: "profile",
       images: [
         {
-          url: `/_next/image?url=${user.img?.href}`,
+          url: generateImageLink(user.img.href),
           width: 100,
           height: 100,
           alt: user.display_name,
