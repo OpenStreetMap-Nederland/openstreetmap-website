@@ -20,16 +20,6 @@ export async function generateMetadata({
   const user = await getUser(params.id);
   if (!user) return notFound();
 
-  if (!user.img) {
-    return {
-      title: user.display_name,
-      description: user.description,
-      openGraph: {
-        type: "profile",
-      },
-    };
-  }
-
   return {
     title: user.display_name,
     description: user.description,
@@ -37,7 +27,10 @@ export async function generateMetadata({
       type: "profile",
       images: [
         {
-          url: generateImageLink(user.img.href),
+          url: generateImageLink(
+            user.img?.href ??
+              "https://www.openstreetmap.org/assets/osm_logo_256-ed028f90468224a272961c380ecee0cfb73b8048b34f4b4b204b7f0d1097875d.png"
+          ),
           width: 100,
           height: 100,
           alt: user.display_name,
@@ -69,7 +62,8 @@ const getIDFromUserName = async (userName: string) => {
   let names = data[0].names as string[];
 
   if (names.length === 0) return null;
-  if (names[0].toLowerCase() !== userName.toLowerCase()) return null;
+  if (names[names.length - 1].toLowerCase() !== userName.toLowerCase())
+    return null;
 
   return data[0].id;
 };
