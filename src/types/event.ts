@@ -1,5 +1,4 @@
 import { format } from "date-fns";
-import { de } from "date-fns/locale";
 
 export type EventLocation = {
   short: string;

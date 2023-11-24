@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { MapLocationContainer } from "../map/containers/map-location-container";
 import { Card } from "../ui/card";
 import { EventClass } from "@/types/event";
+import { WindowContainer } from "../map/containers/window-conatiner";
 
 type Props = {
   event: EventClass;
@@ -20,7 +20,7 @@ export function EventCard({ event }: Props) {
         </div>
         {!event?.location?.venue.toLowerCase().includes("online") && (
           <div className="h-64 col-span-1">
-            <MapLocationContainer location={event.location.coords} />
+            <WindowContainer location={event.location.coords} />
           </div>
         )}
       </Card>

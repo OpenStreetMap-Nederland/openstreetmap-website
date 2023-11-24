@@ -5,7 +5,6 @@ import { Marker, useMap } from "react-leaflet";
 import { LatLngExpression, icon } from "leaflet";
 
 type Props = {
-  children?: React.ReactNode | React.ReactNode[] | null;
   location: number[];
 };
 
@@ -24,7 +23,7 @@ const MoveToLocation = ({ location }: { location: LatLngExpression }) => {
   );
 };
 
-export function MapLocationContainer({ children, location }: Props) {
+export function MapLocationContainer({ location }: Props) {
   const Map = dynamic(() => import("../map").then((m) => m.Map), {
     ssr: false,
   });
@@ -34,9 +33,6 @@ export function MapLocationContainer({ children, location }: Props) {
   return (
     <Map>
       <MoveToLocation location={latLong} />
-      <div suppressHydrationWarning>
-        {typeof window === "undefined" ? null : children}
-      </div>
     </Map>
   );
 }
