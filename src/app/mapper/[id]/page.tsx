@@ -7,6 +7,8 @@ import { Separator } from "@/components/ui/separator";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Metadata } from "next";
+import Link from "next/link";
+import { ExternalButton } from "@/components/external-button";
 
 const generateImageLink = (href: string) => {
   return `/_next/image?url=${encodeURIComponent(href)}&w=128&q=75`;
@@ -40,6 +42,10 @@ export async function generateMetadata({
   };
 }
 
+const normalizeName = (name: string) => {
+  return name.replace(/_/g, " ");
+};
+
 const getIDFromUserName = async (userName: string) => {
   const response = await fetch(
     `https://whosthat.osmz.ru/whosthat.php?action=names&q=${userName}`,
@@ -62,7 +68,7 @@ const getIDFromUserName = async (userName: string) => {
   let names = data[0].names as string[];
 
   if (names.length === 0) return null;
-  if (names[names.length - 1].toLowerCase() !== userName.toLowerCase())
+  if (normalizeName(names[names.length - 1]) !== normalizeName(userName))
     return null;
 
   return data[0].id;
@@ -134,6 +140,14 @@ export default async function AboutPage({
         )
       }
     >
+      <ExternalButton
+        href={`https://community.openstreetmap.org/u/${user.display_name.replace(
+          " ",
+          "_"
+        )}/summary`}
+      >
+        Forum Profile
+      </ExternalButton>
       <Separator />
       <Markdown>{user.description}</Markdown>
     </TitledPage>

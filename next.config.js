@@ -8,6 +8,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: '**.openstreetmap.org',
       },
+      {
+        protocol: 'https',
+        hostname: '**.gravatar.com',
+      },
     ],
   },
 }

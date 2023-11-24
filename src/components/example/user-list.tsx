@@ -22,8 +22,7 @@ export function UserList({ users }: Props) {
         <Link
           className="flex items-center justify-between gap-4 rounded-md p-2"
           key={user.id}
-          target="_blank"
-          href={`https://community.openstreetmap.org/u/${user.username}/summary`}
+          href={`/mapper/${user.username.replace(" ", "_")}`}
         >
           <div className="flex items-center h-9">
             <Avatar className="h-9 w-9">
@@ -44,7 +43,6 @@ export function UserList({ users }: Props) {
               <p className="text-sm text-muted-foreground">{user.name}</p>
             </div>
           </div>
-          <ExternalLink className="h-4 w-4 text-muted-foreground"></ExternalLink>
         </Link>
       ))}
     </div>
