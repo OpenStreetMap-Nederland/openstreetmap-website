@@ -60,7 +60,7 @@ export default function ChangesetViewer({ changeset }: Props) {
         </div>
         <p>
           Closed {changeset.closed_at} by{" "}
-          <Link href={`/mapper/${changeset.uid}`}>{changeset.user}</Link>
+          <Link href={`/mapper/${changeset.user}`}>{changeset.user}</Link>
         </p>
       </div>
 

@@ -13,17 +13,46 @@ export const metadata: Metadata = {
   description: "De details van een mapper.",
 };
 
+const getIDFromUserName = async (userName: string) => {
+  const response = await fetch(
+    `https://whosthat.osmz.ru/whosthat.php?action=names&q=${userName}`,
+    {
+      next: {
+        revalidate: 60 * 60 * 24 * 7, // 1 week
+      },
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+    }
+  );
+  if (response.status !== 200) return null;
+
+  const data = await response.json();
+  if (!data || !data[0]) return null;
+
+  return data[0].id;
+};
+
 export default async function AboutPage({
   params,
 }: {
   params: { id: string };
 }) {
-  const id = params.id;
+  const userName = params.id;
+  if (!userName) return notFound();
+
+  const id = await getIDFromUserName(userName);
+
   if (!id) return notFound();
 
   const response = await fetch(
     `https://www.openstreetmap.org/api/0.6/user/${id}`,
     {
+      next: {
+        revalidate: 60 * 60, // 1 hour
+      },
       method: "GET",
       headers: {
         Accept: "application/json",

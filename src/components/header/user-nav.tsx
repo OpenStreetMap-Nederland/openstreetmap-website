@@ -129,7 +129,7 @@ export function UserNav() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <Link href={`/mapper/${user.id}`}>
+          <Link href={`/mapper/${user.display_name}`}>
             <DropdownMenuItem>
               Profile
               <DropdownMenuShortcut>⇧P</DropdownMenuShortcut>
