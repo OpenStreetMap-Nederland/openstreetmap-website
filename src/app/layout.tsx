@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   title: "OpenStreetMap",
   description:
     "Open street map is a map of the world, made by people like you and free to use under an open license.",
+  metadataBase: new URL("https://osmnl.vercel.app/"),
 };
 
 // export default function RootLayout({

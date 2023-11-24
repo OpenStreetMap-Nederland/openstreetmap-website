@@ -8,10 +8,30 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Mapper details",
-  description: "De details van een mapper.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const user = await getUser(params.id);
+  if (!user) return notFound();
+
+  return {
+    title: user.display_name,
+    description: user.description,
+    openGraph: {
+      type: "profile",
+      images: [
+        {
+          url: `/_next/image?url=${user.img?.href}`,
+          width: 100,
+          height: 100,
+          alt: user.display_name,
+        },
+      ],
+    },
+  };
+}
 
 const getIDFromUserName = async (userName: string) => {
   const response = await fetch(
@@ -32,20 +52,20 @@ const getIDFromUserName = async (userName: string) => {
   const data = await response.json();
   if (!data || !data[0]) return null;
 
+  let names = data[0].names as string[];
+
+  if (names.length === 0) return null;
+  if (names[0].toLowerCase() !== userName.toLowerCase()) return null;
+
   return data[0].id;
 };
 
-export default async function AboutPage({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const userName = params.id;
-  if (!userName) return notFound();
+const getUser = async (userName: string) => {
+  if (!userName) return null;
 
   const id = await getIDFromUserName(userName);
 
-  if (!id) return notFound();
+  if (!id) return null;
 
   const response = await fetch(
     `https://www.openstreetmap.org/api/0.6/user/${id}`,
@@ -60,14 +80,23 @@ export default async function AboutPage({
       },
     }
   );
-  if (response.status !== 200) return notFound();
+  if (response.status !== 200) return null;
 
   const userData: UserData = await response.json();
-  if (!userData) return notFound();
+  if (!userData) return null;
 
   const user: User = userData.user;
 
-  metadata.title = user.display_name;
+  return user;
+};
+
+export default async function AboutPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const user = await getUser(params.id);
+  if (!user) return notFound();
 
   return (
     <TitledPage
