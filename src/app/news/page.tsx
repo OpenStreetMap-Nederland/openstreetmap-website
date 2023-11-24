@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import jsdom from "jsdom";
 import { ExternalButton } from "@/components/external-button";
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "OpenStreetMap News",
@@ -35,19 +36,28 @@ export default async function News() {
   const dom = await new JSDOM(html);
   const recentPosts = dom.window.document.getElementById("recent-posts-2");
 
-  const list: (string | undefined)[] = [];
+  type Link = {
+    href: string;
+    text: string;
+  };
+  const list: Link[] = [];
   const ul = recentPosts?.querySelector("ul");
   ul?.childNodes.forEach((li) => {
     if (li.nodeName !== "LI") {
       return;
     }
 
-    list.push(li.textContent?.trim());
+    const element = li as HTMLLIElement;
+
+    list.push({
+      href: element?.querySelector("a")?.getAttribute("href") ?? "",
+      text: element.textContent?.trim() ?? "",
+    });
   });
 
   const content = dom.window.document.getElementById("content");
 
-  // get firts article tag from the content
+  // get first article tag from the content
 
   const article = content?.querySelector("article");
   // change img to <Image>
@@ -68,11 +78,15 @@ export default async function News() {
         <ExternalButton href="https://weeklyosm.eu/">WeeklyOSM</ExternalButton>
       }
     >
-      {list &&
-        list.length > 0 &&
-        list.map((item) => {
-          return <p key={item}>{item}</p>;
-        })}
+      <div className="flex flex-col gap-4">
+        {list &&
+          list.length > 0 &&
+          list.map((item) => (
+            <div key={item.href}>
+              <ExternalButton href={item.href}>{item.text}</ExternalButton>
+            </div>
+          ))}
+      </div>
     </TitledPage>
   );
 }

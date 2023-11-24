@@ -4,6 +4,7 @@ import { TitledPage } from "@/components/layouts/titled-page";
 import { EventClass } from "@/types/event";
 import { ExternalButton } from "@/components/external-button";
 import { Event } from "@/types/event";
+import { WindowContainer } from "@/components/map/containers/window-conatiner";
 
 type Props = {
   params: { slug: string[] };
@@ -36,6 +37,11 @@ export default async function EventDetailPage({ params }: Props) {
       <div className="flex flex-col gap-4">
         <p>{event.date.human}</p>
       </div>
+      {!event?.location?.venue.toLowerCase().includes("online") && (
+        <div className="h-64 col-span-1 rounded overflow-hidden">
+          <WindowContainer location={event.location.coords} />
+        </div>
+      )}
     </TitledPage>
   );
 }

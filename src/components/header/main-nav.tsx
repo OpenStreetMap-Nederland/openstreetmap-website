@@ -14,10 +14,8 @@ export function MainNav({ className, dropdownMenu = false, ...props }: Props) {
     // { href: "/diaries", label: "User Diaries" },
     { href: "/about", label: "About" },
     { href: "/projects", label: "Projects" },
-
     { href: "/events", label: "Events" },
-    // { href: "/news", label: "News" },
-
+    { href: "/news", label: "News" },
     { href: "/community", label: "Community" },
     // { href: "/bagbot", label: "BagBot", badge: "New!" },
     // { href: "/copyright", label: "Copyright" },
