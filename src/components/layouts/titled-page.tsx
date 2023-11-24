@@ -27,23 +27,24 @@ export function TitledPage({
 }: TitledPageProps) {
   return (
     <div className="flex-1 space-y-6 p-4 lg:p-10 pb-16 container mx-auto">
-      {backLink && (
-        <Link
-          href={backLink}
-          className="flex items-center gap-1 text-gray-500 hover:text-gray-900 cursor-pointer"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back
-        </Link>
-      )}
-      <Title
-        size="h1"
-        title={title}
-        titlePostfix={titlePostfix}
-        subTitle={subTitle}
-        actions={actions}
-      />
-
+      <div className="flex-1 space-y-2">
+        {backLink && (
+          <Link
+            href={backLink}
+            className="flex items-center gap-1 text-gray-500 hover:text-gray-900 cursor-pointer"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back
+          </Link>
+        )}
+        <Title
+          size="h1"
+          title={title}
+          titlePostfix={titlePostfix}
+          subTitle={subTitle}
+          actions={actions}
+        />
+      </div>
       {separator === SeparatorTypes.space && <div className="h-1"></div>}
       {separator === SeparatorTypes.line && <Separator />}
       {children}

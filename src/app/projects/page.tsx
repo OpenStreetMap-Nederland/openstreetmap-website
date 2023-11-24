@@ -41,17 +41,19 @@ export default function ProjectsPage() {
                 >
                   <Card
                     key={project.name}
-                    className="flex gap-2 p-4 justify-between"
+                    className="gap-4 p-4 justify-between grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2"
                   >
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-2 col-span-1 lg:col-span-1">
                       <Title size="h3" title={project.name} />
-                      <p>{project.description}</p>
+                      <p>{project.longdescription}</p>
                     </div>
 
                     {project.image && (
                       <div
-                        className="hidden md:flex justify-center items-center relative"
-                        style={{ height: "300px", width: "580px" }}
+                        className="justify-center items-center relative
+                          col-span-1
+                        "
+                        style={{ height: "300px" }}
                       >
                         <Image
                           className="overflow-hidden rounded-md"

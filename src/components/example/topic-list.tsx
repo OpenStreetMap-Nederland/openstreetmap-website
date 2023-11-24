@@ -3,6 +3,7 @@ import { ExternalLink, Eye, Reply, ReplyAll, ReplyIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Card } from "../ui/card";
+import { cn } from "@/lib/utils";
 
 type Props = {
   topicList: DiscourseTopicList;
@@ -21,47 +22,49 @@ export function TopicList({ topicList }: Props) {
             href={`https://community.openstreetmap.org/t/${topic.slug}/${topic.id}`}
             key={topic.id}
           >
-            <Card className="flex items-start justify-between gap-4 w-full p-4">
-              <div className="flex flex-col">
-                <div className="flex gap-4">
-                  {topic.image_url && (
-                    <div
-                      className="hidden lg:flex justify-center items-center relative"
-                      style={{ height: "300px", width: "400px" }}
-                    >
-                      <Image
-                        className="overflow-hidden rounded-md"
-                        objectFit="cover"
-                        alt={topic.title}
-                        src={topic.image_url}
-                        fill
-                      />
-                    </div>
-                  )}
-
-                  <div className="space-y-1">
-                    <h5 className="font-semibold leading-none">
-                      {topic.title}
-                    </h5>
-                    {topic.excerpt && (
-                      <p className="text-sm text-muted-foreground">
-                        {topic.excerpt}
-                      </p>
-                    )}
+            <Card className="items-start justify-between gap-4 w-full p-4 grid grid-cols-1 md:grid-cols-2">
+              {topic.image_url && (
+                <div className="flex flex-col col-span-1">
+                  <div
+                    className="justify-center items-center relative col-span-1"
+                    style={{ height: "300px" }}
+                  >
+                    <Image
+                      className="overflow-hidden rounded-md"
+                      objectFit="cover"
+                      alt={topic.title}
+                      src={topic.image_url}
+                      fill
+                    />
                   </div>
                 </div>
-              </div>
-              <div className="flex items-center gap-2">
-                {/* replys */}
-                <span className="flex items-center gap-1">
-                  {topic.posts_count}
+              )}
+              <div
+                className={cn(
+                  "flex items-center justify-between gap-2 col-span-1",
+                  !topic.image_url && "col-span-2"
+                )}
+              >
+                <div className="flex">
+                  <h5 className="font-semibold leading-none">{topic.title}</h5>
+                  {topic.excerpt && (
+                    <p className="text-sm text-muted-foreground">
+                      {topic.excerpt}
+                    </p>
+                  )}
+                </div>
 
-                  <Reply className="h-4 w-4 text-muted-foreground" />
-                </span>
-                <span className="flex items-center gap-1">
-                  {topic.views}
-                  <Eye className="h-4 w-4" />
-                </span>
+                <div className="flex gap-1">
+                  <span className="flex items-center gap-1">
+                    {topic.posts_count}
+
+                    <Reply className="h-4 w-4 text-muted-foreground" />
+                  </span>
+                  <span className="flex items-center gap-1">
+                    {topic.views}
+                    <Eye className="h-4 w-4" />
+                  </span>
+                </div>
               </div>
             </Card>
           </Link>

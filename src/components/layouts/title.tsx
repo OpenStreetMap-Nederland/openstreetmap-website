@@ -23,7 +23,7 @@ export function Title({
   };
 
   return (
-    <div className="flex items-center justify-between space-y-2">
+    <div className="flex items-start md:items:center justify-between space-y-2 flex-col md:flex-row">
       <div>
         <div className="flex items-end gap-1">
           <h2 className={cn("font-bold tracking-tight", sizes[size])}>
@@ -41,7 +41,7 @@ export function Title({
           </p>
         )}
       </div>
-      <div className="hidden md:block">{actions && actions}</div>
+      <div>{actions && actions}</div>
     </div>
   );
 }

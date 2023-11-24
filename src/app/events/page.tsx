@@ -7,6 +7,8 @@ import { ExternalButton } from "@/components/external-button";
 import { Card } from "@/components/ui/card";
 import { EventClass, Event } from "@/types/event";
 import { Metadata } from "next";
+import { MapLocationContainer } from "@/components/map/containers/map-location-container";
+import { EventCard } from "@/components/event/event-card";
 
 export const metadata: Metadata = {
   title: "OpenStreetMap Events",
@@ -81,15 +83,7 @@ export default async function Blog() {
             futureEvents.map((event) => {
               const eventClass: EventClass = new EventClass(event);
 
-              return (
-                <Link href={`/events/${eventClass.toHash()}`} key={event.name}>
-                  <Card className="flex flex-col p-4">
-                    <h1>{event.name}</h1>
-                    <p>{event.date.human}</p>
-                    <p>{event?.location?.venue}</p>
-                  </Card>
-                </Link>
-              );
+              return <EventCard key={eventClass.toHash()} event={eventClass} />;
             })
           )}
         </div>
@@ -104,15 +98,7 @@ export default async function Blog() {
             pastEvents.map((event) => {
               const eventClass: EventClass = new EventClass(event);
 
-              return (
-                <Link href={`/events/${eventClass.toHash()}`} key={event.name}>
-                  <Card className="flex flex-col p-4">
-                    <h1>{event.name}</h1>
-                    <p>{event.date.human}</p>
-                    <p>{event?.location?.venue}</p>
-                  </Card>
-                </Link>
-              );
+              return <EventCard key={eventClass.toHash()} event={eventClass} />;
             })
           )}
         </div>
