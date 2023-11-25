@@ -9,10 +9,7 @@ import Image from "next/image";
 import { Metadata } from "next";
 import Link from "next/link";
 import { ExternalButton } from "@/components/external-button";
-
-const generateImageLink = (href: string) => {
-  return `/_next/image?url=${encodeURIComponent(href)}&w=128&q=75`;
-};
+import { generateImageLink } from "@/lib/utils";
 
 export async function generateMetadata({
   params,
