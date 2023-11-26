@@ -197,6 +197,14 @@ export default async function News({ params }: { params: { id: string } }) {
   // step 8: remove .sharedaddy
   article.querySelector(".sharedaddy")?.remove();
 
+  // step 9: change ul to div if the ul does not have li elements
+  const uls = article.querySelectorAll("ul");
+  uls?.forEach((ul) => {
+    if (!ul.querySelector("li")) {
+      ul.outerHTML = `<div class="flex flex-col gap-2">${ul.innerHTML}</div>`;
+    }
+  });
+
   // get last p element
   const p = article.querySelectorAll("p");
   const lastP = p[p.length - 1];
