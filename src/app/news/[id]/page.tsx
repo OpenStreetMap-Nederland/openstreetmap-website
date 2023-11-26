@@ -10,6 +10,7 @@ import { sanitize } from "isomorphic-dompurify";
 import { removeDomain } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export async function generateStaticParams() {
   const response = await fetch("https://weeklyosm.eu", {
@@ -51,7 +52,7 @@ export async function generateStaticParams() {
 }
 
 // dont allow page to be generated at run time it is too slow
-export const dynamicParams = false;
+// export const dynamicParams = false;
 
 const getPage = async (id: string) => {
   const response = await fetch(`https://weeklyosm.eu/archives/${id}`, {
@@ -178,8 +179,6 @@ export default async function News({ params }: { params: { id: string } }) {
         image.remove();
         continue;
       }
-
-      image.classList.add("w-full", "rounded-lg", "mt-4", "mb-2");
     }
   }
 
@@ -210,6 +209,18 @@ export default async function News({ params }: { params: { id: string } }) {
 
   const options = {
     replace: (domNode: any) => {
+      if (domNode.name === "img") {
+        return (
+          <Image
+            src={domNode.attribs.src}
+            width={800}
+            height={600}
+            alt={domNode.attribs.alt}
+            className="rounded-lg w-full md:w-2/3 lg:w-1/2 mt-4 mb-2"
+          ></Image>
+        );
+      }
+
       if (domNode.name === "code") {
         return (
           <span className="bg-gray-100 dark:bg-gray-800 rounded-md px-1.5 py-0.5 hover:underline">
