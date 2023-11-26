@@ -1,5 +1,5 @@
 import React from "react";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { env } from "process";
 
 export default async function News() {
@@ -15,7 +15,15 @@ export default async function News() {
     },
   });
 
+  if (response.status !== 200) {
+    return notFound();
+  }
+
   const news = await response.json();
+
+  if (!news?.id) {
+    return notFound();
+  }
 
   redirect(`/news/${news.id}`);
 }
