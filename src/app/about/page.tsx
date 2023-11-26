@@ -26,9 +26,8 @@ export default function AboutPage() {
       <p>
         Wees niet bang om iets fout te doen. De eerste paar edits worden door
         een ervaren mapper gecontroleerd. Deze kan je dan tips geven om je edits
-        te verbeteren. Op het forum van OpenStreetMap Nederland kan je een vraag
-        stellen als je ergens niet uitkomt. Mocht je er niet uitkomen, dan kan
-        je altijd een vraag stellen op het forum van OpenStreetMap.
+        te verbeteren. Mocht je er niet uitkomen, dan kan je altijd een vraag
+        stellen op het forum van OpenStreetMap.
       </p>
       <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
         Voor bedrijven
@@ -41,7 +40,7 @@ export default function AboutPage() {
         Alleen bedrijven die een fysieke locatie hebben, waarbij deze locatie
         ook voor klanten toegankelijk is, mogen op de kaart worden gezet.
         Voorbeelden van bedrijven die welkom zijn in OpenStreetMap zijn onder
-        andere winkels, restourants en hotels.
+        andere winkels, restaurants en hotels.
       </p>
       <p>
         Bij bedrijven die niet publiek toegankelijk zijn, zoals kantoren,
