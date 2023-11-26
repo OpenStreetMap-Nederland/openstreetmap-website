@@ -31,8 +31,6 @@ export async function GET(request: Request) {
 
   if (!content) return notFound();
 
-  console.log(content);
-
   const ids = Array.from(content).map((item) => {
     const id = item.getAttribute("href")?.split("/")[4];
     return id;

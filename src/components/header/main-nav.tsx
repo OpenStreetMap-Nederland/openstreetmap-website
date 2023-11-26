@@ -3,9 +3,36 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { DropdownMenuItem } from "../ui/dropdown-menu";
+import { env } from "process";
 
 type Props = React.HTMLAttributes<HTMLElement> & {
   dropdownMenu: boolean;
+};
+
+const getNewsId = async () => {
+  const baseUrl = env.BASE_URL || "http://localhost:3000";
+  const response = await fetch(`${baseUrl}/api/news`, {
+    next: {
+      revalidate: 60 * 60, // 1 hour
+    },
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+  });
+
+  if (response.status !== 200) {
+    return "";
+  }
+
+  const news = await response.json();
+
+  if (!news?.id) {
+    return "";
+  }
+
+  return news.id as string;
 };
 
 export function MainNav({ className, dropdownMenu = false, ...props }: Props) {
@@ -15,7 +42,7 @@ export function MainNav({ className, dropdownMenu = false, ...props }: Props) {
     { href: "/about", label: "About" },
     { href: "/projects", label: "Projects" },
     { href: "/events", label: "Events" },
-    { href: "/news", label: "News" },
+    { href: "/news", label: "News", dynamicAddition: getNewsId },
     { href: "/community", label: "Community" },
     // { href: "/bagbot", label: "BagBot", badge: "New!" },
     // { href: "/copyright", label: "Copyright" },
@@ -26,6 +53,7 @@ export function MainNav({ className, dropdownMenu = false, ...props }: Props) {
     href: string;
     label: string;
     badge?: string;
+    dynamicAddition?: () => Promise<string>;
   };
 
   return (
@@ -36,7 +64,14 @@ export function MainNav({ className, dropdownMenu = false, ...props }: Props) {
       })}
       {...props}
     >
-      {links.map(({ href, label, badge }: LinkProps) => {
+      {links.map(async ({ href, label, badge, dynamicAddition }: LinkProps) => {
+        if (dynamicAddition) {
+          const id = await dynamicAddition();
+          if (id) {
+            href = `${href}/${id}`;
+          }
+        }
+
         if (dropdownMenu) {
           return (
             <Link href={href} key={href}>
