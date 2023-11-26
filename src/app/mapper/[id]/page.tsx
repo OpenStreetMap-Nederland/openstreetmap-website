@@ -7,9 +7,9 @@ import { Separator } from "@/components/ui/separator";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Metadata } from "next";
-import Link from "next/link";
 import { ExternalButton } from "@/components/external-button";
 import { generateImageLink } from "@/lib/utils";
+import { env } from "process";
 
 export async function generateMetadata({
   params,
@@ -39,59 +39,24 @@ export async function generateMetadata({
   };
 }
 
-const normalizeName = (name: string) => {
-  return name.replace(/_/g, " ");
-};
-
-const getIDFromUserName = async (userName: string) => {
-  const response = await fetch(
-    `https://whosthat.osmz.ru/whosthat.php?action=names&q=${userName}`,
-    {
-      next: {
-        revalidate: 60 * 60 * 24 * 7, // 1 week
-      },
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json;charset=UTF-8",
-      },
-    }
-  );
-  if (response.status !== 200) return null;
-
-  const data = await response.json();
-  if (!data || !data[0]) return null;
-
-  let names = data[0].names as string[];
-
-  if (names.length === 0) return null;
-  if (normalizeName(names[names.length - 1]) !== normalizeName(userName))
-    return null;
-
-  return data[0].id;
-};
-
 const getUser = async (userName: string) => {
   if (!userName) return null;
 
-  const id = await getIDFromUserName(userName);
+  const baseUrl = env.BASE_URL || "http://localhost:3000";
+  const response = await fetch(`${baseUrl}/api/mapper/${userName}`, {
+    next: {
+      revalidate: 60 * 60 * 24,
+    },
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+  });
 
-  if (!id) return null;
-
-  const response = await fetch(
-    `https://www.openstreetmap.org/api/0.6/user/${id}`,
-    {
-      next: {
-        revalidate: 60 * 60, // 1 hour
-      },
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json;charset=UTF-8",
-      },
-    }
-  );
-  if (response.status !== 200) return null;
+  if (response.status !== 200) {
+    return notFound();
+  }
 
   const userData: UserData = await response.json();
   if (!userData) return null;
