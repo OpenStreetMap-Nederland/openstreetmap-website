@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { Project, projects } from "../data";
 import Image from "next/image";
-import Link from "next/link";
 import { ExternalButton } from "@/components/external-button";
 import Markdown from "react-markdown";
 import { SeparatorTypes } from "@/enums/separator-types";
@@ -12,6 +11,16 @@ export const metadata: Metadata = {
   title: "OpenStreetMap Project",
   description: "",
 };
+
+export function generateStaticParams() {
+  const params = projects.map((project) => {
+    return {
+      name: project.name.toLowerCase().replaceAll(" ", "-"),
+    };
+  });
+
+  return params;
+}
 
 export default function ProjectDetailPage({
   params,

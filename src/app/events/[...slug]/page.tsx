@@ -5,6 +5,22 @@ import { ExternalButton } from "@/components/external-button";
 import { Event } from "@/types/event";
 import { WindowContainer } from "@/components/map/containers/window-conatiner";
 
+export async function generateStaticParams() {
+  const events = await getAllEvents();
+
+  const eventClasses: EventClass[] = events.map(
+    (event) => new EventClass(event)
+  );
+
+  const params = eventClasses.map((event) => {
+    return {
+      slug: [event.toHash(), event.id],
+    };
+  });
+
+  return params;
+}
+
 const getFutureEvents = async () => {
   const response = await fetch("https://osmcal.org/api/v2/events?in=nl", {
     method: "GET",
@@ -27,6 +43,13 @@ const getPastEvents = async () => {
   });
   const data = await response.json();
   return data;
+};
+
+const getAllEvents = async () => {
+  const futureEvents: Event[] = await getFutureEvents();
+  const pastEvents: Event[] = await getPastEvents();
+  const events: Event[] = [...pastEvents, ...futureEvents];
+  return events;
 };
 
 type Props = {
