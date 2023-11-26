@@ -21,6 +21,10 @@ export async function generateStaticParams() {
     },
   });
 
+  if (response.status !== 200) {
+    return [];
+  }
+
   const data = await response.json();
 
   const params = data.map((id: string) => {
