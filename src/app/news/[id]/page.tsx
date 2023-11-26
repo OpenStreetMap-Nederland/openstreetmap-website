@@ -11,6 +11,30 @@ import { removeDomain } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
+export async function generateStaticParams() {
+  const baseUrl = process.env.BASE_URL || "http://localhost:3000";
+  const response = await fetch(`${baseUrl}/api/news/latest`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+  });
+
+  const data = await response.json();
+
+  const params = data.map((id: string) => {
+    return {
+      id,
+    };
+  });
+
+  return params;
+}
+
+// dont allow page to be generated at run time it is too slow
+export const dynamicParams = false;
+
 const getPage = async (id: string) => {
   const response = await fetch(`https://weeklyosm.eu/archives/${id}`, {
     method: "GET",
