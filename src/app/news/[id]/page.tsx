@@ -12,22 +12,36 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export async function generateStaticParams() {
-  const baseUrl = process.env.BASE_URL || "http://localhost:3000";
-  const response = await fetch(`${baseUrl}/api/news/latest`, {
+  const response = await fetch("https://weeklyosm.eu", {
     method: "GET",
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json;charset=UTF-8",
+      Accept: "text/html",
+      "Content-Type": "text/html;charset=UTF-8",
     },
   });
 
   if (response.status !== 200) {
-    return [];
+    return notFound();
   }
 
-  const data = await response.json();
+  const html = await response.text();
+  const { JSDOM } = jsdom;
+  const dom = await new JSDOM(html);
+  const content = dom.window.document
+    .getElementById("recent-posts-2")
+    ?.querySelector("ul")
+    ?.querySelectorAll("a");
 
-  const params = data.map((id: string) => {
+  if (!content) return notFound();
+
+  console.log(content);
+
+  const ids = Array.from(content).map((item) => {
+    const id = item.getAttribute("href")?.split("/")[4];
+    return id;
+  }) as string[];
+
+  const params = ids.map((id: string) => {
     return {
       id,
     };
