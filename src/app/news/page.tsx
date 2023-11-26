@@ -1,41 +1,21 @@
 import React from "react";
-import { notFound } from "next/navigation";
-import jsdom from "jsdom";
 import { redirect } from "next/navigation";
+import { env } from "process";
 
-const getPage = async () => {
-  const response = await fetch("https://weeklyosm.eu", {
+export default async function News() {
+  const baseUrl = env.BASE_URL || "http://localhost:3000";
+  const response = await fetch(`${baseUrl}/api/news`, {
     next: {
-      revalidate: 60 * 60 * 2, // 2 hours
+      revalidate: 60 * 60, // 1 hour
     },
     method: "GET",
     headers: {
-      Accept: "text/html",
-      "Content-Type": "text/html;charset=UTF-8",
+      Accept: "application/json",
+      "Content-Type": "application/json;charset=UTF-8",
     },
   });
 
-  if (response.status !== 200) {
-    return notFound();
-  }
+  const news = await response.json();
 
-  const html = await response.text();
-  const { JSDOM } = jsdom;
-  const dom = await new JSDOM(html);
-  const content = dom.window.document.getElementById("content");
-
-  return content;
-};
-
-export default async function News() {
-  const content = await getPage();
-  if (!content) return notFound();
-
-  const header = content
-    .querySelector(".header-meta")
-    ?.querySelector("a")
-    ?.href.split("/");
-
-  const id = header?.[header.length - 1];
-  redirect(`/news/${id}`);
+  redirect(`/news/${news.id}`);
 }

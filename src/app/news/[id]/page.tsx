@@ -11,6 +11,7 @@ import { removeDomain } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { env } from "process";
 
 const getPage = async (id: string) => {
   const response = await fetch(`https://weeklyosm.eu/archives/${id}`, {
@@ -104,8 +105,13 @@ type NewsObject = {
   content: string;
 };
 
+// export function generateStaticParams() {
+//   return [{ id: "16857" }];
+// }
+
 export default async function News({ params }: { params: { id: string } }) {
-  const response = await fetch(`http://localhost:3000/api/news/${params.id}`, {
+  const baseUrl = env.BASE_URL || "http://localhost:3000";
+  const response = await fetch(`${baseUrl}/api/news/${params.id}`, {
     next: {
       revalidate: false,
     },
