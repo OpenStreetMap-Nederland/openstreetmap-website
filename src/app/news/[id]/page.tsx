@@ -11,10 +11,6 @@ import { removeDomain } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-export function generateStaticParams() {
-  return [{ id: "16846" }, { id: "16857" }];
-}
-
 const getPage = async (id: string) => {
   const response = await fetch(`https://weeklyosm.eu/archives/${id}`, {
     method: "GET",
