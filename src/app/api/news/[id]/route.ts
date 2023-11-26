@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import jsdom from "jsdom";
 import { sanitize } from "isomorphic-dompurify";
-import { notFound } from "next/navigation";
+import { error } from "console";
 
 const dateFromDateString = (dateString: string) => {
   const date = dateString.split("/");
@@ -28,7 +28,7 @@ export async function GET(
   });
 
   if (response.status !== 200) {
-    return notFound();
+    return error(response.status + " " + response.statusText);
   }
 
   const html = await response.text();
@@ -36,10 +36,10 @@ export async function GET(
   const dom = await new JSDOM(html);
   const content = dom.window.document.getElementById("content");
 
-  if (!content) return notFound();
+  if (!content) return error("No content found");
 
   const article = content.querySelector("article");
-  if (!article) return notFound();
+  if (!article) return error("No article found");
 
   // step 1: remove all syling
   const styles = article.querySelectorAll("[style]");
@@ -106,16 +106,16 @@ export async function GET(
     lastP.classList.add("text-center", "mt-12");
   }
 
+  let title = "WeeklyOSM";
+
   const dateHtmlObject = Array.from(p).find((p) => p.textContent?.length);
-  if (!dateHtmlObject) return notFound();
+  if (dateHtmlObject) {
+    const dateSting = dateHtmlObject.textContent?.split("-")[0] ?? "";
+    const date = dateFromDateString(dateSting);
+    title = `${date.getFullYear()} - Week ${date.getWeek()}`;
 
-  const dateSting = dateHtmlObject.textContent?.split("-")[0];
-  if (!dateSting) return notFound();
-
-  const date = dateFromDateString(dateSting);
-  const title = `${date.getFullYear()} - Week ${date.getWeek()}`;
-
-  dateHtmlObject.remove();
+    dateHtmlObject.remove();
+  }
 
   const pagination = content?.querySelector("nav");
 
