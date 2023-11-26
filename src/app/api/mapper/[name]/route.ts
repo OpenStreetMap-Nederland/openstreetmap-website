@@ -25,7 +25,7 @@ const getUIDFromChangeset = async (id: string) => {
 };
 
 const fetchHistory = async (name: string) => {
-  return await fetch(
+  const response = await fetch(
     `https://www.openstreetmap.org/user/${name}/history?list=1`,
     {
       cache: "force-cache",
@@ -36,6 +36,18 @@ const fetchHistory = async (name: string) => {
       },
     }
   );
+
+  if (response.status !== 200) {
+    return null;
+  }
+
+  const html = await response.text();
+
+  if (html.includes("does not exist")) {
+    return null;
+  }
+
+  return html;
 };
 
 const normalizeName = (name: string) => {
@@ -43,22 +55,14 @@ const normalizeName = (name: string) => {
 };
 
 const getFirstChangesetFromUserByName = async (name: string) => {
-  name = normalizeName(name);
+  let html = await fetchHistory(name);
 
-  let response = await fetchHistory(name);
-
-  if (response.status !== 200) {
-    let response = await fetchHistory(name.replaceAll(" ", "_"));
-
-    if (response.status !== 200) {
-      return notFound();
-    }
-  }
-
-  const html = await response.text();
+  // If the user has an underscore in their name,
+  // it is possible that the user has a space in their name
+  if (!html) html = await fetchHistory(normalizeName(name));
+  if (!html) return notFound();
 
   const { JSDOM } = jsdom;
-
   const dom = await new JSDOM(html);
   const a = dom.window.document?.querySelector("a");
   const id = a?.getAttribute("href")?.split("/");
