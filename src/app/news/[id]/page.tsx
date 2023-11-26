@@ -10,8 +10,10 @@ import { sanitize } from "isomorphic-dompurify";
 import { removeDomain } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import { env } from "process";
+
+export function generateStaticParams() {
+  return [{ id: "16846" }, { id: "16857" }];
+}
 
 const getPage = async (id: string) => {
   const response = await fetch(`https://weeklyosm.eu/archives/${id}`, {
@@ -98,47 +100,78 @@ const dateFromDateString = (dateString: string) => {
   return new Date(`${year}-${month}-${day}`);
 };
 
-type NewsObject = {
-  title: string;
-  prevId: string;
-  nextId: string;
-  content: string;
-};
-
-// export function generateStaticParams() {
-//   return [{ id: "16857" }];
-// }
-
 export default async function News({ params }: { params: { id: string } }) {
-  const baseUrl = env.BASE_URL || "http://localhost:3000";
-  const response = await fetch(`${baseUrl}/api/news/${params.id}`, {
-    next: {
-      revalidate: false,
-    },
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json;charset=UTF-8",
-    },
+  const content = await getPage(params.id);
+  if (!content) return notFound();
+
+  const article = content.querySelector("article");
+  if (!article) return notFound();
+
+  // step 1: remove all syling
+  const styles = article.querySelectorAll("[style]");
+  styles?.forEach((style) => {
+    style.removeAttribute("style");
   });
 
-  const newsObject = (await response.json()) as NewsObject;
-  const { title, prevId, nextId, content } = newsObject;
+  // step 2: remove header and footer
+  article.querySelector("header")?.remove();
+  article.querySelector("footer")?.remove();
+
+  // step 3: style the headings
+  const headings = article.querySelectorAll("h2");
+  headings.forEach((heading) => {
+    heading.classList.add("text-2xl", "font-bold", "mt-4", "mb-2");
+  });
+
+  // step 4: remove the Upcoming Events
+  headings.forEach((heading) => {
+    if (heading.textContent?.includes("Upcoming Events")) {
+      heading.nextElementSibling?.remove();
+      heading.remove();
+    }
+  });
+
+  // step 5: add styling to images and remove all images except the first one
+  const images = article.querySelectorAll("img");
+  if (images) {
+    for (let i = 0; i < images.length; i++) {
+      const image = images[i];
+      if (i !== 0) {
+        image.remove();
+        continue;
+      }
+
+      image.classList.add("w-full", "rounded-lg", "mt-4", "mb-2");
+    }
+  }
+
+  // step 6: remove all "►"
+  const lis = article.querySelectorAll("li");
+  lis.forEach((li) => {
+    li.innerHTML = li.innerHTML.replaceAll("►", "");
+  });
+
+  // step 7: change user links to internal links
+  // const as = article.querySelectorAll("a");
+  // as?.forEach((a) => {
+  //   if (a.href.includes("https://www.openstreetmap.org/user")) {
+  //     a.href = a.href.replace("https://www.openstreetmap.org/user", "/mapper");
+  //   }
+  // });
+
+  // step 8: remove .sharedaddy
+  article.querySelector(".sharedaddy")?.remove();
+
+  // get last p element
+  const p = article.querySelectorAll("p");
+  const lastP = p[p.length - 1];
+
+  if (lastP) {
+    lastP.classList.add("text-center", "mt-12");
+  }
 
   const options = {
     replace: (domNode: any) => {
-      if (domNode.name === "img") {
-        return (
-          <Image
-            src={domNode.attribs.src}
-            alt={domNode.attribs.alt}
-            width={800}
-            height={600}
-            className="rounded-lg"
-          />
-        );
-      }
-
       if (domNode.name === "code") {
         return (
           <span className="bg-gray-100 dark:bg-gray-800 rounded-md px-1.5 py-0.5 hover:underline">
@@ -148,6 +181,31 @@ export default async function News({ params }: { params: { id: string } }) {
       }
     },
   };
+
+  const dateHtmlObject = Array.from(p).find((p) => p.textContent?.length);
+  if (!dateHtmlObject) return notFound();
+
+  const dateSting = dateHtmlObject.textContent?.split("-")[0];
+  if (!dateSting) return notFound();
+
+  const date = dateFromDateString(dateSting);
+  const title = `${date.getFullYear()} - Week ${date.getWeek()}`;
+
+  dateHtmlObject.remove();
+
+  const pagination = content?.querySelector("nav");
+
+  const prevhref = pagination
+    ?.querySelector(".nav-previous")
+    ?.querySelector("a")
+    ?.href.split("/");
+  const nexthref = pagination
+    ?.querySelector(".nav-next")
+    ?.querySelector("a")
+    ?.href.split("/");
+
+  const prevId = prevhref?.[prevhref.length - 1];
+  const nextId = nexthref?.[nexthref.length - 1];
 
   return (
     <TitledPage
@@ -171,9 +229,9 @@ export default async function News({ params }: { params: { id: string } }) {
         </div>
       }
     >
-      {content && (
+      {article && (
         <article className="flex flex-col gap-4">
-          {parse(content, options)}
+          {parse(sanitize(article.innerHTML), options)}
         </article>
       )}
     </TitledPage>
