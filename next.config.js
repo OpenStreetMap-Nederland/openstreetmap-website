@@ -12,6 +12,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: '**.gravatar.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'weeklyosm.eu',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.ibb.co',
+      },
     ],
   },
 }
