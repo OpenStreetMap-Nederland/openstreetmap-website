@@ -21,6 +21,15 @@ export interface Event {
   location: EventLocation;
 }
 
+export type EventDetail = {
+  id: string;
+  name: string;
+  description: string;
+  creator: string;
+  attendees: string[];
+  website: string | null;
+};
+
 export class EventClass implements Event {
   id: string;
   name: string;

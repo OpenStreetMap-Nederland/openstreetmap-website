@@ -1,9 +1,12 @@
 import { notFound } from "next/navigation";
 import { TitledPage } from "@/components/layouts/titled-page";
-import { EventClass } from "@/types/event";
+import { EventClass, EventDetail } from "@/types/event";
 import { ExternalButton } from "@/components/external-button";
 import { Event } from "@/types/event";
 import { WindowContainer } from "@/components/map/containers/window-conatiner";
+import { env } from "process";
+import Link from "next/link";
+import Markdown from "react-markdown";
 
 export async function generateStaticParams() {
   const events = await getAllEvents();
@@ -49,11 +52,36 @@ const getAllEvents = async () => {
   const futureEvents: Event[] = await getFutureEvents();
   const pastEvents: Event[] = await getPastEvents();
   const events: Event[] = [...pastEvents, ...futureEvents];
+
   return events;
 };
 
 type Props = {
   params: { slug: string[] };
+};
+
+const getEventDetail = async (id: string) => {
+  if (!id) return null;
+
+  const baseUrl = env.BASE_URL || "http://localhost:3000";
+  const response = await fetch(`${baseUrl}/api/event/${id}`, {
+    next: {
+      revalidate: 60 * 60 * 24,
+    },
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+  });
+
+  if (response.status !== 200) {
+    return notFound();
+  }
+
+  const eventDetail: EventDetail = await response.json();
+
+  return eventDetail;
 };
 
 export default async function EventDetailPage({ params }: Props) {
@@ -62,15 +90,15 @@ export default async function EventDetailPage({ params }: Props) {
   const id = params?.slug?.[1];
   if (!id) return notFound();
 
-  const pastEvents: Event[] = await getPastEvents();
-  const futureEvents: Event[] = await getFutureEvents();
-  const events: Event[] = [...pastEvents, ...futureEvents];
+  const eventDetail = await getEventDetail(id);
+  if (!eventDetail) return notFound();
+
+  const events: Event[] = await getAllEvents();
   const eventClasses: EventClass[] = events.map(
     (event) => new EventClass(event)
   );
 
   const event = eventClasses.find((event) => event.id === id);
-
   if (!event) return notFound();
 
   return (
@@ -78,16 +106,48 @@ export default async function EventDetailPage({ params }: Props) {
       title={event.name}
       subTitle={event.location?.short}
       backLink={"/events"}
-      actions={<ExternalButton href={event.url}>OSMcal</ExternalButton>}
+      actions={
+        eventDetail.website && (
+          <ExternalButton href={eventDetail.website}>
+            Event website
+          </ExternalButton>
+        )
+      }
     >
-      <div className="flex flex-col gap-4">
-        <p>{event.date.human}</p>
-      </div>
-      {!event?.location?.venue.toLowerCase().includes("online") && (
-        <div className="h-64 col-span-1 rounded overflow-hidden">
-          <WindowContainer location={event.location.coords} />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="h-full w-full col-span-1">
+          <div className="flex flex-col gap-6">
+            <p>
+              <strong>{event.date.human}</strong>
+            </p>
+            <div className="flex flex-col gap-2">
+              <Markdown>{eventDetail.description}</Markdown>
+            </div>
+            <p>
+              <strong>Created by: </strong>
+              <Link href={`/mapper/${eventDetail.creator}`}>
+                {eventDetail.creator}
+              </Link>
+            </p>
+
+            {eventDetail.attendees.length > 0 && (
+              <p>
+                <strong>Attendees: </strong>{" "}
+                {eventDetail.attendees.map((attendee) => (
+                  <Link href={`/mapper/${attendee}`} key={attendee}>
+                    {attendee}
+                  </Link>
+                ))}
+              </p>
+            )}
+          </div>
         </div>
-      )}
+        <div className="rounded-lg overflow-hidden col-span-1 h-[32rem]">
+          {!event?.location?.venue.toLowerCase().includes("online") && (
+            <WindowContainer location={event.location.coords} />
+          )}
+        </div>
+      </div>
     </TitledPage>
   );
 }
