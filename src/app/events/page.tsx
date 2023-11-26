@@ -1,13 +1,8 @@
 import React from "react";
 import { TitledPage } from "@/components/layouts/titled-page";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { ExternalLink } from "lucide-react";
 import { ExternalButton } from "@/components/external-button";
-import { Card } from "@/components/ui/card";
 import { EventClass, Event } from "@/types/event";
 import { Metadata } from "next";
-import { MapLocationContainer } from "@/components/map/containers/map-location-container";
 import { EventCard } from "@/components/event/event-card";
 
 export const metadata: Metadata = {
@@ -29,7 +24,7 @@ const addLocations = (events: Event[]) => {
   });
 };
 
-export const getFutureEvents = async () => {
+const getFutureEvents = async () => {
   const response = await fetch("https://osmcal.org/api/v2/events?in=nl", {
     method: "GET",
     headers: {
@@ -43,7 +38,7 @@ export const getFutureEvents = async () => {
   return data;
 };
 
-export const getPastEvents = async () => {
+const getPastEvents = async () => {
   const response = await fetch("https://osmcal.org/api/v2/events/past?in=nl", {
     method: "GET",
     headers: {
@@ -57,7 +52,7 @@ export const getPastEvents = async () => {
   return data;
 };
 
-export default async function Blog() {
+export default async function EventsPage() {
   const futureEvents: Event[] = await getFutureEvents();
   const pastEvents: Event[] = await getPastEvents();
 

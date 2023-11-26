@@ -1,10 +1,33 @@
 import { notFound } from "next/navigation";
-import { getFutureEvents, getPastEvents } from "../page";
 import { TitledPage } from "@/components/layouts/titled-page";
 import { EventClass } from "@/types/event";
 import { ExternalButton } from "@/components/external-button";
 import { Event } from "@/types/event";
 import { WindowContainer } from "@/components/map/containers/window-conatiner";
+
+const getFutureEvents = async () => {
+  const response = await fetch("https://osmcal.org/api/v2/events?in=nl", {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+  });
+  const data = await response.json();
+  return data;
+};
+
+const getPastEvents = async () => {
+  const response = await fetch("https://osmcal.org/api/v2/events/past?in=nl", {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+  });
+  const data = await response.json();
+  return data;
+};
 
 type Props = {
   params: { slug: string[] };

@@ -1,7 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import jsdom from "jsdom";
 import { sanitize } from "isomorphic-dompurify";
+import { notFound } from "next/navigation";
 
 const dateFromDateString = (dateString: string) => {
   const date = dateString.split("/");
@@ -13,7 +14,7 @@ const dateFromDateString = (dateString: string) => {
 
 // GET: /api/news/[id]
 export async function GET(
-  req: NextApiRequest,
+  request: Request,
   context: { params: { id: string } }
 ) {
   const { id } = context.params;
@@ -27,7 +28,7 @@ export async function GET(
   });
 
   if (response.status !== 200) {
-    return;
+    return notFound();
   }
 
   const html = await response.text();
@@ -35,10 +36,10 @@ export async function GET(
   const dom = await new JSDOM(html);
   const content = dom.window.document.getElementById("content");
 
-  if (!content) return;
+  if (!content) return notFound();
 
   const article = content.querySelector("article");
-  if (!article) return;
+  if (!article) return notFound();
 
   // step 1: remove all syling
   const styles = article.querySelectorAll("[style]");
@@ -106,10 +107,10 @@ export async function GET(
   }
 
   const dateHtmlObject = Array.from(p).find((p) => p.textContent?.length);
-  if (!dateHtmlObject) return;
+  if (!dateHtmlObject) return notFound();
 
   const dateSting = dateHtmlObject.textContent?.split("-")[0];
-  if (!dateSting) return;
+  if (!dateSting) return notFound();
 
   const date = dateFromDateString(dateSting);
   const title = `${date.getFullYear()} - Week ${date.getWeek()}`;
