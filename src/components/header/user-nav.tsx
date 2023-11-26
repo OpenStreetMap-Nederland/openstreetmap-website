@@ -85,14 +85,6 @@ export function UserNav() {
       });
   }, [session]);
 
-  if (
-    session.status === "loading" ||
-    loading ||
-    (!user && session.status !== "unauthenticated")
-  ) {
-    return <Skeleton className="h-8 w-8 rounded-full" />;
-  }
-
   if (session.status === "unauthenticated") {
     return <SignInButton />;
   }
@@ -113,7 +105,7 @@ export function UserNav() {
                   width="65"
                   height="65"
                   src={user?.img?.href}
-                  priority={true}
+                  unoptimized
                 ></Image>
                 <Skeleton className="h-8 w-8 rounded-full" />
               </div>

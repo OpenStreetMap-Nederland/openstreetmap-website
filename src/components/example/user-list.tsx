@@ -34,6 +34,7 @@ export function UserList({ users }: Props) {
                 alt={user.username}
                 width={36}
                 height={36}
+                unoptimized
               ></Image>
             </Avatar>
             <div className="ml-4 space-y-1">
