@@ -11,6 +11,30 @@ export type Project = {
   startDate?: string;
 };
 
+const OpenAED: Project = {
+  name: "OpenAED",
+  altName: "Open AED",
+  description: "OpenAED is a project to map all AEDs in the Netherlands.",
+  longdescription:
+    "OpenAED is a project to map all AEDs in the Netherlands. It displays the AEDs on a map.",
+  links: [
+    {
+      name: "Webste",
+      url: "https://openaed.nl/",
+    },
+    {
+      name: "Code",
+      url: "https://github.com/openaed",
+    },
+    {
+      name: "Creator",
+      url: "https://github.com/jxpsert",
+    },
+  ],
+  image: "/openAEDPreview.png",
+  startDate: "2023",
+};
+
 const OpenStreetMapCarto: Project = {
   name: "OSM Carto",
   altName: "OpenStreetMap Carto",
@@ -84,7 +108,7 @@ export const projectLists = [
   {
     name: "Nederlandse projecten",
     description: "Projecten die gemaakt zijn door Nederlanders.",
-    projects: [] as Project[],
+    projects: [OpenAED] as Project[],
   },
   {
     name: "Maps",
