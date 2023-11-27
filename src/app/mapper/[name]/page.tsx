@@ -14,9 +14,9 @@ import { env } from "process";
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: { name: string };
 }): Promise<Metadata> {
-  const user = await getUser(params.id);
+  const user = await getUser(params.name);
   if (!user) return notFound();
 
   return {
