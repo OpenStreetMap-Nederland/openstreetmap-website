@@ -6,11 +6,42 @@ import Image from "next/image";
 import { ExternalButton } from "@/components/external-button";
 import Markdown from "react-markdown";
 import { SeparatorTypes } from "@/enums/separator-types";
+import { eclipse } from "@/lib/utils";
 
-export const metadata: Metadata = {
-  title: "OpenStreetMap Project",
-  description: "",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: { name: string };
+}): Promise<Metadata> {
+  const project: Project | undefined = projects.find(
+    (project) => project.name.toLowerCase() === params.name.replaceAll("-", " ")
+  );
+
+  if (!project) {
+    return notFound();
+  }
+
+  const metadata: Metadata = {
+    title: eclipse(project.name, 50) + " OpenStreetMap project",
+    description: eclipse(project.description, 200),
+    keywords: ["OpenStreetMap", "Prject", project.name],
+  };
+
+  if (project.image) {
+    metadata.openGraph = {
+      images: [
+        {
+          url: project.image,
+          width: 800,
+          height: 600,
+          alt: project.name,
+        },
+      ],
+    };
+  }
+
+  return metadata;
+}
 
 export function generateStaticParams() {
   const params = projects.map((project) => {
@@ -34,9 +65,6 @@ export default function ProjectDetailPage({
   if (!project) {
     return notFound();
   }
-
-  metadata.title = project.name;
-  metadata.description = project.description;
 
   return (
     <TitledPage
