@@ -84,11 +84,11 @@
   }
 
   a {
-    color: #2563eb;
+    @apply text-blue-600 dark:text-blue-200;
   }
 
   a:hover {
-    color: #1e40af;
+    @apply text-blue-700 dark:text-blue-100;
   }
 
   a * {
