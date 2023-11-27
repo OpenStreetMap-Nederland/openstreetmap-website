@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from "clsx";
+import { ht } from "date-fns/locale";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -102,4 +103,31 @@ Date.prototype.getWeek = function () {
 
 export const removeDomain = (url: string) => {
   return url.replace(/^(?:\/\/|[^/]+)*\//, "/");
+};
+
+export const toInternalLinks = (html: string) => {
+  html = html.replaceAll("https://www.openstreetmap.org/user/", "/mapper/");
+
+  html = html.replaceAll("https://www.openstreetmap.org/", "/");
+
+  return html;
+};
+
+export const eclipse = (input: string, length = 20) => {
+  if (input.length <= length) return input;
+
+  return input.slice(0, length) + "...";
+};
+
+export const richTextToPlainText = (input: string) => {
+  // remove all html tags
+  input = input.replace(/<[^>]*>?/gm, "");
+
+  // remove all newlines
+  input = input.replace(/\n/g, " ");
+
+  // remove all double spaces
+  input = input.replace(/  +/g, " ");
+
+  return input;
 };

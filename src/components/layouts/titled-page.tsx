@@ -9,7 +9,7 @@ import { ArrowLeft, MoveLeft } from "lucide-react";
 interface TitledPageProps {
   title: string;
   titlePostfix?: string | null;
-  subTitle?: string | null;
+  subTitle?: string | null | React.ReactNode;
   separator?: SeparatorTypes;
   actions?: React.ReactNode | null;
   backLink?: string | null;

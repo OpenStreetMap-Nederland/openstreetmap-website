@@ -7,7 +7,7 @@ import { Metadata } from "next";
 import parse from "html-react-parser";
 import { SeparatorTypes } from "@/enums/separator-types";
 import { sanitize } from "isomorphic-dompurify";
-import { removeDomain } from "@/lib/utils";
+import { removeDomain, toInternalLinks } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -245,7 +245,7 @@ export default async function News({ params }: { params: { id: string } }) {
   if (!dateSting) return notFound();
 
   const date = dateFromDateString(dateSting);
-  const title = `${date.getFullYear()} - Week ${date.getWeek()}`;
+  const title = `News ${date.getFullYear()} - Week ${date.getWeek()}`;
 
   dateHtmlObject.remove();
 
@@ -267,7 +267,7 @@ export default async function News({ params }: { params: { id: string } }) {
     <TitledPage
       title={title}
       titlePostfix="WeeklyOSM"
-      subTitle="De laatste nieuwsberichten over OpenStreetMap. Gemaakt door WeeklyOSM."
+      subTitle="The latest news about OpenStreetMap in a weekly format. Published every Sunday."
       separator={SeparatorTypes.none}
       actions={
         <div className="flex gap-4">
@@ -287,7 +287,7 @@ export default async function News({ params }: { params: { id: string } }) {
     >
       {article && (
         <article className="flex flex-col gap-4">
-          {parse(sanitize(article.innerHTML), options)}
+          {parse(toInternalLinks(sanitize(article.innerHTML)), options)}
         </article>
       )}
     </TitledPage>

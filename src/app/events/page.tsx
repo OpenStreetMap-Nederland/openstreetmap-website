@@ -7,7 +7,8 @@ import { EventCard } from "@/components/event/event-card";
 
 export const metadata: Metadata = {
   title: "OpenStreetMap Events",
-  description: "Zie hier de evenementen van OpenStreetMap Nederland.",
+  description: "The upcoming and past events of OpenStreetMap Netherlands,",
+  keywords: ["OpenStreetMap", "Event", "OSM"],
 };
 
 const locations: any[] = [];

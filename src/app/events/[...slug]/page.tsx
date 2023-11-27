@@ -7,6 +7,28 @@ import { WindowContainer } from "@/components/map/containers/window-conatiner";
 import { env } from "process";
 import Link from "next/link";
 import Markdown from "react-markdown";
+import { Metadata } from "next";
+import { eclipse } from "@/lib/utils";
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  if (!params) return notFound();
+
+  const id = params?.slug?.[1];
+  if (!id) return notFound();
+
+  const eventDetail = await getEventDetail(id);
+
+  if (!eventDetail) return notFound();
+
+  let keywords = eventDetail.name.split(" ");
+  let keyword = `${keywords[0]} ${keywords[1]}`;
+
+  return {
+    title: eclipse(eventDetail.name, 60) + " OpenStreetMap event",
+    description: eclipse(eventDetail.description, 800),
+    keywords: ["OpenStreetMap", "Event", keyword, "OSM"],
+  };
+}
 
 export async function generateStaticParams() {
   const events = await getAllEvents();

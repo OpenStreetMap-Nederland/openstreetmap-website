@@ -4,7 +4,7 @@ type Props = {
   size: "h1" | "h2" | "h3" | "h4";
   title: string;
   titlePostfix?: string | null;
-  subTitle?: string | null;
+  subTitle?: string | null | React.ReactNode;
   actions?: React.ReactNode | null;
 };
 

@@ -39,11 +39,11 @@ export async function generateMetadata({
   };
 }
 
-const getUser = async (userName: string) => {
-  if (!userName) return null;
+const getUser = async (name: string) => {
+  if (!name) return null;
 
   const baseUrl = env.BASE_URL || "http://localhost:3000";
-  const response = await fetch(`${baseUrl}/api/mapper/${userName}`, {
+  const response = await fetch(`${baseUrl}/api/mapper/${name}`, {
     next: {
       revalidate: 60 * 60 * 24,
     },
@@ -69,9 +69,9 @@ const getUser = async (userName: string) => {
 export default async function AboutPage({
   params,
 }: {
-  params: { id: string };
+  params: { name: string };
 }) {
-  const user = await getUser(params.id);
+  const user = await getUser(params.name);
   if (!user) return notFound();
 
   return (
