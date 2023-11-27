@@ -46,17 +46,6 @@ export class EventClass implements Event {
     this.location = event.location;
   }
 
-  toKey(): string {
-    const formattedDate = format(new Date(this.date.start), "yyyy-MM-dd");
-    const lowercaseName = this.name
-      .toLowerCase()
-      .replace(/ /g, "-")
-      .replace(/[^a-z0-9-]/g, "")
-      .replace(/-+/g, "-");
-
-    return `${lowercaseName}-${formattedDate}-${this.id}`;
-  }
-
   toHash(): string {
     const formattedDate = format(new Date(this.date.start), "yyyy-MM-dd");
     const lowercaseName = this.name

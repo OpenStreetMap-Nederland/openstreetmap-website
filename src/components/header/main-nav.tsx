@@ -46,7 +46,7 @@ export async function MainNav({
     { href: "/about", label: "About" },
     { href: "/projects", label: "Projects" },
     { href: "/events", label: "Events" },
-    { href: "/news", label: "News", dynamicAddition: getNewsId },
+    { href: "/news", label: "News" },
     { href: "/community", label: "Community" },
     // { href: "/bagbot", label: "BagBot", badge: "New!" },
     // { href: "/copyright", label: "Copyright" },
@@ -57,7 +57,6 @@ export async function MainNav({
     href: string;
     label: string;
     badge?: string;
-    dynamicAddition?: () => Promise<string>;
   };
 
   return (
@@ -68,14 +67,7 @@ export async function MainNav({
       })}
       {...props}
     >
-      {links.map(async ({ href, label, badge, dynamicAddition }: LinkProps) => {
-        if (dynamicAddition) {
-          const id = await dynamicAddition();
-          if (id) {
-            href = `${href}/${id}`;
-          }
-        }
-
+      {links.map(({ href, label, badge }: LinkProps) => {
         if (dropdownMenu) {
           return (
             <Link href={href} key={href}>

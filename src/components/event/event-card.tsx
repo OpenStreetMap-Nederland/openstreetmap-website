@@ -9,7 +9,7 @@ type Props = {
 
 export function EventCard({ event }: Props) {
   return (
-    <Link href={`/events/${event.toHash()}`} key={event.name}>
+    <Link href={`/events/${event.toHash()}`}>
       <Card className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         <div className="flex flex-col col-span-1 lg:col-span-2">
           <h1 className="text-xl font-bold tracking-tight mb-4">
