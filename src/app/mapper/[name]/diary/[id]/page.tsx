@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { env } from "process";
 import { Diary } from "@/types/diary";
-import { eclipse, richTextToPlainText } from "@/lib/utils";
+import { eclipse, richTextToPlainText, toInternalLinks } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
 import parse from "html-react-parser";
@@ -87,6 +87,18 @@ export default async function AboutPage({
           </span>
         );
       }
+
+      if (domNode.name === "a") {
+        let baseUrl = env.BASE_URL || "http://localhost:3000";
+        let href = domNode.attribs.href;
+
+        if (href && !href.startsWith("http")) {
+          domNode.attribs.rel = null;
+          return <Link {...domNode.attribs}>{domNode.children[0].data}</Link>;
+        } else {
+          domNode.attribs.target = "_blank";
+        }
+      }
     },
   };
 
@@ -103,7 +115,7 @@ export default async function AboutPage({
       separator={SeparatorTypes.space}
     >
       {diary.content && (
-        <article className="flex flex-col gap-4">
+        <article className="flex flex-col gap-4" lang={diary.language}>
           {parse(sanitize(diary.content), options)}
         </article>
       )}

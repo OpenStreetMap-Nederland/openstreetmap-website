@@ -8,7 +8,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Metadata } from "next";
 import { ExternalButton } from "@/components/external-button";
-import { generateImageLink } from "@/lib/utils";
+import { generateImageLink, toInternalLinks } from "@/lib/utils";
 import { env } from "process";
 
 export async function generateMetadata({
@@ -111,7 +111,34 @@ export default async function AboutPage({
         Forum Profile
       </ExternalButton>
       <Separator />
-      <Markdown>{user.description}</Markdown>
+
+      <Markdown
+        components={{
+          a: ({ node, ...props }) => {
+            // id link is not in the same domain
+            let baseUrl = env.BASE_URL || "http://localhost:3000";
+            if (props.href) props.href = toInternalLinks(props.href);
+
+            if (
+              props?.href?.startsWith("http") &&
+              !props?.href?.startsWith(baseUrl)
+            ) {
+              return (
+                <a
+                  {...props}
+                  target="_blank"
+                  rel="nofollow noopener noreferrer"
+                >
+                  {props.children}
+                </a>
+              );
+            }
+            return <a {...props}>{props.children}</a>;
+          },
+        }}
+      >
+        {user.description}
+      </Markdown>
     </TitledPage>
   );
 }

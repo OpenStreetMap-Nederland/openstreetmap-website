@@ -8,7 +8,7 @@ import { env } from "process";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import { Metadata } from "next";
-import { eclipse } from "@/lib/utils";
+import { eclipse, toInternalLinks } from "@/lib/utils";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!params) return notFound();
@@ -143,7 +143,33 @@ export default async function EventDetailPage({ params }: Props) {
               <strong>{event.date.human}</strong>
             </p>
             <div className="flex flex-col gap-2">
-              <Markdown>{eventDetail.description}</Markdown>
+              <Markdown
+                components={{
+                  a: ({ node, ...props }) => {
+                    // id link is not in the same domain
+                    let baseUrl = env.BASE_URL || "http://localhost:3000";
+                    if (props.href) props.href = toInternalLinks(props.href);
+
+                    if (
+                      props?.href?.startsWith("http") &&
+                      !props?.href?.startsWith(baseUrl)
+                    ) {
+                      return (
+                        <a
+                          {...props}
+                          target="_blank"
+                          rel="nofollow noopener noreferrer"
+                        >
+                          {props.children}
+                        </a>
+                      );
+                    }
+                    return <a {...props}>{props.children}</a>;
+                  },
+                }}
+              >
+                {eventDetail.description}
+              </Markdown>
             </div>
             <p>
               <strong>Created by: </strong>
