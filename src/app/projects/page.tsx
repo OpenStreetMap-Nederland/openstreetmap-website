@@ -41,7 +41,7 @@ export default function ProjectsPage() {
                       <Title
                         size="h3"
                         title={project.name}
-                        titlePostfix={`(${project.altName})`}
+                        titlePostfix={project.altName && `(${project.altName})`}
                       />
                       <p>{project.description}</p>
                     </div>

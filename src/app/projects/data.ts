@@ -13,7 +13,6 @@ export type Project = {
 
 const OpenAED: Project = {
   name: "OpenAED",
-  altName: "Open AED",
   description: "OpenAED is a project to map all AEDs in the Netherlands.",
   longdescription:
     "OpenAED is a project to map all AEDs in the Netherlands. It displays the AEDs on a map.",
@@ -102,7 +101,7 @@ const JOSM: Project = {
   image: "/josmPreview.png",
 };
 
-export const projects = [OpenStreetMapCarto, iD, JOSM] as Project[];
+export const projects = [OpenAED, OpenStreetMapCarto, iD, JOSM] as Project[];
 
 export const projectLists = [
   {
