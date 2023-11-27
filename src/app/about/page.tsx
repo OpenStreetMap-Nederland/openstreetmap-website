@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <TitledPage title="About">
-      OpenStreetMap Nederland is een vereniging van vrijwilligers die zich
-      inzetten voor het verzamelen, bewerken en beschikbaar stellen van vrije
-      geografische gegevens.
+      OpenStreetMap Nederland bestaat uit vrijwilligers die zich inzetten voor
+      het verzamelen, bewerken en beschikbaar stellen van vrije geografische
+      gegevens.
       <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
         Hoe jij kan helpen
       </h2>
