@@ -79,7 +79,7 @@ export default async function EventsPage() {
             futureEvents.map((event) => {
               const eventClass: EventClass = new EventClass(event);
 
-              return <EventCard key={eventClass.toHash()} event={eventClass} />;
+              return <EventCard key={eventClass.toKey()} event={eventClass} />;
             })
           )}
         </div>
@@ -94,7 +94,7 @@ export default async function EventsPage() {
             pastEvents.map((event) => {
               const eventClass: EventClass = new EventClass(event);
 
-              return <EventCard key={eventClass.toHash()} event={eventClass} />;
+              return <EventCard key={eventClass.toKey()} event={eventClass} />;
             })
           )}
         </div>

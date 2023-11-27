@@ -182,13 +182,11 @@ export default async function EventDetailPage({ params }: Props) {
               <p>
                 <strong>Attendees: </strong>{" "}
                 {eventDetail.attendees.map((attendee, i) => (
-                  <>
-                    <Link href={`/mapper/${attendee}`} key={attendee}>
-                      {attendee}
-                    </Link>
+                  <span key={attendee}>
+                    <Link href={`/mapper/${attendee}`}>{attendee}</Link>
                     {i < eventDetail.attendees.length - 2 && ", "}
                     {i === eventDetail.attendees.length - 2 && ", and "}
-                  </>
+                  </span>
                 ))}
               </p>
             )}

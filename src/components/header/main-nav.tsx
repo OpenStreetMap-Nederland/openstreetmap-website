@@ -35,7 +35,11 @@ const getNewsId = async () => {
   return news.id as string;
 };
 
-export function MainNav({ className, dropdownMenu = false, ...props }: Props) {
+export async function MainNav({
+  className,
+  dropdownMenu = false,
+  ...props
+}: Props) {
   const links = [
     // { href: "/traces", label: "GPS Traces" },
     // { href: "/diaries", label: "User Diaries" },
