@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   let keyword = `${keywords[0]} ${keywords[1]}`;
 
   return {
-    title: eclipse(eventDetail.name, 60) + " OpenStreetMap event",
-    description: eclipse(eventDetail.description, 800),
+    title: eclipse(eventDetail.name, 50) + " OpenStreetMap event",
+    description: eclipse(eventDetail.description, 200),
     keywords: ["OpenStreetMap", "Event", keyword, "OSM"],
   };
 }
@@ -181,10 +181,14 @@ export default async function EventDetailPage({ params }: Props) {
             {eventDetail.attendees.length > 0 && (
               <p>
                 <strong>Attendees: </strong>{" "}
-                {eventDetail.attendees.map((attendee) => (
-                  <Link href={`/mapper/${attendee}`} key={attendee}>
-                    {attendee}
-                  </Link>
+                {eventDetail.attendees.map((attendee, i) => (
+                  <>
+                    <Link href={`/mapper/${attendee}`} key={attendee}>
+                      {attendee}
+                    </Link>
+                    {i < eventDetail.attendees.length - 2 && ", "}
+                    {i === eventDetail.attendees.length - 2 && ", and "}
+                  </>
                 ))}
               </p>
             )}

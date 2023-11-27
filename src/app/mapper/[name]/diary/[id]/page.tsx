@@ -23,8 +23,8 @@ export async function generateMetadata({
   if (!diary) return notFound();
 
   return {
-    title: diary.title,
-    description: eclipse(richTextToPlainText(diary.content), 800),
+    title: eclipse(diary.title, 50) + " OpenStreetMap diary",
+    description: eclipse(richTextToPlainText(diary.content), 200),
     openGraph: {
       type: "article",
       // images: [],
