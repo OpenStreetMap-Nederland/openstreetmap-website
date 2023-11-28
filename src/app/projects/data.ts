@@ -85,7 +85,7 @@ const JOSM: Project = {
   name: "JOSM",
   altName: "Java OpenStreetMap Editor",
   description:
-    "JOSM is a desktop editor for OpenStreetMap. It supports a large number of plugins. JOSM is written in Java. Reccomended for more advanced mappers.",
+    "JOSM is a desktop editor for OpenStreetMap. It supports a large number of plugins. JOSM is written in Java. Recommended for more advanced mappers.",
   longdescription:
     "JOSM is a desktop editor for OpenStreetMap. It supports a large number of plugins. JOSM is written in Java. JOSM is the most popular editor for OpenStreetMap. It is used by many advanced mappers. JOSM is written in Java.",
   links: [
