@@ -60,7 +60,7 @@ export default async function CommunityPage() {
     <TitledPage
       title="Community"
       titlePostfix="forum"
-      subTitle="OpenStreetMap is build by real people like you and me."
+      subTitle="OpenStreetMap is built by real people like you and me."
       separator={SeparatorTypes.none}
       actions={
         <ExternalButton href="https://community.openstreetmap.org/">
