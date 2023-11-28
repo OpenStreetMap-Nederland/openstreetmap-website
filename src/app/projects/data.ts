@@ -18,7 +18,7 @@ const OpenAED: Project = {
     "OpenAED is a project to map all AEDs in the Netherlands. It displays the AEDs on a map.",
   links: [
     {
-      name: "Webste",
+      name: "Website",
       url: "https://openaed.nl/",
     },
     {
