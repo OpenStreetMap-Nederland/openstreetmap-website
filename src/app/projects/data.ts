@@ -60,7 +60,7 @@ const iD: Project = {
   name: "iD",
   altName: "iD editor",
   description:
-    "A web editor for OpenStreetMap, that is easy to use. Reccomended for beginning mappers.",
+    "A web editor for OpenStreetMap, that is easy to use. Recommended for beginning mappers.",
   longdescription:
     "iD is a web editor for OpenStreetMap, that is easy to use. It is intentionally simple, but powerful. iD is written in JavaScript and uses [d3](https://d3js.org/)",
   links: [
