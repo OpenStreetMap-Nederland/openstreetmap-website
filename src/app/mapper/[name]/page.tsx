@@ -78,8 +78,6 @@ export default async function AboutPage({
   const user = await getUser(params.name);
   if (!user) return notFound();
 
-  console.log(user.description);
-
   return (
     <TitledPage
       title={user.display_name}
