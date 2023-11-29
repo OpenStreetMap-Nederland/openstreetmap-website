@@ -7,6 +7,7 @@ import { ExternalButton } from "@/components/external-button";
 import Markdown from "react-markdown";
 import { SeparatorTypes } from "@/enums/separator-types";
 import { eclipse } from "@/lib/utils";
+import { MarkdownWrapper } from "@/components/markdown-wrapper";
 
 export async function generateMetadata({
   params,
@@ -94,7 +95,7 @@ export default function ProjectDetailPage({
         ></Image>
       )}
 
-      <Markdown>{project.longdescription}</Markdown>
+      <MarkdownWrapper>{project.longdescription}</MarkdownWrapper>
     </TitledPage>
   );
 }

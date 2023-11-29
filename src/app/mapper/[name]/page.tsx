@@ -10,6 +10,9 @@ import { Metadata } from "next";
 import { ExternalButton } from "@/components/external-button";
 import { generateImageLink, toInternalLinks } from "@/lib/utils";
 import { env } from "process";
+import Link from "next/link";
+import remarkGfm from "remark-gfm";
+import { MarkdownWrapper } from "@/components/markdown-wrapper";
 
 export async function generateMetadata({
   params,
@@ -20,7 +23,7 @@ export async function generateMetadata({
   if (!user) return notFound();
 
   return {
-    title: user.display_name,
+    title: user.display_name + " - OpenStreetMap Mapper",
     description: user.description,
     openGraph: {
       type: "profile",
@@ -45,7 +48,8 @@ const getUser = async (name: string) => {
   const baseUrl = env.BASE_URL || "http://localhost:3000";
   const response = await fetch(`${baseUrl}/api/mapper/${name}`, {
     next: {
-      revalidate: 60 * 60 * 24,
+      revalidate: 60 * 60 * 24, // 24 hours
+      tags: ["mapper"],
     },
     method: "GET",
     headers: {
@@ -73,6 +77,8 @@ export default async function AboutPage({
 }) {
   const user = await getUser(params.name);
   if (!user) return notFound();
+
+  console.log(user.description);
 
   return (
     <TitledPage
@@ -112,33 +118,7 @@ export default async function AboutPage({
       </ExternalButton>
       <Separator />
 
-      <Markdown
-        components={{
-          a: ({ node, ...props }) => {
-            // id link is not in the same domain
-            let baseUrl = env.BASE_URL || "http://localhost:3000";
-            if (props.href) props.href = toInternalLinks(props.href);
-
-            if (
-              props?.href?.startsWith("http") &&
-              !props?.href?.startsWith(baseUrl)
-            ) {
-              return (
-                <a
-                  {...props}
-                  target="_blank"
-                  rel="nofollow noopener noreferrer"
-                >
-                  {props.children}
-                </a>
-              );
-            }
-            return <a {...props}>{props.children}</a>;
-          },
-        }}
-      >
-        {user.description}
-      </Markdown>
+      <MarkdownWrapper>{user.description}</MarkdownWrapper>
     </TitledPage>
   );
 }

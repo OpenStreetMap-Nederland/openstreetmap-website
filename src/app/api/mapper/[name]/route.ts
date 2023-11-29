@@ -75,9 +75,7 @@ const getUserData = async (uid: string) => {
   const response = await fetch(
     `https://www.openstreetmap.org/api/0.6/user/${uid}`,
     {
-      next: {
-        revalidate: 60 * 60, // 1 hour
-      },
+      cache: "no-cache",
       method: "GET",
       headers: {
         Accept: "application/json",
