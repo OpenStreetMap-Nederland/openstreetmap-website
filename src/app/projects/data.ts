@@ -18,7 +18,7 @@ const OpenAED: Project = {
     "OpenAED is a project to map all AEDs in the Netherlands. It displays the AEDs on a map.",
   links: [
     {
-      name: "Webste",
+      name: "Website",
       url: "https://openaed.nl/",
     },
     {
@@ -60,7 +60,7 @@ const iD: Project = {
   name: "iD",
   altName: "iD editor",
   description:
-    "A web editor for OpenStreetMap, that is easy to use. Reccomended for beginning mappers.",
+    "A web editor for OpenStreetMap, that is easy to use. Recommended for beginning mappers.",
   longdescription:
     "iD is a web editor for OpenStreetMap, that is easy to use. It is intentionally simple, but powerful. iD is written in JavaScript and uses [d3](https://d3js.org/)",
   links: [
@@ -85,7 +85,7 @@ const JOSM: Project = {
   name: "JOSM",
   altName: "Java OpenStreetMap Editor",
   description:
-    "JOSM is a desktop editor for OpenStreetMap. It supports a large number of plugins. JOSM is written in Java. Reccomended for more advanced mappers.",
+    "JOSM is a desktop editor for OpenStreetMap. It supports a large number of plugins. JOSM is written in Java. Recommended for more advanced mappers.",
   longdescription:
     "JOSM is a desktop editor for OpenStreetMap. It supports a large number of plugins. JOSM is written in Java. JOSM is the most popular editor for OpenStreetMap. It is used by many advanced mappers. JOSM is written in Java.",
   links: [
