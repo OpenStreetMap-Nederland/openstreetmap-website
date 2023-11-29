@@ -12,7 +12,7 @@ export function MarkdownWrapper({ children }: Props) {
   if (typeof children !== "string") return null;
 
   return (
-    <div className="flex flex-col gap-2 prose">
+    <div className="flex flex-col gap-2 prose dark:prose-invert">
       <Markdown
         remarkPlugins={[remarkGfm]}
         components={{

@@ -75,6 +75,9 @@ export function UserNav() {
         if (!data.user) {
           throw new Error("User not found");
         }
+
+        console.log(`Loged in as: ${data.user.display_name}`);
+
         setUser(data.user);
       })
       .catch((error) => {

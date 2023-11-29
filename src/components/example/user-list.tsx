@@ -20,6 +20,7 @@ export function UserList({ users }: Props) {
     <div className="space-y-4">
       {users.map((user) => (
         <Link
+          prefetch={false}
           className="flex items-center justify-between gap-4 rounded-md p-2"
           key={user.id}
           href={`/mapper/${user.username.replace(" ", "_")}`}
