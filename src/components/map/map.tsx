@@ -35,13 +35,14 @@ export function Map({ children }: Props) {
       scrollWheelZoom={true}
       maxZoom={19}
     >
-      <TileLayer
-        maxZoom={19}
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+      <MapMenu>
+        <TileLayer
+          maxZoom={19}
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
 
-      {/* <LayersControl position="topright">
+        {/* <LayersControl position="topright">
         <LayersControl.BaseLayer checked name="OSM carto">
           <TileLayer
             maxZoom={19}
@@ -58,7 +59,8 @@ export function Map({ children }: Props) {
           />
         </LayersControl.BaseLayer>
       </LayersControl> */}
-      {children}
+        {children}
+      </MapMenu>
     </MapContainer>
   );
 }
