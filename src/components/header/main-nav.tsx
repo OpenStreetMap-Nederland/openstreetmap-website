@@ -48,6 +48,7 @@ export async function MainNav({
     { href: "/events", label: "Events" },
     { href: "/news", label: "News" },
     { href: "/community", label: "Community" },
+    { href: "/contact", label: "Contact" },
     // { href: "/bagbot", label: "BagBot", badge: "New!" },
     // { href: "/copyright", label: "Copyright" },
     // { href: "/help", label: "Help" },

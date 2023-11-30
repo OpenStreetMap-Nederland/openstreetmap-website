@@ -73,7 +73,7 @@ export default async function AboutPage({
             width={800}
             height={600}
             alt={domNode.attribs.alt}
-            className="rounded-lg w-full md:w-2/3 lg:w-1/2 mt-4 mb-2"
+            className="rounded-lg w-full mt-4 mb-2"
             priority
             unoptimized
           ></Image>
