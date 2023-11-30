@@ -40,7 +40,7 @@
     "leaflet": "^1.9.4",
     "lucide-react": "^0.293.0",
     "negotiator": "^0.6.3",
-    "next": "14.0.3",
+    "next": "^14.0.4-canary.28",
     "next-auth": "^4.24.4",
     "next-sitemap": "^4.2.3",
     "next-themes": "^0.2.1",

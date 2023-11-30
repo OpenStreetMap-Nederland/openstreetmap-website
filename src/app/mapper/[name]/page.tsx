@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { TitledPage } from "@/components/layouts/titled-page";
 import { User, UserData } from "@/types/user";
 import { SeparatorTypes } from "@/enums/separator-types";
@@ -13,6 +13,7 @@ import { env } from "process";
 import Link from "next/link";
 import remarkGfm from "remark-gfm";
 import { MarkdownWrapper } from "@/components/markdown-wrapper";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export async function generateMetadata({
   params,
@@ -78,44 +79,46 @@ export default async function AboutPage({
   if (!user) return notFound();
 
   return (
-    <TitledPage
-      title={user.display_name}
-      titlePostfix={
-        user.roles.length === 0
-          ? "Mapper"
-          : user.roles
-              .map((role) => role.replace("role_", ""))
-              .join(", ")
-              .capitalize()
-      }
-      subTitle={`Already a mapper for ${Math.floor(
-        (new Date().getTime() - new Date(user.account_created).getTime()) /
-          (1000 * 60 * 60 * 24)
-      )} days!`}
-      separator={SeparatorTypes.space}
-      actions={
-        user.img && (
-          <Image
-            src={user.img?.href}
-            alt={user.display_name}
-            width={100}
-            height={100}
-            className="rounded-md"
-          ></Image>
-        )
-      }
-    >
-      <ExternalButton
-        href={`https://community.openstreetmap.org/u/${user.display_name.replace(
-          " ",
-          "_"
-        )}/summary`}
+    <Suspense>
+      <TitledPage
+        title={user.display_name}
+        titlePostfix={
+          user.roles.length === 0
+            ? "Mapper"
+            : user.roles
+                .map((role) => role.replace("role_", ""))
+                .join(", ")
+                .capitalize()
+        }
+        subTitle={`Already a mapper for ${Math.floor(
+          (new Date().getTime() - new Date(user.account_created).getTime()) /
+            (1000 * 60 * 60 * 24)
+        )} days!`}
+        separator={SeparatorTypes.space}
+        actions={
+          user.img && (
+            <Image
+              src={user.img?.href}
+              alt={user.display_name}
+              width={100}
+              height={100}
+              className="rounded-md"
+            ></Image>
+          )
+        }
       >
-        Forum Profile
-      </ExternalButton>
-      <Separator />
+        <ExternalButton
+          href={`https://community.openstreetmap.org/u/${user.display_name.replace(
+            " ",
+            "_"
+          )}/summary`}
+        >
+          Forum Profile
+        </ExternalButton>
+        <Separator />
 
-      <MarkdownWrapper>{user.description}</MarkdownWrapper>
-    </TitledPage>
+        <MarkdownWrapper>{user.description}</MarkdownWrapper>
+      </TitledPage>
+    </Suspense>
   );
 }
