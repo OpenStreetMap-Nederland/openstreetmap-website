@@ -1,5 +1,4 @@
 import { MainNav } from "./main-nav";
-import { UserNav } from "./user-nav";
 import { Logo } from "./logo";
 import { Search } from "./search";
 import { GithubLink } from "./github-link";
@@ -21,7 +20,6 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Skeleton } from "../ui/skeleton";
-import { SignOutButton } from "./sign-out-button";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { Card } from "../ui/card";
 
@@ -48,7 +46,6 @@ export async function Header() {
           <div className="flex items-center space-x-2">
             <GithubLink />
             <ModeToggle />
-            <UserNav />
           </div>
         </div>
       </div>
@@ -72,9 +69,6 @@ export async function Header() {
                   <div className="flex items-center space-x-2 mx-2">
                     <GithubLink />
                     <ModeToggle />
-                  </div>
-                  <div className="flex">
-                    <UserNav />
                   </div>
                 </div>
               </DropdownMenuGroup>
