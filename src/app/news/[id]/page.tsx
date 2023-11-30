@@ -286,7 +286,7 @@ export default async function News({ params }: { params: { id: string } }) {
       }
     >
       {article && (
-        <article className="flex flex-col gap-4 prose">
+        <article className="flex flex-col gap-4 prose dark:prose-invert">
           {parse(toInternalLinks(sanitize(article.innerHTML)), options)}
         </article>
       )}

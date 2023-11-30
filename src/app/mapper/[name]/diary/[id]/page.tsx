@@ -115,7 +115,10 @@ export default async function AboutPage({
       separator={SeparatorTypes.space}
     >
       {diary.content && (
-        <article className="flex flex-col gap-4 prose" lang={diary.language}>
+        <article
+          className="flex flex-col gap-4 prose dark:prose-invert"
+          lang={diary.language}
+        >
           {parse(sanitize(diary.content), options)}
         </article>
       )}

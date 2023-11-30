@@ -49,7 +49,6 @@ const getUser = async (name: string) => {
   const response = await fetch(`${baseUrl}/api/mapper/${name}`, {
     next: {
       revalidate: 60 * 60 * 24, // 24 hours
-      tags: ["mapper"],
     },
     method: "GET",
     headers: {

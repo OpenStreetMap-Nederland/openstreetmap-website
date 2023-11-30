@@ -89,4 +89,12 @@
   a * {
     @apply text-primary;
   }
+
+  .prose hr {
+    @apply my-2;
+  }
+
+  .prose li {
+    @apply m-0;
+  }
 }
