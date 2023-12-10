@@ -8,6 +8,41 @@ import {
 } from "@/types/map-postition";
 
 export function MapUrl() {
+  const map = useMap();
+
+  useEffect(() => {
+    if (map === null) {
+      return;
+    }
+
+    window.addEventListener("hashchange", () => {
+      const mapPostition: MapPostition | null = getMapPositionFromHash(
+        window.location.hash
+      );
+
+      if (!mapPostition) {
+        return;
+      }
+
+      map.flyTo([mapPostition.lat, mapPostition.lng], mapPostition.zoom);
+      writeMapPositionToUrl(mapPostition);
+    });
+
+    return () => {
+      window.removeEventListener("hashchange", () => {
+        const mapPostition: MapPostition | null = getMapPositionFromHash(
+          window.location.hash
+        );
+
+        if (!mapPostition) {
+          return;
+        }
+
+        writeMapPositionToUrl(mapPostition);
+      });
+    };
+  }, [map]);
+
   const writeEventMapPositionToUrl = (e: LeafletEvent) => {
     const map = e.target as Map;
     const mapPostition: MapPostition = {
@@ -46,20 +81,27 @@ export function MapUrl() {
     return mapPostition;
   };
 
-  const mapPostition: MapPostition | null = readMapPositionFromUrl();
-  const map = useMap();
+  // first try to read from the url
+  let mapPostition: MapPostition | null = readMapPositionFromUrl();
 
-  if (mapPostition) {
-    map.setView([mapPostition.lat, mapPostition.lng], mapPostition.zoom);
-    writeMapPositionToUrl(mapPostition);
-  } else {
-    const mapPostition: MapPostition | null = readMapPositionFromLocalStorage();
-
-    if (mapPostition) {
-      map.setView([mapPostition.lat, mapPostition.lng], mapPostition.zoom);
-      writeMapPositionToUrl(mapPostition);
-    }
+  // if not found, try to read from localstorage
+  if (!mapPostition) {
+    mapPostition = readMapPositionFromLocalStorage();
   }
+
+  // backup position
+  if (!mapPostition) {
+    mapPostition = {
+      lat: 52.1009263,
+      lng: 5.6462682,
+      zoom: 8,
+    };
+  }
+
+  // set the map position
+  // and write it to the url and localstorage
+  map.setView([mapPostition.lat, mapPostition.lng], mapPostition.zoom);
+  writeMapPositionToUrl(mapPostition);
 
   useMapEvents({
     moveend(e) {

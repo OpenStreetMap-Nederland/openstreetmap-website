@@ -2,6 +2,12 @@
 const nextConfig = {
   // output: 'export',
   // images: { unoptimized: true }
+  rewrites: async () => [
+    {
+      source: '/history',
+      destination: '/',
+    },
+  ],
   images: {
     remotePatterns: [
       {

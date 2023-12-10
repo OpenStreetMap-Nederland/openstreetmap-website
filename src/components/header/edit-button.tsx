@@ -107,7 +107,7 @@ export function EditButton() {
       }}
     >
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost">
+        <Button variant="ghost" className="px-3">
           Edit
           <ChevronDown size={16} className="ml-2" />
         </Button>

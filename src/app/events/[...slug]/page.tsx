@@ -89,7 +89,7 @@ const getEventDetail = async (id: string) => {
   const baseUrl = env.BASE_URL || "http://localhost:3000";
   const response = await fetch(`${baseUrl}/api/event/${id}`, {
     next: {
-      revalidate: 60 * 60 * 24,
+      revalidate: 60 * 60, // 1 hour
     },
     method: "GET",
     headers: {

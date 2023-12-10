@@ -16,11 +16,36 @@ import { TitledPage } from "@/components/layouts/titled-page";
 import { SeparatorTypes } from "@/enums/separator-types";
 import { CardsMetric } from "@/components/bagbot/metric";
 import { MapContainer } from "@/components/map/containers/map-container";
+import { Alert } from "@/components/ui/alert";
+import { BagMapContainer } from "@/components/map/containers/bag-map-container";
 
 export default function Dashboard() {
   const [selectedBuilding, setSelectedBuilding] = useState<Building>();
+  const [healthy, setHealthy] = useState<boolean>(true);
 
   const { toast } = useToast();
+
+  useEffect(() => {
+    // check https://localhost:7152/api/health
+
+    fetch("https://localhost:7152/api/health", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+        "Access-Control-Allow-Origin": "*",
+      },
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          setHealthy(true);
+        }
+      })
+      .catch((error) => {
+        setHealthy(false);
+      });
+  }, []);
+
   return (
     <TitledPage
       title="BagBot"
@@ -44,6 +69,14 @@ export default function Dashboard() {
         </Button>
       }
     >
+      <Alert>
+        BagBot backend is{" "}
+        {healthy ? (
+          <span className="text-green-500">running</span>
+        ) : (
+          <span className="text-red-500">not running</span>
+        )}
+      </Alert>
       <Tabs defaultValue="overview" className="space-y-4">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
@@ -168,15 +201,14 @@ export default function Dashboard() {
           <div>
             <CardsMetric />
           </div>
-          <Card className="col-span-3">
+          {/* <Card className="col-span-3">
             <CardHeader>
               <CardTitle>Tasks</CardTitle>
               <CardDescription>
                 A task is an abstract representation of a unit of work.
               </CardDescription>
             </CardHeader>
-            <CardContent>{/* <RecentSales /> */}</CardContent>
-          </Card>
+          </Card> */}
         </TabsContent>
 
         <TabsContent value="changesets" className="space-y-4">
@@ -188,11 +220,7 @@ export default function Dashboard() {
         </TabsContent>
 
         <TabsContent value="manualcontrol" className="space-y-4">
-          <div className="">
-            <Card className="h-96 rounded-none">
-              <MapContainer></MapContainer>
-            </Card>
-          </div>
+          {/* <BagMapContainer></BagMapContainer> */}
         </TabsContent>
       </Tabs>
     </TitledPage>
