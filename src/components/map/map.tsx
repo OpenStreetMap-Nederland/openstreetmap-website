@@ -24,7 +24,7 @@ interface Props {
   mapPostion?: MapPostition;
 }
 
-export function Map({ children, mapPostion = null }: Props) {
+export function Map({ children, mapPostion }: Props) {
   return (
     <MapContainer
       className={"h-full z-0"}
