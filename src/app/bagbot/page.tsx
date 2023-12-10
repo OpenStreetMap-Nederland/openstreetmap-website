@@ -220,7 +220,7 @@ export default function Dashboard() {
         </TabsContent>
 
         <TabsContent value="manualcontrol" className="space-y-4">
-          <BagMapContainer></BagMapContainer>
+          {/* <BagMapContainer></BagMapContainer> */}
         </TabsContent>
       </Tabs>
     </TitledPage>
