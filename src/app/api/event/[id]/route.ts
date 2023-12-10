@@ -14,7 +14,7 @@ const getEventHTML = async (id: string) => {
   });
 
   if (response.status !== 200) {
-    return null;
+    return ``null;
   }
 
   const html = await response.text();

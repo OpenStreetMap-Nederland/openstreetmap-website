@@ -27,6 +27,9 @@ const addLocations = (events: Event[]) => {
 
 const getFutureEvents = async () => {
   const response = await fetch("https://osmcal.org/api/v2/events?in=nl", {
+    next: {
+      revalidate: 60 * 60, // 1 hour
+    },
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -41,6 +44,9 @@ const getFutureEvents = async () => {
 
 const getPastEvents = async () => {
   const response = await fetch("https://osmcal.org/api/v2/events/past?in=nl", {
+    next: {
+      revalidate: 60 * 60 * 24, // 1 day
+    },
     method: "GET",
     headers: {
       Accept: "application/json",
