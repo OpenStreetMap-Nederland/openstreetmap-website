@@ -7,6 +7,8 @@ import { Toaster } from "@/components/toaster";
 import { Header } from "@/components/header/header";
 import { NextAuthProvider } from "@/lib/next-auth-provider";
 import { Analytics } from "@vercel/analytics/react";
+import { Suspense } from "react";
+import { NavigationEvents } from "@/components/navigation-events";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -105,6 +107,9 @@ export default function RootLayout({ children, pageProps }: RootLayoutProps) {
             <Toaster />
           </NextAuthProvider>
           <Analytics />
+          <Suspense fallback={null}>
+            <NavigationEvents />
+          </Suspense>
         </body>
       </html>
     </>

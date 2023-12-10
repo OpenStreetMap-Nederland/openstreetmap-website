@@ -33,13 +33,13 @@ export async function Header() {
           <Logo />
           {/* <Search /> */}
           <EditButton />
-          {/* <Link
+          <Link
             href="/history"
             className="text-sm font-medium transition-colors hover:text-primary
               text-muted-foreground dark:text-muted-foreground dark:hover:text-primary"
           >
             History
-          </Link> */}
+          </Link>
           <UpcomingEvents />
         </div>
 

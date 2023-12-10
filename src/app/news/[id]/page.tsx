@@ -2,15 +2,12 @@ import React from "react";
 import { TitledPage } from "@/components/layouts/titled-page";
 import { notFound } from "next/navigation";
 import jsdom from "jsdom";
-import { ExternalButton } from "@/components/external-button";
 import { Metadata } from "next";
-import parse from "html-react-parser";
 import { SeparatorTypes } from "@/enums/separator-types";
-import { sanitize } from "isomorphic-dompurify";
-import { removeDomain, toInternalLinks } from "@/lib/utils";
+import { removeDomain } from "@/lib/utils";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import { RichtextWrapper } from "@/components/richtext-wrapper";
 
 export async function generateStaticParams() {
   const response = await fetch("https://weeklyosm.eu", {
@@ -213,31 +210,6 @@ export default async function News({ params }: { params: { id: string } }) {
     lastP.classList.add("text-center", "mt-12");
   }
 
-  const options = {
-    replace: (domNode: any) => {
-      if (domNode.name === "img") {
-        return (
-          <Image
-            src={domNode.attribs.src}
-            width={800}
-            height={600}
-            alt={domNode.attribs.alt}
-            className="rounded-lg w-full mt-4 mb-2"
-            priority
-          ></Image>
-        );
-      }
-
-      if (domNode.name === "code") {
-        return (
-          <span className="bg-gray-100 dark:bg-gray-800 rounded-md px-1.5 py-0.5 hover:underline">
-            {domNode.children[0].data}
-          </span>
-        );
-      }
-    },
-  };
-
   const dateHtmlObject = Array.from(p).find((p) => p.textContent?.length);
   if (!dateHtmlObject) return notFound();
 
@@ -285,11 +257,7 @@ export default async function News({ params }: { params: { id: string } }) {
         </div>
       }
     >
-      {article && (
-        <article className="flex flex-col gap-4 prose dark:prose-invert">
-          {parse(toInternalLinks(sanitize(article.innerHTML)), options)}
-        </article>
-      )}
+      {article && <RichtextWrapper>{article.innerHTML}</RichtextWrapper>}
     </TitledPage>
   );
 }

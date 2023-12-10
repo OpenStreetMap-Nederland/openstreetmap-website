@@ -1,11 +1,12 @@
+import { parse } from "path";
 import { useState, useMemo } from "react";
-import { useMapEvents, Polygon } from "react-leaflet";
+import { useMapEvents, Polygon, useMap } from "react-leaflet";
 
-export default function SelectBuilding({
-  onBuildingChange,
-}: {
-  onBuildingChange: (building: Building) => void;
-}) {
+type Props = {
+  onSelectBuilding?: (building: Building | null) => void;
+};
+
+export default function SelectBuilding({ onSelectBuilding }: Props) {
   const [selectedBuilding, setSelectedBuilding] = useState<Building>();
   const [buildings, setBuildings] = useState<Building[]>();
 
@@ -17,32 +18,44 @@ export default function SelectBuilding({
     }
   }, [buildings]);
 
-  const getBuildingByReference = (reference: string) => {
-    fetch(`https://localhost:7152/api/building/?referance=${reference}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        setBuildings([response]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const getBuildingByReference = (reference: string) => {
+  //   fetch(`https://localhost:7152/api/building/?referance=${reference}`, {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "Access-Control-Allow-Origin": "*",
+  //     },
+  //   })
+  //     .then((response) => response.json())
+  //     .then((response) => {
+  //       setBuildings([response]);
 
-  const map = useMapEvents({
+  //       if (onSelectBuilding) onSelectBuilding(response);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+
+  const map = useMap();
+
+  useMapEvents({
     click(e) {
       fetch(
         `https://localhost:7152/api/building/?lat=${e.latlng.lat}&lon=${e.latlng.lng}`
       )
         .then((response) => response.json())
         .then((response) => {
-          setBuildings([response]);
-          onBuildingChange(response);
+          // check ig the response is a building
+          if (response.reference) {
+            setBuildings([response]);
+
+            if (onSelectBuilding) onSelectBuilding(response);
+          } else {
+            setBuildings([]);
+
+            if (onSelectBuilding) onSelectBuilding(null);
+          }
         })
         .catch((error) => {
           console.log(error);

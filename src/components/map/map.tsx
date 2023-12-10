@@ -8,6 +8,7 @@ import { MapNotes } from "./map-notes";
 import SelectBuilding from "../bagbot/select-building";
 import { LayersControl } from "react-leaflet/LayersControl";
 import { Circle, LayerGroup } from "react-leaflet";
+import { MapPostition } from "@/types/map-postition";
 
 const MapContainer = dynamic(
   () => import("react-leaflet").then((m) => m.MapContainer),
@@ -20,20 +21,18 @@ export const TileLayer = dynamic(
 );
 interface Props {
   children?: React.ReactNode | null;
+  mapPostion?: MapPostition;
 }
 
-export function Map({ children }: Props) {
-  const [geoData, setGeoData] = useState({ lat: 52.1992, lng: 5.6799 });
-  const [zoom, setZoom] = useState(8);
-
+export function Map({ children, mapPostion = null }: Props) {
   return (
     <MapContainer
       className={"h-full z-0"}
       zoomControl={false}
-      center={[geoData.lat, geoData.lng]}
-      zoom={zoom}
       scrollWheelZoom={true}
       maxZoom={19}
+      center={mapPostion && [mapPostion.lat, mapPostion.lng]}
+      zoom={mapPostion && mapPostion.zoom}
     >
       <MapMenu>
         <TileLayer
