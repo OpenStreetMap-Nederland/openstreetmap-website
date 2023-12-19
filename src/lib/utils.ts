@@ -109,6 +109,7 @@ export const toInternalLinks = (html: string) => {
   html = html.replaceAll("https://www.openstreetmap.org/user/", "/mapper/");
   html = html.replaceAll("https://www.openstreetmap.org/", "/");
   html = html.replaceAll("https://www.openstraatkaart.nl/", "/");
+  html = html.replaceAll("https://www.openstreetmap.app/", "/");
 
   return html;
 };

@@ -48,7 +48,7 @@ const getUser = async (name: string) => {
   const baseUrl = env.BASE_URL || "http://localhost:3000";
   const response = await fetch(`${baseUrl}/api/mapper/${name}`, {
     next: {
-      revalidate: 60 * 60 * 24, // 24 hours
+      revalidate: 60,
     },
     method: "GET",
     headers: {

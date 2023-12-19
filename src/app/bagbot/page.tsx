@@ -21,7 +21,7 @@ import { BagMapContainer } from "@/components/map/containers/bag-map-container";
 
 export default function Dashboard() {
   const [selectedBuilding, setSelectedBuilding] = useState<Building>();
-  const [healthy, setHealthy] = useState<boolean>(true);
+  const [healthy, setHealthy] = useState<boolean | null>(null);
 
   const { toast } = useToast();
 
@@ -70,8 +70,10 @@ export default function Dashboard() {
       }
     >
       <Alert>
-        BagBot backend is{" "}
-        {healthy ? (
+        BagBot backend status:{" "}
+        {healthy === null ? (
+          <span className="text-yellow-500">checking</span>
+        ) : healthy === true ? (
           <span className="text-green-500">running</span>
         ) : (
           <span className="text-red-500">not running</span>
