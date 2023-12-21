@@ -17,10 +17,10 @@ export default function ContactPage() {
       Om in contact te komen met de OpenStreetMap (OSM) gemeenschap in Nederland zijn de volgende kanalen beschikbaar.
       <Title size="h2" title="Forum" />
       <div className="flex flex-col gap-4">
-        Het wereldwijde OpenStreetMap Forum heeft een "NL Hoek" ("Category"). Dit is een (de!) plek, waar je vragen, "schroom niet!", kunt stellen aan leden van de Nederlandse OSM-Community.
+        Het wereldwijde OpenStreetMap Forum heeft een &quot;NL Hoek&quot; (&quot;Category&quot;). Dit is een (de!) plek, waar je vragen, schroom niet!, kunt stellen aan leden van de Nederlandse OSM-Community.
         Zij zullen die graag beantwoorden.
         Het is ook een plek waar je kunt discussiëren, uiteraard ook internationaal, over OpenStreetMap-gerelateerde onderwerpen.
-        De discussies zijn georganiseerd in "Topics". Daarin kun je zoeken en vaak al antwoorden vinden, of zelf een Topic starten. 
+        De discussies zijn georganiseerd in &quot;Topics&quot;. Daarin kun je zoeken en vaak al antwoorden vinden, of zelf een Topic starten. 
         <ExternalButton href="https://community.openstreetmap.org/c/communities/nl/43">
           Forum
         </ExternalButton>
@@ -36,7 +36,7 @@ export default function ContactPage() {
             Discord (OSM Globaal)
           </div>
         </ExternalButton>
-        Ook op Discord is er een Nederlandstalig "Channel": Languages | #Nederlands. Via de button hieronder kun je daar direct heen: 
+        Ook op Discord is er een Nederlandstalig &quot;Channel&quot;: Languages | #Nederlands. Via de button hieronder kun je daar direct heen: 
         <ExternalButton href="https://discord.com/channels/413070382636072960/805079423505661993">
           <div className="flex gap-2 items-center">
             <DiscordLogoIcon />
