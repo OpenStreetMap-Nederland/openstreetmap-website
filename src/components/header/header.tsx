@@ -40,7 +40,7 @@ export async function Header() {
           >
             History
           </Link>
-          <UpcomingEvents />
+          {/* <UpcomingEvents /> */}
         </div>
 
         <div className="flex items-center space-x-6 mx-4">
