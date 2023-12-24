@@ -165,11 +165,12 @@ export default async function News({ params }: { params: { id: string } }) {
     }
   });
 
-  // step 5: add styling to images and remove all images except the first one
+  // step 5: remove all images except the first one
   const images = article.querySelectorAll("img");
   if (images) {
     for (let i = 0; i < images.length; i++) {
       const image = images[i];
+
       if (i !== 0) {
         image.remove();
         continue;

@@ -33,9 +33,14 @@ export function RichtextWrapper({ children }: Props) {
   const options = {
     replace: (domNode: any) => {
       if (domNode.name === "img") {
+        // if image is base64 encoded, use data-src instead of src
+        const src = domNode.attribs["src"].includes("data:image")
+          ? domNode.attribs["data-src"]
+          : domNode.attribs["src"];
+
         return (
           <Image
-            src={domNode.attribs.src}
+            src={src}
             width={800}
             height={600}
             alt={domNode.attribs.alt}

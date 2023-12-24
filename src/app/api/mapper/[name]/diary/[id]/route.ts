@@ -59,9 +59,12 @@ const getDiaryFromUsernameAndId = async (name: string, id: string) => {
     ?.trim()
     .split(" ");
 
-  let day = rawDateString?.[1];
-  let month = rawDateString?.[2];
-  let year = rawDateString?.[3];
+  const cleanRawDateString = rawDateString?.filter((x) => x.trim() !== "");
+
+  let day = cleanRawDateString?.[1];
+  let month = cleanRawDateString?.[2];
+  let year = cleanRawDateString?.[3];
+
   if (!day || !month || !year) return notFound();
   const date = new Date(`${day} ${month} ${year} UTC`);
 
