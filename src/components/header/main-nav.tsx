@@ -43,6 +43,7 @@ export async function MainNav({
   const links = [
     // { href: "/traces", label: "GPS Traces" },
     // { href: "/diaries", label: "User Diaries" },
+    { href: "/places", label: "Places", badge: "New!" },
     { href: "/about", label: "About" },
     { href: "/projects", label: "Projects" },
     { href: "/events", label: "Events" },

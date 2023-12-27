@@ -28,31 +28,31 @@ export function Title({
         <div className="flex items-end gap-1">
           {size === "h1" && (
             <h1 className={cn("font-bold tracking-tight", sizes[size])}>
-              {title}
+              {decodeURIComponent(title)}
             </h1>
           )}
 
           {size === "h2" && (
             <h2 className={cn("font-bold tracking-tight", sizes[size])}>
-              {title}
+              {decodeURIComponent(title)}
             </h2>
           )}
 
           {size === "h3" && (
             <h3 className={cn("font-bold tracking-tight", sizes[size])}>
-              {title}
+              {decodeURIComponent(title)}
             </h3>
           )}
 
           {size === "h4" && (
             <h4 className={cn("font-bold tracking-tight", sizes[size])}>
-              {title}
+              {decodeURIComponent(title)}
             </h4>
           )}
 
           {titlePostfix && (
             <span className="text-[12px] font-medium text-muted-foreground dark:text-muted-foreground">
-              {titlePostfix}
+              {decodeURIComponent(titlePostfix)}
             </span>
           )}
         </div>

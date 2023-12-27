@@ -1,0 +1,57 @@
+{
+  "pois": [
+    {
+      "type": "supermarkets",
+      "name": "supermarkten",
+      "nameOne": "supermarkt",
+      "tag": {
+        "key": "shop",
+        "value": "supermarket"
+      },
+      "required_tags": [
+        {
+          "key": "name",
+          "value": "*"
+        },
+        {
+          "key": "addr:street",
+          "value": "*"
+        }
+      ]
+    },
+    {
+      "type": "schools",
+      "name": "scholen",
+      "nameOne": "school",
+      "tag": {
+        "key": "amenity",
+        "value": "school"
+      },
+      "required_tags": [
+        {
+          "key": "name",
+          "value": "*"
+        },
+        {
+          "key": "addr:street",
+          "value": "*"
+        }
+      ]
+    },
+    {
+      "type": "squares",
+      "name": "pleinen",
+      "nameOne": "plein",
+      "tag": {
+        "key": "place",
+        "value": "square"
+      },
+      "required_tags": [
+        {
+          "key": "name",
+          "value": "*"
+        }
+      ]
+    }
+  ]
+}
