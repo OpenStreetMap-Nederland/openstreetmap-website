@@ -2,7 +2,6 @@
 import dynamic from "next/dynamic";
 import React, { use, useContext, useEffect } from "react";
 import { MapUrl } from "../map-url";
-import { Title } from "@/components/layouts/title";
 
 type Props = {
   children?: React.ReactNode | React.ReactNode[] | null;

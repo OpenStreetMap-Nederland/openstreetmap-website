@@ -34,8 +34,6 @@ type Props = {
 };
 
 export function BagMapContainer({ children }: Props) {
-  const [search, setSearch] = useState<string>("");
-
   const { toast } = useToast();
 
   let Map = dynamic(() => import("../map").then((m) => m.Map), {
@@ -150,10 +148,11 @@ export function BagMapContainer({ children }: Props) {
   return (
     <div className="h-[550px] w-full grid grid-cols-1 md:grid-cols-2 gap-4">
       <div className="col-span-1 rounded-lg overflow-hidden">
-        <MapMemo
-          onSelectBuilding={onSelectBuilding}
-          selectedBuilding={selectedBuilding}
-        ></MapMemo>
+        <Map>
+          <MapUrl />
+          <RenderBuilding selectedBuilding={selectedBuilding} />
+          <SelectBuilding onSelectBuilding={onSelectBuilding} />
+        </Map>
       </div>
       <div className="flex flex-col gap-4">
         <Form {...form}>

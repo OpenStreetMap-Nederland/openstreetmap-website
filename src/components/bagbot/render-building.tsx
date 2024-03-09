@@ -28,7 +28,7 @@ export default function RenderBuilding({ selectedBuilding }: Props) {
 
       map.flyTo([coord[0], coord[1]], 19);
     }
-  }, [selectedBuilding]);
+  }, [selectedBuilding, map]);
 
   return selectedBuilding != undefined &&
     selectedBuilding?.polygon?.coordinates?.length > 1 ? (

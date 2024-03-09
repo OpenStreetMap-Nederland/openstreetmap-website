@@ -85,24 +85,29 @@ type Props = {
 
 const getEventDetail = async (id: string) => {
   if (!id) return null;
+  let eventDetail: EventDetail | null = null;
 
-  const baseUrl = env.BASE_URL || "http://localhost:3000";
-  const response = await fetch(`${baseUrl}/api/event/${id}`, {
-    next: {
-      revalidate: 60 * 60, // 1 hour
-    },
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json;charset=UTF-8",
-    },
-  });
+  try {
+    const baseUrl = env.BASE_URL || "http://localhost:3000";
+    const response = await fetch(`${baseUrl}/api/event/${id}`, {
+      next: {
+        revalidate: 60 * 60, // 1 hour
+      },
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+    });
 
-  if (response.status !== 200) {
+    if (response.status !== 200) {
+      return notFound();
+    }
+
+    eventDetail = await response.json();
+  } catch (error) {
     return notFound();
   }
-
-  const eventDetail: EventDetail = await response.json();
 
   return eventDetail;
 };
