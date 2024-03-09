@@ -15,13 +15,21 @@ import { useToast } from "@/components/ui/use-toast";
 import { TitledPage } from "@/components/layouts/titled-page";
 import { SeparatorTypes } from "@/enums/separator-types";
 import { CardsMetric } from "@/components/bagbot/metric";
-import { MapContainer } from "@/components/map/containers/map-container";
 import { Alert } from "@/components/ui/alert";
-import { BagMapContainer } from "@/components/map/containers/bag-map-container";
+import dynamic from "next/dynamic";
 
 export default function Dashboard() {
-  const [selectedBuilding, setSelectedBuilding] = useState<Building>();
   const [healthy, setHealthy] = useState<boolean | null>(null);
+
+  const BagMapContainer = dynamic(
+    () =>
+      import("../../components/map/containers/bag-map-container").then(
+        (m) => m.BagMapContainer
+      ),
+    {
+      ssr: false,
+    }
+  );
 
   const { toast } = useToast();
 

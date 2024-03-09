@@ -36,14 +36,6 @@ type Props = {
 export function BagMapContainer({ children }: Props) {
   const { toast } = useToast();
 
-  let Map = dynamic(() => import("../map").then((m) => m.Map), {
-    ssr: false,
-  });
-
-  const SelectBuilding = dynamic(() => import("../../bagbot/select-building"), {
-    ssr: false,
-  });
-
   const [selectedBuilding, setSelectedBuilding] = useState<Building | null>();
 
   const onSelectBuilding = useCallback((building: Building | null) => {
@@ -148,11 +140,10 @@ export function BagMapContainer({ children }: Props) {
   return (
     <div className="h-[550px] w-full grid grid-cols-1 md:grid-cols-2 gap-4">
       <div className="col-span-1 rounded-lg overflow-hidden">
-        <Map>
-          <MapUrl />
-          <RenderBuilding selectedBuilding={selectedBuilding} />
-          <SelectBuilding onSelectBuilding={onSelectBuilding} />
-        </Map>
+        <MapMemo
+          onSelectBuilding={onSelectBuilding}
+          selectedBuilding={selectedBuilding}
+        ></MapMemo>
       </div>
       <div className="flex flex-col gap-4">
         <Form {...form}>
@@ -228,7 +219,7 @@ export function BagMapContainer({ children }: Props) {
   );
 }
 
-const MapMemo = memo(function MapMemoTest({
+const MapMemo = memo(function MapMemo({
   onSelectBuilding,
   selectedBuilding,
 }: {
