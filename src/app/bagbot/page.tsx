@@ -26,8 +26,6 @@ export default function Dashboard() {
   const { toast } = useToast();
 
   useEffect(() => {
-    // check https://localhost:7152/api/health
-
     fetch("https://localhost:7152/api/health", {
       method: "GET",
       headers: {
@@ -79,11 +77,11 @@ export default function Dashboard() {
           <span className="text-red-500">not running</span>
         )}
       </Alert>
-      <Tabs defaultValue="overview" className="space-y-4">
+      <Tabs defaultValue="manualcontrol" className="space-y-4">
         <TabsList>
-          <TabsTrigger value="overview">Overview</TabsTrigger>
+          {/* <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="changesets">Changesets</TabsTrigger>
-          <TabsTrigger value="tasks">Tasks</TabsTrigger>
+          <TabsTrigger value="tasks">Tasks</TabsTrigger> */}
           <TabsTrigger value="manualcontrol">Manual control</TabsTrigger>
         </TabsList>
         <TabsContent value="overview" className="space-y-4">
@@ -222,7 +220,7 @@ export default function Dashboard() {
         </TabsContent>
 
         <TabsContent value="manualcontrol" className="space-y-4">
-          {/* <BagMapContainer></BagMapContainer> */}
+          <BagMapContainer></BagMapContainer>
         </TabsContent>
       </Tabs>
     </TitledPage>
