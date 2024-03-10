@@ -29,6 +29,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import RenderBuilding from "@/components/bagbot/render-building";
 import { env } from "process";
+import { Map } from "@/components/map/map";
 
 type Props = {
   children?: React.ReactNode | React.ReactNode[] | null;
@@ -137,10 +138,6 @@ export function BagMapContainer({ children }: Props) {
         console.log(error);
       });
   };
-
-  let Map = dynamic(() => import("../map").then((m) => m.Map), {
-    ssr: false,
-  });
 
   return (
     <div className="h-[550px] w-full grid grid-cols-1 md:grid-cols-2 gap-4">

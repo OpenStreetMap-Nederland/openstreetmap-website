@@ -1,2 +1,9 @@
+# *
 User-agent: *
 Allow: /
+
+# Host
+Host: https://www.openstreetmap.app
+
+# Sitemaps
+Sitemap: https://www.openstreetmap.app/sitemap.xml
