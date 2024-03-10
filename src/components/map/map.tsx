@@ -3,11 +3,6 @@ import React, { useState } from "react";
 import "leaflet/dist/leaflet.css";
 import { MapMenu } from "./map-menu";
 import dynamic from "next/dynamic";
-import { MapUrl } from "./map-url";
-import { MapNotes } from "./map-notes";
-import SelectBuilding from "../bagbot/select-building";
-import { LayersControl } from "react-leaflet/LayersControl";
-import { Circle, LayerGroup } from "react-leaflet";
 import { MapPostition } from "@/types/map-postition";
 
 const MapContainer = dynamic(

@@ -28,6 +28,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import RenderBuilding from "@/components/bagbot/render-building";
+import { env } from "process";
 
 type Props = {
   children?: React.ReactNode | React.ReactNode[] | null;
@@ -45,8 +46,9 @@ export function BagMapContainer({ children }: Props) {
   const importBuilding = () => {
     if (!selectedBuilding) return;
 
+    const bagBotUrl = env.BAGBOT_URL || "https://localhost:7152";
     fetch(
-      `https://localhost:7152/api/task/importbuilding/${selectedBuilding?.reference}`,
+      `${bagBotUrl}/api/task/importbuilding/${selectedBuilding?.reference}`,
       {
         method: "POST",
         headers: {
@@ -75,8 +77,9 @@ export function BagMapContainer({ children }: Props) {
   const updateBuilding = () => {
     if (!selectedBuilding) return;
 
+    const bagBotUrl = env.BAGBOT_URL || "https://localhost:7152";
     fetch(
-      `https://localhost:7152/api/task/updatebuilding/${selectedBuilding?.reference}`,
+      `${bagBotUrl}/api/task/updatebuilding/${selectedBuilding?.reference}`,
       {
         method: "PUT",
         headers: {
@@ -116,16 +119,14 @@ export function BagMapContainer({ children }: Props) {
   });
 
   const searchBuilding = (values: z.infer<typeof formSchema>) => {
-    fetch(
-      `https://localhost:7152/api/building/?referance=${values.reference}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-      }
-    )
+    const bagBotUrl = env.BAGBOT_URL || "https://localhost:7152";
+    fetch(`${bagBotUrl}/api/building/?referance=${values.reference}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    })
       .then((response) => response.json())
       .then((response) => {
         setSelectedBuilding(response);
@@ -137,13 +138,18 @@ export function BagMapContainer({ children }: Props) {
       });
   };
 
+  let Map = dynamic(() => import("../map").then((m) => m.Map), {
+    ssr: false,
+  });
+
   return (
     <div className="h-[550px] w-full grid grid-cols-1 md:grid-cols-2 gap-4">
       <div className="col-span-1 rounded-lg overflow-hidden">
-        <MapMemo
-          onSelectBuilding={onSelectBuilding}
-          selectedBuilding={selectedBuilding}
-        ></MapMemo>
+        <Map>
+          <MapUrl />
+          <RenderBuilding selectedBuilding={selectedBuilding} />
+          <SelectBuilding onSelectBuilding={onSelectBuilding} />
+        </Map>
       </div>
       <div className="flex flex-col gap-4">
         <Form {...form}>
@@ -173,7 +179,7 @@ export function BagMapContainer({ children }: Props) {
           <Card className="col-span-1 z-10 rounded-lg bg-white dark:bg-gray-900 p-4 flex flex-col justify-between">
             <div>
               <Title size="h1" title="Bag" titlePostfix="Building" />
-              <Table>
+              <Table className="my-4">
                 <TableHeader>
                   <TableRow>
                     <TableHead>Key</TableHead>
@@ -189,10 +195,10 @@ export function BagMapContainer({ children }: Props) {
                     <TableCell>Reference</TableCell>
                     <TableCell>{selectedBuilding.reference}</TableCell>
                   </TableRow>
-                  <TableRow>
+                  {/* <TableRow>
                     <TableCell>Type</TableCell>
                     <TableCell>{selectedBuilding.type}</TableCell>
-                  </TableRow>
+                  </TableRow> */}
                   <TableRow>
                     <TableCell>Start Date</TableCell>
                     <TableCell>{selectedBuilding.startDate}</TableCell>
@@ -201,10 +207,10 @@ export function BagMapContainer({ children }: Props) {
                     <TableCell>Source Date</TableCell>
                     <TableCell>{selectedBuilding.sourceDate}</TableCell>
                   </TableRow>
-                  <TableRow>
+                  {/* <TableRow>
                     <TableCell>Hash</TableCell>
                     <TableCell>{selectedBuilding.hash}</TableCell>
-                  </TableRow>
+                  </TableRow> */}
                 </TableBody>
               </Table>
             </div>
