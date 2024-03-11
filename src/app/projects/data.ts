@@ -15,7 +15,7 @@ const OpenAED: Project = {
   name: "OpenAED",
   description: "OpenAED is a project to map all AEDs in the Netherlands.",
   longdescription:
-    "OpenAED is a project to map all AEDs in the Netherlands. It displays the AEDs on a map.",
+    "OpenAED is a project to map all AEDs in the Netherlands. It displays the AEDs on a map and exposes an API.",
   links: [
     {
       name: "Website",
@@ -23,7 +23,7 @@ const OpenAED: Project = {
     },
     {
       name: "Code",
-      url: "https://github.com/openaed",
+      url: "https://github.com/openaed/openaed",
     },
     {
       name: "Creator",
