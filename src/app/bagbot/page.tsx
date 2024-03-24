@@ -2,22 +2,16 @@
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ExternalLink, Info } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { TitledPage } from "@/components/layouts/titled-page";
 import { SeparatorTypes } from "@/enums/separator-types";
-import { CardsMetric } from "@/components/bagbot/metric";
 import { Alert } from "@/components/ui/alert";
 import dynamic from "next/dynamic";
 import Overview from "./overview";
+import Changesets from "./changesets";
+import { env } from "process";
 
 export default function Dashboard() {
   const [healthy, setHealthy] = useState<boolean | null>(null);
@@ -35,7 +29,8 @@ export default function Dashboard() {
   const { toast } = useToast();
 
   useEffect(() => {
-    fetch("https://localhost:7152/api/health", {
+    const bagBotUrl = env.BAGBOT_URL || "https://localhost:7152";
+    fetch(`${bagBotUrl}/api/health`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -86,7 +81,7 @@ export default function Dashboard() {
           <span className="text-red-500">not running</span>
         )}
       </Alert>
-      <Tabs defaultValue="manualcontrol" className="space-y-4">
+      <Tabs defaultValue="changesets" className="space-y-4">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="changesets">Changesets</TabsTrigger>
@@ -98,7 +93,7 @@ export default function Dashboard() {
         </TabsContent>
 
         <TabsContent value="changesets" className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4"></div>
+          <Changesets></Changesets>
         </TabsContent>
 
         <TabsContent value="tasks" className="space-y-4">
