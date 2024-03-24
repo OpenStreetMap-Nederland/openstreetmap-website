@@ -7,9 +7,9 @@ type Props = {
 export default function SelectBuilding({ onSelectBuilding }: Props) {
   useMapEvents({
     click(e) {
-      const bagBotUrl = process.env.BAGBOT_URL || "https://localhost:7152";
+      const baseUrl = process.env.BASE_URL || "http://localhost:3000";
       fetch(
-        `${bagBotUrl}/api/building/?lat=${e.latlng.lat}&lon=${e.latlng.lng}`
+        `${baseUrl}/api/bagbot/building/?lat=${e.latlng.lat}&lon=${e.latlng.lng}`
       )
         .then((response) => response.json())
         .then((response) => {

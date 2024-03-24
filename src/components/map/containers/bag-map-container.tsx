@@ -46,9 +46,9 @@ export function BagMapContainer({ children }: Props) {
   const importBuilding = () => {
     if (!selectedBuilding) return;
 
-    const bagBotUrl = process.env.BAGBOT_URL || "https://localhost:7152";
+    const baseUrl = process.env.BASE_URL || "http://localhost:3000";
     fetch(
-      `${bagBotUrl}/api/task/importbuilding/${selectedBuilding?.reference}`,
+      `${baseUrl}/api/bagbot/task/importbuilding/${selectedBuilding?.reference}`,
       {
         method: "POST",
         headers: {
@@ -77,9 +77,9 @@ export function BagMapContainer({ children }: Props) {
   const updateBuilding = () => {
     if (!selectedBuilding) return;
 
-    const bagBotUrl = process.env.BAGBOT_URL || "https://localhost:7152";
+    const baseUrl = process.env.BASE_URL || "http://localhost:3000";
     fetch(
-      `${bagBotUrl}/api/task/updatebuilding/${selectedBuilding?.reference}`,
+      `${baseUrl}/api/bagbot/task/updatebuilding/${selectedBuilding?.reference}`,
       {
         method: "PUT",
         headers: {
@@ -119,8 +119,8 @@ export function BagMapContainer({ children }: Props) {
   });
 
   const searchBuilding = (values: z.infer<typeof formSchema>) => {
-    const bagBotUrl = process.env.BAGBOT_URL || "https://localhost:7152";
-    fetch(`${bagBotUrl}/api/building/?referance=${values.reference}`, {
+    const baseUrl = process.env.BASE_URL || "http://localhost:3000";
+    fetch(`${baseUrl}/api/bagbot/building/?referance=${values.reference}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

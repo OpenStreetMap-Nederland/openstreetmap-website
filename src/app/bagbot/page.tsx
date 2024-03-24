@@ -28,8 +28,8 @@ export default function Dashboard() {
   const { toast } = useToast();
 
   useEffect(() => {
-    const bagBotUrl = process.env.BAGBOT_URL || "https://localhost:7152";
-    fetch(`${bagBotUrl}/api/health`, {
+    const baseUrl = process.env.BASE_URL || "http://localhost:3000";
+    fetch(`${baseUrl}/api/bagbot/health`, {
       method: "GET",
       headers: {
         Accept: "application/json",
