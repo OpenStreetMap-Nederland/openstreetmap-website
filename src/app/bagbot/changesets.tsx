@@ -132,7 +132,7 @@ async function getData(sorting: SortingState): Promise<Changeset[]> {
 
   const bagBotUrl = env.BAGBOT_URL || "https://localhost:7152";
   const data = await fetch(
-    `${bagBotUrl}/api/changeset?page=1&pageSize=5${sort ? sort : ""}`,
+    `${bagBotUrl}/api/changeset?page=1&pageSize=50${sort ? sort : ""}`,
     {
       method: "GET",
       headers: {
