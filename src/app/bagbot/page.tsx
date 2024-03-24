@@ -11,7 +11,6 @@ import { Alert } from "@/components/ui/alert";
 import dynamic from "next/dynamic";
 import Overview from "./overview";
 import Changesets from "./changesets";
-import { env } from "process";
 
 export default function Dashboard() {
   const [healthy, setHealthy] = useState<boolean | null>(null);
@@ -29,7 +28,7 @@ export default function Dashboard() {
   const { toast } = useToast();
 
   useEffect(() => {
-    const bagBotUrl = env.BAGBOT_URL || "https://localhost:7152";
+    const bagBotUrl = process.env.BAGBOT_URL || "https://localhost:7152";
     fetch(`${bagBotUrl}/api/health`, {
       method: "GET",
       headers: {

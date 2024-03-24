@@ -1,4 +1,3 @@
-import { env } from "process";
 import { useMapEvents } from "react-leaflet";
 
 type Props = {
@@ -8,8 +7,7 @@ type Props = {
 export default function SelectBuilding({ onSelectBuilding }: Props) {
   useMapEvents({
     click(e) {
-      
-      const bagBotUrl = env.BAGBOT_URL || "https://localhost:7152";
+      const bagBotUrl = process.env.BAGBOT_URL || "https://localhost:7152";
       fetch(
         `${bagBotUrl}/api/building/?lat=${e.latlng.lat}&lon=${e.latlng.lng}`
       )

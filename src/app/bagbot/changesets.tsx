@@ -7,7 +7,6 @@ import { DataTable } from "../data-table";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
-import { env } from "process";
 
 export type Changeset = {
   id: string;
@@ -130,7 +129,7 @@ async function getData(sorting: SortingState): Promise<Changeset[]> {
     }`;
   }
 
-  const bagBotUrl = env.BAGBOT_URL || "https://localhost:7152";
+  const bagBotUrl = process.env.BAGBOT_URL || "https://localhost:7152";
   const data = await fetch(
     `${bagBotUrl}/api/changeset?page=1&pageSize=50${sort ? sort : ""}`,
     {
