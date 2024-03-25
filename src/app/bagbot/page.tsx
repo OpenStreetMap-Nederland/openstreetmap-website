@@ -63,14 +63,16 @@ export default function Dashboard() {
 
   if (session.status === "unauthenticated") {
     return (
-      <div className="flex m-8">
-        <SignInButton />;
+      <div className="container my-8">
+        <Alert>This page is only accessible for authenticated users.</Alert>
       </div>
     );
   }
 
   return loading ? (
-    <div>Loading</div>
+    <div className="container my-8">
+      <Alert>Loading...</Alert>
+    </div>
   ) : (
     <TitledPage
       title="BagBot"
