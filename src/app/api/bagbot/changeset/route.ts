@@ -9,7 +9,7 @@ export async function GET(request: Request) {
   const params = request.url.split("?")[1];
   const response = await fetch(`${bagBotUrl}/api/changeset?${params}`, {
     next: {
-      revalidate: false,
+      revalidate: 10,
     },
     method: "GET",
     headers: {

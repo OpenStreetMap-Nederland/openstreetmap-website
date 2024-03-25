@@ -16,13 +16,11 @@ export async function PUT(
   const response = await fetch(
     `${bagBotUrl}/api/task/updatebuilding/${context.params.id}`,
     {
-      next: {
-        revalidate: false,
-      },
       method: "PUT",
       headers: {
         Accept: "text/html",
         "Content-Type": "text/html;charset=UTF-8",
+        "Cache-Control": "no-cache",
       },
     }
   );

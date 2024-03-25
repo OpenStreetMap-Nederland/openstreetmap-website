@@ -16,13 +16,11 @@ export async function POST(
   const response = await fetch(
     `${bagBotUrl}/api/task/importbuilding/${context.params.id}`,
     {
-      next: {
-        revalidate: false,
-      },
       method: "POST",
       headers: {
         Accept: "text/html",
         "Content-Type": "text/html;charset=UTF-8",
+        "Cache-Control": "no-cache",
       },
     }
   );

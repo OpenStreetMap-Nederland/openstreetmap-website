@@ -9,6 +9,8 @@ import { NextAuthProvider } from "@/lib/next-auth-provider";
 import { Analytics } from "@vercel/analytics/react";
 import { Suspense } from "react";
 import { NavigationEvents } from "@/components/navigation-events";
+import { PrimeReactProvider } from "primereact/api";
+import "primereact/resources/themes/lara-light-cyan/theme.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -89,23 +91,25 @@ export default function RootLayout({ children, pageProps }: RootLayoutProps) {
             inter.className
           )}
         >
-          <NextAuthProvider session={pageProps?.session}>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <div className="relative flex min-h-screen flex-col h-screen">
-                <Header />
-                {children}
-                {/* <Footer /> */}
-              </div>
-              {/* <TailwindIndicator /> */}
-            </ThemeProvider>
-            {/* <ThemeSwitcher /> */}
-            <Toaster />
-          </NextAuthProvider>
+          <PrimeReactProvider>
+            <NextAuthProvider session={pageProps?.session}>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
+              >
+                <div className="relative flex min-h-screen flex-col h-screen">
+                  <Header />
+                  {children}
+                  {/* <Footer /> */}
+                </div>
+                {/* <TailwindIndicator /> */}
+              </ThemeProvider>
+              {/* <ThemeSwitcher /> */}
+              <Toaster />
+            </NextAuthProvider>
+          </PrimeReactProvider>
           <Analytics />
           <Suspense fallback={null}>
             <NavigationEvents />
