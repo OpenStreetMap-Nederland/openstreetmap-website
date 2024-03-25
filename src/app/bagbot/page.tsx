@@ -11,9 +11,22 @@ import { Alert } from "@/components/ui/alert";
 import dynamic from "next/dynamic";
 import Overview from "./overview";
 import Changesets from "./changesets";
+import { signIn, useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+import { set } from "date-fns";
 
 export default function Dashboard() {
   const [healthy, setHealthy] = useState<boolean | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const session = useSession();
+  useEffect(() => {
+    const sesionUser = session?.data?.user;
+
+    if (sesionUser) {
+      setLoading(false);
+    }
+  }, [session]);
 
   const BagMapContainer = dynamic(
     () =>
@@ -47,7 +60,13 @@ export default function Dashboard() {
       });
   }, []);
 
-  return (
+  if (session.status === "unauthenticated") {
+    return signIn("osm");
+  }
+
+  return loading ? (
+    <>Loading</>
+  ) : (
     <TitledPage
       title="BagBot"
       titlePostfix="console"

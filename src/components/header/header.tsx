@@ -1,27 +1,18 @@
 import { MainNav } from "./main-nav";
 import { UserNav } from "./user-nav";
 import { Logo } from "./logo";
-import { Search } from "./search";
 import { GithubLink } from "./github-link";
-import { UpcomingEvents } from "./upcoming-events";
 import { EditButton } from "./edit-button";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "./mode-toggle";
-import { cn, getColor } from "@/lib/utils";
-import { Avatar, AvatarFallback } from "@radix-ui/react-avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { Skeleton } from "../ui/skeleton";
-import { SignOutButton } from "./sign-out-button";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { Card } from "../ui/card";
 
