@@ -14,6 +14,7 @@ import Changesets from "./changesets";
 import { signIn, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { set } from "date-fns";
+import { SignInButton } from "@/components/header/sign-in-button";
 
 export default function Dashboard() {
   const [healthy, setHealthy] = useState<boolean | null>(null);
@@ -61,11 +62,15 @@ export default function Dashboard() {
   }, []);
 
   if (session.status === "unauthenticated") {
-    return signIn("osm");
+    return (
+      <div className="flex m-8">
+        <SignInButton />;
+      </div>
+    );
   }
 
   return loading ? (
-    <>Loading</>
+    <div>Loading</div>
   ) : (
     <TitledPage
       title="BagBot"
