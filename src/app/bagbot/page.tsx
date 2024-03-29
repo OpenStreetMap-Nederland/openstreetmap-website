@@ -18,16 +18,6 @@ import { SignInButton } from "@/components/header/sign-in-button";
 
 export default function Dashboard() {
   const [healthy, setHealthy] = useState<boolean | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  const session = useSession();
-  useEffect(() => {
-    const sesionUser = session?.data?.user;
-
-    if (sesionUser) {
-      setLoading(false);
-    }
-  }, [session]);
 
   const BagMapContainer = dynamic(
     () =>
@@ -61,19 +51,7 @@ export default function Dashboard() {
       });
   }, []);
 
-  if (session.status === "unauthenticated") {
-    return (
-      <div className="container my-8">
-        <Alert>This page is only accessible for authenticated users.</Alert>
-      </div>
-    );
-  }
-
-  return loading ? (
-    <div className="container my-8">
-      <Alert>Loading...</Alert>
-    </div>
-  ) : (
+  return (
     <TitledPage
       title="BagBot"
       titlePostfix="console"
