@@ -120,16 +120,4 @@ export const projectLists = [
     description: "Editors voor OpenStreetMap.",
     projects: [iD, JOSM] as Project[],
   },
-  {
-    name: "Information",
-    projects: [] as Project[],
-  },
-  {
-    name: "Data",
-    projects: [] as Project[],
-  },
-  {
-    name: "Quality control",
-    projects: [] as Project[],
-  },
 ];
