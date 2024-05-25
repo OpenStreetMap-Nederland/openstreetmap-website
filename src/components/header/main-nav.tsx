@@ -49,7 +49,7 @@ export async function MainNav({
     { href: "/news", label: "News" },
     { href: "/community", label: "Community" },
     { href: "/contact", label: "Contact" },
-    { href: "/bagbot", label: "BagBot", badge: "New!" },
+    // { href: "/bagbot", label: "BagBot", badge: "New!" },
     // { href: "/copyright", label: "Copyright" },
     // { href: "/help", label: "Help" },
   ];

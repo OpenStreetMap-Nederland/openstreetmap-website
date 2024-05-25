@@ -92,8 +92,8 @@ export function MapUrl() {
   // backup position
   if (!mapPostition) {
     mapPostition = {
-      lat: 52.1009263,
-      lng: 5.6462682,
+      lat: 5.6462682,
+      lng: 52.1009263,
       zoom: 8,
     };
   }
