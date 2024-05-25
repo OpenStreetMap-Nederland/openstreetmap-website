@@ -4,9 +4,6 @@ import {
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuShortcut,
-  ContextMenuSub,
-  ContextMenuSubContent,
-  ContextMenuSubTrigger,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
 import { Check, Copy } from "lucide-react";
@@ -22,15 +19,7 @@ type Props = {
 export function MapMenu({ children }: Props) {
   const { toast } = useToast();
   const [copy, setCopy] = useState(false);
-
   const [location, setLocation] = useState<LatLng>();
-
-  const displayToast = () => {
-    toast({
-      title: "Not implemented",
-      description: "This feature is not implemented yet.",
-    });
-  };
 
   const copyLocation = () => {
     if (!location) return;
@@ -40,8 +29,8 @@ export function MapMenu({ children }: Props) {
     );
 
     toast({
-      title: "Copied location",
-      description: "The location has been copied to your clipboard.",
+      title: "Locatie gekopieerd",
+      description: "De locatie is gekopieerd naar het klembord.",
     });
   };
 
@@ -80,28 +69,7 @@ export function MapMenu({ children }: Props) {
             )}
           </ContextMenuShortcut>
         </ContextMenuItem>
-        <ContextMenuItem onClick={displayToast}>
-          Directions from here
-        </ContextMenuItem>
-        <ContextMenuItem onClick={displayToast}>
-          Directions to here
-        </ContextMenuItem>
-        <ContextMenuItem onClick={displayToast}>Add note</ContextMenuItem>
-        <ContextMenuItem onClick={displayToast}>Measure</ContextMenuItem>
-        <ContextMenuSub>
-          <ContextMenuSubTrigger>More tools</ContextMenuSubTrigger>
-          <ContextMenuSubContent className="w-48">
-            <ContextMenuItem onClick={centerMap}>
-              Center map here
-            </ContextMenuItem>
-            <ContextMenuItem onClick={displayToast}>
-              Query features
-            </ContextMenuItem>
-            <ContextMenuItem onClick={displayToast}>
-              Show address
-            </ContextMenuItem>
-          </ContextMenuSubContent>
-        </ContextMenuSub>
+        <ContextMenuItem onClick={centerMap}>Kaart centreren</ContextMenuItem>
       </ContextMenuContent>
     </ContextMenu>
   );

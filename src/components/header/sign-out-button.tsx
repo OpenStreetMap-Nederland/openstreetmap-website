@@ -6,10 +6,9 @@ import {
 import { signOut } from "next-auth/react";
 
 export function SignOutButton() {
-
   return (
     <DropdownMenuItem onClick={() => signOut()}>
-      Log out
+      Uitloggen
       <DropdownMenuShortcut>⇧Q</DropdownMenuShortcut>
     </DropdownMenuItem>
   );

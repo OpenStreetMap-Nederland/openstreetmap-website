@@ -14,7 +14,7 @@ export function SignInButton() {
         signIn("osm");
       }}
     >
-      Sign in
+      Inloggen
     </Button>
   );
 }
