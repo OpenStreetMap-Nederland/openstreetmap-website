@@ -111,7 +111,7 @@ export default async function AboutPage({
           "_"
         )}/summary`}
       >
-        Forum Profile
+        Forum Profiel
       </ExternalButton>
       <Separator />
 

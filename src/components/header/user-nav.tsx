@@ -151,7 +151,7 @@ export function UserNav() {
         <DropdownMenuGroup>
           <Link href={`/mapper/${user.display_name}`}>
             <DropdownMenuItem>
-              Profile
+              Profiel
               <DropdownMenuShortcut>⇧P</DropdownMenuShortcut>
             </DropdownMenuItem>
           </Link>

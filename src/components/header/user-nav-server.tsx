@@ -106,7 +106,7 @@ export async function UserNavServer() {
         <DropdownMenuGroup>
           <Link href={`/mapper/${user.user.id}`}>
             <DropdownMenuItem>
-              Profile
+              Profiel
               <DropdownMenuShortcut>⇧P</DropdownMenuShortcut>
             </DropdownMenuItem>
           </Link>
