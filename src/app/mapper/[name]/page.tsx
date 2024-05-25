@@ -88,7 +88,7 @@ export default async function AboutPage({
               .join(", ")
               .capitalize()
       }
-      subTitle={`Already a mapper for ${Math.floor(
+      subTitle={`Is al een Mapper voor ${Math.floor(
         (new Date().getTime() - new Date(user.account_created).getTime()) /
           (1000 * 60 * 60 * 24)
       )} days!`}

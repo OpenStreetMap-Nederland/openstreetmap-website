@@ -73,7 +73,7 @@ export default async function CommunityPage() {
           <TopicList topicList={topicList}></TopicList>
         </div>
         <Card className="p-4 col-span-4 lg:col-span-1">
-          <h2 className="text-xl font-bold tracking-tight mb-4 m-2">Members</h2>
+          <h2 className="text-xl font-bold tracking-tight mb-4 m-2">Mappers</h2>
           <UserList users={users}></UserList>
         </Card>
       </div>
