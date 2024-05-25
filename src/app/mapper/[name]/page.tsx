@@ -88,10 +88,10 @@ export default async function AboutPage({
               .join(", ")
               .capitalize()
       }
-      subTitle={`Is al een Mapper voor ${Math.floor(
+      subTitle={`Dit account is ${Math.floor(
         (new Date().getTime() - new Date(user.account_created).getTime()) /
           (1000 * 60 * 60 * 24)
-      )} days!`}
+      )} dagen oud!`}
       separator={SeparatorTypes.space}
       actions={
         user.img && (
