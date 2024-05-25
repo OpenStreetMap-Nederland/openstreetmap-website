@@ -23,14 +23,14 @@ export async function Header() {
         <div className="items-center space-x-4 flex">
           <Logo />
           {/* <Search /> */}
-          <EditButton />
+          {/* <EditButton />
           <Link
             href="/history"
             className="text-sm font-medium transition-colors hover:text-primary
               text-muted-foreground dark:text-muted-foreground dark:hover:text-primary"
           >
             History
-          </Link>
+          </Link> */}
           {/* <UpcomingEvents /> */}
         </div>
 
