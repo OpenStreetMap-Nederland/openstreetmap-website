@@ -9,15 +9,15 @@ import { Card } from "@/components/ui/card";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "OpenStreetMap Projects",
+  title: "OpenStreetMap Projecten",
   description: "Zie hier de projecten van OpenStreetMap Nederland.",
 };
 
 export default function ProjectsPage() {
   return (
     <TitledPage
-      title="Projects"
-      subTitle="A collection of projects and tools that are used by OpenStreetMap Netherlands."
+      title="Projecten"
+      subTitle="Een overzicht van projecten en tools die worden gebruikt bij OpenStreetMap."
       separator={SeparatorTypes.none}
     >
       {projectLists.map((projectsList) => {

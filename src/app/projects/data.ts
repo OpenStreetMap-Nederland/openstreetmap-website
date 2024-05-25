@@ -13,9 +13,10 @@ export type Project = {
 
 const OpenAED: Project = {
   name: "OpenAED",
-  description: "OpenAED is a project to map all AEDs in the Netherlands.",
+  description:
+    "OpenAED is een project om alle AED's in Nederland in kaart te brengen.",
   longdescription:
-    "OpenAED is a project to map all AEDs in the Netherlands. It displays the AEDs on a map and exposes an API.",
+    "OpenAED is een project om alle AED's in Nederland in kaart te brengen. Het toont de AED's op een kaart en stelt een API beschikbaar.",
   links: [
     {
       name: "Website",
@@ -38,9 +39,9 @@ const OpenStreetMapCarto: Project = {
   name: "OSM Carto",
   altName: "OpenStreetMap Carto",
   description:
-    "The default OpenStreetMap style for the map on openstreetmap.org.",
+    "De standaard OpenStreetMap stijl voor de kaart op openstreetmap.org.",
   longdescription:
-    "The default OpenStreetMap style for the map on openstreetmap.org. It is written in CartoCSS and published as the openstreetmap-carto style on GitHub.",
+    "De standaard OpenStreetMap stijl voor de kaart op openstreetmap.org. Het is geschreven in CartoCSS en gepubliceerd als de openstreetmap-carto stijl op GitHub.",
   links: [
     {
       name: "Code",
@@ -60,9 +61,9 @@ const iD: Project = {
   name: "iD",
   altName: "iD editor",
   description:
-    "A web editor for OpenStreetMap, that is easy to use. Recommended for beginning mappers.",
+    "Een gebruiksvriendelijke webeditor voor OpenStreetMap. Aanbevolen voor beginnende mappers.",
   longdescription:
-    "iD is a web editor for OpenStreetMap, that is easy to use. It is intentionally simple, but powerful. iD is written in JavaScript and uses [d3](https://d3js.org/)",
+    "iD is een gebruiksvriendelijke webeditor voor OpenStreetMap. Het is met opzet eenvoudig, maar krachtig. iD is geschreven in JavaScript en gebruikt [d3] (https://d3js.org/)",
   links: [
     {
       name: "Code",
@@ -85,9 +86,9 @@ const JOSM: Project = {
   name: "JOSM",
   altName: "Java OpenStreetMap Editor",
   description:
-    "JOSM is a desktop editor for OpenStreetMap. It supports a large number of plugins. JOSM is written in Java. Recommended for more advanced mappers.",
+    "JOSM is een editor voor OpenStreetMap. Het ondersteunt een groot aantal plug-ins. JOSM is geschreven in Java. Aanbevolen voor meer geavanceerde mappers.",
   longdescription:
-    "JOSM is a desktop editor for OpenStreetMap. It supports a large number of plugins. JOSM is written in Java. JOSM is the most popular editor for OpenStreetMap. It is used by many advanced mappers. JOSM is written in Java.",
+    "JOSM is een editor voor OpenStreetMap. Het ondersteunt een groot aantal plug-ins. JOSM is geschreven in Java. Aanbevolen voor meer geavanceerde mappers.",
   links: [
     {
       name: "Website",

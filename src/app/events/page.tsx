@@ -6,8 +6,9 @@ import { Metadata } from "next";
 import { EventCard } from "@/components/event/event-card";
 
 export const metadata: Metadata = {
-  title: "OpenStreetMap Events",
-  description: "The upcoming and past events of OpenStreetMap Netherlands,",
+  title: "OpenStreetMap Evenementen",
+  description:
+    "De aankomende en afgelopen evenementen van OpenStreetMap Nederland",
   keywords: ["OpenStreetMap", "Event", "OSM"],
 };
 
@@ -65,9 +66,9 @@ export default async function EventsPage() {
 
   return (
     <TitledPage
-      title="Events"
+      title="Evenementen"
       titlePostfix="OSMcal"
-      subTitle="The upcoming and past events of OpenStreetMap Netherlands"
+      subTitle="De aankomende en afgelopen evenementen van OpenStreetMap Nederland"
       actions={
         <ExternalButton href="https://osmcal.org/event/add/">
           Add event
@@ -76,11 +77,11 @@ export default async function EventsPage() {
     >
       <div>
         <h3 className="text-2xl font-bold tracking-tight mb-4">
-          Upcoming events
+          Aankomende evenementen
         </h3>
         <div className="flex flex-col gap-4">
           {futureEvents.length === 0 ? (
-            <p>No upcoming events</p>
+            <p>Geen aankomende evenementen</p>
           ) : (
             futureEvents.map((event) => {
               const eventClass: EventClass = new EventClass(event);
@@ -92,10 +93,12 @@ export default async function EventsPage() {
       </div>
 
       <div>
-        <h3 className="text-2xl font-bold tracking-tight mb-4">Past events</h3>
+        <h3 className="text-2xl font-bold tracking-tight mb-4">
+          Afgelopen evenementen
+        </h3>
         <div className="flex flex-col gap-4">
           {pastEvents.length === 0 ? (
-            <p>No past events</p>
+            <p>Geen afgelopen evenementen</p>
           ) : (
             pastEvents.map((event) => {
               const eventClass: EventClass = new EventClass(event);
