@@ -20,7 +20,9 @@ export function EventCard({ event }: Props) {
         </div>
         {!event?.location?.venue.toLowerCase().includes("online") && (
           <div className="h-64 col-span-1 rounded overflow-hidden">
-            <WindowContainer location={event.location.coords} />
+            <WindowContainer
+              interactable={false}
+            location={event.location.coords} />
           </div>
         )}
       </Card>

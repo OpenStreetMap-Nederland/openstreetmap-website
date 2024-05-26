@@ -4,9 +4,10 @@ import React from "react";
 
 type Props = {
   location: number[];
+  interactable?: boolean;
 };
 
-export function WindowContainer({ location }: Props) {
+export function WindowContainer({ location, interactable = true }: Props) {
   const MapLocationContainer = dynamic(
     () =>
       import("./map-location-container").then((m) => m.MapLocationContainer),
@@ -15,5 +16,7 @@ export function WindowContainer({ location }: Props) {
     }
   );
 
-  return <MapLocationContainer location={location} />;
+  return (
+    <MapLocationContainer location={location} interactable={interactable} />
+  );
 }
