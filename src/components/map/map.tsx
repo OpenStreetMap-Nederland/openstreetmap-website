@@ -24,7 +24,7 @@ export function Map({ children, mapPostion, interactable = true }: Props) {
   return (
     <MapContainer
       className={"h-full z-0"}
-      zoomControl={interactable ? true : false}
+      zoomControl={false}
       scrollWheelZoom={interactable ? true : false}
       dragging={interactable ? true : false}
       maxZoom={19}
