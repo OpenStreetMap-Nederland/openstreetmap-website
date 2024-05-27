@@ -20,7 +20,7 @@ interface Props {
   interactable?: boolean;
 }
 
-export function Map({ children, mapPostion, interactable }: Props) {
+export function Map({ children, mapPostion, interactable = true }: Props) {
   return (
     <MapContainer
       className={"h-full z-0"}

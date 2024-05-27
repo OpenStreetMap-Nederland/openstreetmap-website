@@ -24,7 +24,7 @@ const MoveToLocation = ({ location }: { location: LatLngExpression }) => {
   );
 };
 
-export function MapLocationContainer({ location, interactable }: Props) {
+export function MapLocationContainer({ location, interactable = true }: Props) {
   const Map = dynamic(() => import("../map").then((m) => m.Map), {
     ssr: false,
   });
