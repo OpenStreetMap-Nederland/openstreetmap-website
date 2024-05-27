@@ -41,17 +41,12 @@ export async function MainNav({
   ...props
 }: Props) {
   const links = [
-    // { href: "/traces", label: "GPS Traces" },
-    // { href: "/diaries", label: "User Diaries" },
     { href: "/about", label: "Over" },
     { href: "/projects", label: "Projecten" },
     { href: "/events", label: "Evenementen" },
     // { href: "/news", label: "News" },
     { href: "/community", label: "Community" },
     { href: "/contact", label: "Contact" },
-    // { href: "/bagbot", label: "BagBot", badge: "New!" },
-    // { href: "/copyright", label: "Copyright" },
-    // { href: "/help", label: "Help" },
   ];
 
   type LinkProps = {

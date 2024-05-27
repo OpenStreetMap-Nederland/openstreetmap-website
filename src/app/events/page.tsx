@@ -71,7 +71,7 @@ export default async function EventsPage() {
       subTitle="De aankomende en afgelopen evenementen van OpenStreetMap Nederland"
       actions={
         <ExternalButton href="https://osmcal.org/event/add/">
-          Add event
+          Evenement toevoegen
         </ExternalButton>
       }
     >

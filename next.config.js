@@ -11,7 +11,6 @@ const nextConfig = {
   env: {
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     BASE_URL: process.env.BASE_URL,
-    BAGBOT_URL: process.env.BAGBOT_URL,
     OSM_CLIENT_ID: process.env.OSM_CLIENT_ID,
     OSM_CLIENT_SECRET: process.env.OSM_CLIENT_SECRET,
     SECRET: process.env.SECRET,

@@ -88,10 +88,11 @@ export default async function AboutPage({
               .join(", ")
               .capitalize()
       }
-      subTitle={`Dit account is ${Math.floor(
-        (new Date().getTime() - new Date(user.account_created).getTime()) /
-          (1000 * 60 * 60 * 24)
-      )} dagen oud!`}
+      subTitle={`
+        Account aangemaakt op ${new Date(
+          user.account_created
+        ).toLocaleDateString("nl-NL")}
+      `}
       separator={SeparatorTypes.space}
       actions={
         user.img && (
