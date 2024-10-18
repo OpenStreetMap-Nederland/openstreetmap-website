@@ -44,7 +44,6 @@ export async function generateMetadata({
 
 const getUser = async (name: string) => {
   if (!name) return null;
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
   const baseUrl = env.BASE_URL || "http://localhost:3000";
   const response = await fetch(`${baseUrl}/api/mapper/${name}`, {
     next: {
