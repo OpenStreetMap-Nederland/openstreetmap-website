@@ -172,7 +172,7 @@ export function Map() {
           <Link href="https://www.openstreetmap.org/copyright" target="_blank">
             <div className="right-0 bottom-0 absolute z-10 m-3 p-1 px-3 rounded-full bg-gradient-to-r from-green-500 to-orange-500">
               <span className="text-md text-white font-bold select-none">
-                Mogelijk gemaaakt door OpenStreetMap data
+                Mogelijk gemaakt door OpenStreetMap data
               </span>
             </div>
           </Link>
