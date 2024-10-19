@@ -131,15 +131,3 @@ export const richTextToPlainText = (input: string) => {
 
   return input;
 };
-
-export function toSlug(name: string): string {
-  return name
-    .toLowerCase() // Convert to lowercase
-    .normalize('NFD') // Normalize to decomposed form (NFD)
-    .replace(/[\u0300-\u036f]/g, '') // Remove diacritical marks (accents)
-    .replace(/ /g, '-') // Replace spaces with hyphens
-    .replace(/'/g, '') // Remove single quotes
-    .replace(/[^\w-]+/g, '') // Remove all non-word characters except hyphens
-    .replace(/--+/g, '-') // Replace multiple hyphens with a single hyphen
-    .replace(/^-+|-+$/g, ''); // Trim hyphens from start and end
-}

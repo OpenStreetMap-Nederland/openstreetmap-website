@@ -187,7 +187,7 @@ export function Map() {
               alt="OpenStreetMap logo"
               width="60"
               height="60"
-              src="OSMNL_Square.svg"
+              src="/OSMNL_Square.svg"
               priority={true}
             ></Image>
             <span className="text-white text-3xl font-bold">Loading</span>
