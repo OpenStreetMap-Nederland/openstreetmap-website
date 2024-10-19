@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { notFound } from "next/navigation";
 import { UserData } from "@/types/user";
+import { toSlug } from "@/lib/utils";
 
 const getUserData = async (uid: string) => {
   const response = await fetch(
@@ -38,7 +39,9 @@ const getUIDFromName = async (name: string) => {
   const data = await names.json();
   if (data.length === 0) return null;
   let nameObject = data[0];
-  if (!nameObject.names.includes(name)) return null;
+
+  let nameSlugs = nameObject.names.map((name: string) => toSlug(name));
+  if (!nameSlugs.includes(toSlug(name))) return null;
 
   return nameObject.id;
 };

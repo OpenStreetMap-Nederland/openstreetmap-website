@@ -3,14 +3,14 @@ import { TitledPage } from "@/components/layouts/titled-page";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "OpenStreetMap About",
+  title: "Over OpenStreetMap",
   description:
     "Hoe werkt OpenStreetMap? Wat kan je met OpenStreetMap? En hoe kan je zelf meehelpen?",
 };
 
 export default function AboutPage() {
   return (
-    <TitledPage title="About">
+    <TitledPage title="Over">
       OpenStreetMap Nederland bestaat uit vrijwilligers die zich inzetten voor
       het verzamelen, bewerken en beschikbaar stellen van vrije geografische
       gegevens.
