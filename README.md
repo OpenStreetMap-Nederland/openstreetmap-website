@@ -15,8 +15,6 @@ npx local-ssl-proxy --source 3000 --target 3001
 
 ```bash
 npm install
-# or
-pnpm install
 ```
 
 **Then you need to create a .env file**
@@ -29,6 +27,4 @@ cp .env.example .env
 
 ```bash
 npm run dev
-# or
-pnpm dev
 ```

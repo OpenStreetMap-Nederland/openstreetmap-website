@@ -12,6 +12,7 @@ import { NavigationEvents } from "@/components/navigation-events";
 import { PrimeReactProvider } from "primereact/api";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { Map } from "@/components/map/map";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -113,6 +114,8 @@ export default function RootLayout({ children, pageProps }: RootLayoutProps) {
             </NextAuthProvider>
           </PrimeReactProvider>
           <Analytics />
+          <SpeedInsights />
+
           <Suspense fallback={null}>
             <NavigationEvents />
           </Suspense>
