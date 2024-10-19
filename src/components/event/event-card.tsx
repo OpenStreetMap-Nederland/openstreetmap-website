@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Card } from "../ui/card";
 import { EventClass } from "@/types/event";
-import { WindowContainer } from "../map/containers/window-conatiner";
+import { WindowContainer } from "../map-leaflet/containers/window-conatiner";
 
 type Props = {
   event: EventClass;
@@ -22,7 +22,8 @@ export function EventCard({ event }: Props) {
           <div className="h-64 col-span-1 rounded overflow-hidden">
             <WindowContainer
               interactable={false}
-            location={event.location.coords} />
+              location={event.location.coords}
+            />
           </div>
         )}
       </Card>

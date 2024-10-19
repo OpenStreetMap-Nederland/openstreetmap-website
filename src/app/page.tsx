@@ -1,6 +1,4 @@
 import { Metadata } from "next";
-import { MapContainer } from "@/components/map/containers/map-container";
-import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   title: "OpenStreetMap Nederland",
@@ -9,11 +7,15 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const headersList = headers();
+  // const headersList = headers();
 
   return (
-    <div className="h-full w-full grid grid-cols-4">
-      <MapContainer />
+    <div className="relative">
+      {/* <div className="absolute w-screen">
+        <div className="bg-white m-6 p-8 flex flex-col rounded-xl relative z-10 w-1/3 max-w-[450px] shadow-lg">
+          hoi
+        </div>
+      </div> */}
     </div>
   );
 }

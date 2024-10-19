@@ -11,6 +11,7 @@ import { Suspense } from "react";
 import { NavigationEvents } from "@/components/navigation-events";
 import { PrimeReactProvider } from "primereact/api";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
+import { Map } from "@/components/map/map";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -102,6 +103,7 @@ export default function RootLayout({ children, pageProps }: RootLayoutProps) {
                 <div className="relative flex min-h-screen flex-col h-screen">
                   <Header />
                   {children}
+                  <Map></Map>
                   {/* <Footer /> */}
                 </div>
                 {/* <TailwindIndicator /> */}

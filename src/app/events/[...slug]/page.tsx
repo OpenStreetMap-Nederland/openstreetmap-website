@@ -3,7 +3,7 @@ import { TitledPage } from "@/components/layouts/titled-page";
 import { EventClass, EventDetail } from "@/types/event";
 import { ExternalButton } from "@/components/external-button";
 import { Event } from "@/types/event";
-import { WindowContainer } from "@/components/map/containers/window-conatiner";
+import { WindowContainer } from "@/components/map-leaflet/containers/window-conatiner";
 import { env } from "process";
 import Link from "next/link";
 import Markdown from "react-markdown";

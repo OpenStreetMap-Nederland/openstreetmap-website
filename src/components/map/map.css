@@ -1,0 +1,18 @@
+.map-wrap {
+  position: relative;
+  width: 100%;
+  height: calc(
+    100vh - 61px
+  ); /* calculate height of the screen minus the heading */
+}
+
+.map {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/* hide default attribution */
+.maplibregl-ctrl-bottom-right {
+  @apply hidden;
+}
